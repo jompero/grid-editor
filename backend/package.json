@@ -1,0 +1,15 @@
+{
+  "name": "grid-editor-backend",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "del build && cd ..\\client && npm run build --prod && copy build ..\\backend\\build\\"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
