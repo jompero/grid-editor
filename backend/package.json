@@ -5,7 +5,10 @@
   "scripts": {
     "build:ui": "del /s /q public && cd ..\\client && npm run build --prod && xcopy build ..\\backend\\public\\ /s",
     "start": "node ./bin/www",
-    "watch": "nodemon ./bin/www"
+    "watch": "nodemon ./bin/www",
+    "deploy": "git push heroku master",
+    "commit": "git add . && git commit -m \"refresh\"",
+    "deploy:full": "npm run build:ui && npm run commit && npm run deploy"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
