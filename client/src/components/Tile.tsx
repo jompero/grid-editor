@@ -14,7 +14,8 @@ function Tile({ image, posX, posY }: Props) {
     transformOrigin: 'top left',
     backgroundPosition: `-${posX}px -${posY}px`,
     width: '16px',
-    height: '16px'
+    height: '16px',
+    margin: '16px'
   }
 
   return (

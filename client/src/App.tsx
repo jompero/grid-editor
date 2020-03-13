@@ -16,7 +16,7 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      {tileMap}
+      {tileMap()}
     </div>
   );
 }
@@ -26,7 +26,8 @@ export default App;
 function tileMap(): any {
   let tiles = [];
   for (let i = 0; i < 10; i++) {
-    tiles.push(<Tile image={image} posX={i} posY={i} />)
+    tiles.push(<Tile image={image} posX={i*17+1} posY={i*17+1} />)
   }
+  console.log(tiles)
   return tiles;
 }
