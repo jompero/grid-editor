@@ -2,7 +2,7 @@
 
 Grid-editor is a working progress project. The goal is to create a tool that allows editing a grid based layout with preset 'palette'. An example will be created with a tileset from Zelda: Link's Awakening and the ability to create and edit a level layout.  
   
-The example is available at https://dashboard.heroku.com/apps/mysterious-meadow-32567.
+The example is available at https://mysterious-meadow-32567.herokuapp.com/.
   
 ## Goals
 View a grid layout  
