@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Toolbar, Typography, Paper, Button, Drawer } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, Drawer } from '@material-ui/core';
 import Grid from './components/Grid'
 import Tile from './components/Tile';
 import image from './9445.png';
@@ -10,18 +10,18 @@ function App() {
 
   const [open, setOpen] = useState(false);
   const [tile, setTile] = useState(0);
-  const [tileMap, setTileMap] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [tileMap, setTileMap] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
   function palette(): any {
-    return mapping.map((coordinate, index) => <Button onClick={() => setTile(index)}><Tile image={image} posX={coordinate['x']} posY={coordinate['y']} /></Button>);
+    return mapping.map((coordinate, index) => <div onClick={() => setTile(index)}><Tile image={image} posX={coordinate['x']} posY={coordinate['y']} /></div>);
   }
 
   function drawTileMap(): any {
     return tileMap.map((t, i) => {
       return (
-        <Button onClick={() => setTileMap(tileMap.map((oldT, index) => index !== i ? oldT : tile))}>
+        <div onClick={() => setTileMap(tileMap.map((oldT, index) => index !== i ? oldT : tile))}>
           <Tile image={image} posX={mapping[t]['x']} posY={mapping[t]['y']} />
-        </Button>
+        </div>
       )
     });
   }
@@ -38,14 +38,12 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Paper square>
-        <Grid columns={5} rows={3} tileHeight={32} tileWidth={32} >
-          {drawTileMap()}
-        </Grid>
-      </Paper>
+      <Grid columns={4} rows={6} tileHeight={16} tileWidth={16} scale={5} >
+        {drawTileMap()}
+      </Grid>
 
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Grid columns={5} rows={3} tileHeight={32} tileWidth={32} >
+        <Grid columns={5} rows={3} tileHeight={17} tileWidth={17} scale={3} >
             {palette()}
           </Grid>
       </Drawer>

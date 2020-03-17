@@ -10,18 +10,13 @@ function Tile({ image, posX, posY }: Props) {
 
   const style = {
     backgroundImage: `url(${image})`,
-    transform: 'scale(2)',
-    transformOrigin: 'top left',
     backgroundPosition: `-${posX}px -${posY}px`,
     width: '16px',
-    height: '16px',
-    margin: '16px'
+    height: '16px'
   }
 
   return (
-    <div>
-      <div style={style} />
-    </div>
+    <div style={style} />
   );
 }
 
