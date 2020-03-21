@@ -14,14 +14,26 @@ function App() {
   const [tile, setTile] = useState(0);
   const [tileMap, setTileMap] = useState(new Array(40*20).fill(0));
 
+  function paint(index: number): void {
+    const newMap = tileMap.map((oldT, i) => i !== index ? oldT : tile);
+    setTileMap(newMap);
+  }
+
   function palette(): any {
-    return mapping.map((coordinate, index) => <div key={index*coordinate.y} onClick={() => setTile(index)}><Tile image={image} posX={coordinate.x} posY={coordinate.y} /></div>);
+    return mapping.map((coordinate, index) => <div key={index} onClick={() => setTile(index)}><Tile image={image} posX={coordinate.x} posY={coordinate.y} /></div>);
   }
 
   function parseTileMap(): any {
     return tileMap.map((t, i) => {
       return (
-        <div key={t*i} onClick={() => setTileMap(tileMap.map((oldT, index) => index !== i ? oldT : tile))}>
+        <div 
+          key={i} 
+          onClick={() => paint(i)}
+          onMouseDown={() => paint(i)}
+          onMouseEnter={(event) =>  { 
+            event.nativeEvent.which === 1 && paint(i);
+          }} 
+        >
           <Tile image={image} posX={mapping[t]['x']} posY={mapping[t]['y']} />
         </div>
       )
