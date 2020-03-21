@@ -12,16 +12,16 @@ function App() {
 
   const [open, setOpen] = useState(false);
   const [tile, setTile] = useState(0);
-  const [tileMap, setTileMap] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [tileMap, setTileMap] = useState(new Array(40*20).fill(0));
 
   function palette(): any {
-    return mapping.map((coordinate, index) => <div onClick={() => setTile(index)}><Tile image={image} posX={coordinate['x']} posY={coordinate['y']} /></div>);
+    return mapping.map((coordinate, index) => <div key={index*coordinate.y} onClick={() => setTile(index)}><Tile image={image} posX={coordinate.x} posY={coordinate.y} /></div>);
   }
 
   function parseTileMap(): any {
     return tileMap.map((t, i) => {
       return (
-        <div onClick={() => setTileMap(tileMap.map((oldT, index) => index !== i ? oldT : tile))}>
+        <div key={t*i} onClick={() => setTileMap(tileMap.map((oldT, index) => index !== i ? oldT : tile))}>
           <Tile image={image} posX={mapping[t]['x']} posY={mapping[t]['y']} />
         </div>
       )
@@ -48,7 +48,7 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <TileMap width={8} height={3}>
+      <TileMap width={40} height={20}>
         {parseTileMap()}
       </TileMap>
 

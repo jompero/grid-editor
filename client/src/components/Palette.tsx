@@ -12,7 +12,7 @@ function Palette({ setOpen, open, children }: Props) {
     return (
         <div onClick={() => setOpen(false)}>
             <Drawer anchor="right" open={open} onClose={() => setOpen(false)} >
-                <Grid columns={24} rows={50} tileHeight={16} tileWidth={16} scale={3} >
+                <Grid columns={10} rows={50} tileHeight={17} tileWidth={17} scale={2} >
                     {children}
                 </Grid>
             </Drawer>

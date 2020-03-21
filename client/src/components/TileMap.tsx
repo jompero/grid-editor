@@ -11,7 +11,7 @@ export interface Props {
 
 function TileMap({ width, height, tileHeight, tileWidth, children }: Props) {
     return (
-        <Grid columns={width} rows={height} tileHeight={tileHeight ? tileHeight : 16} tileWidth={tileWidth ? tileWidth : 16} scale={5} >
+        <Grid columns={width} rows={height} tileHeight={tileHeight ? tileHeight : 16} tileWidth={tileWidth ? tileWidth : 16} scale={2} >
             {children}
         </Grid>
     );
