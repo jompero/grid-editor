@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from './components/Grid'
 import Tile from './components/Tile';
 import Palette from './components/Palette';
@@ -8,11 +9,32 @@ import image from './9445.png';
 import mapping from './9445.json';
 import { useState } from 'react';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    drawer: {
+      //width: 300,
+      flexShrink: 0,
+    },
+    title: {
+      flexGrow: 1,
+    },
+    toolbarMargin: theme.mixins.toolbar,
+  })
+);
+
 function App() {
+
+  const classes = useStyles();
 
   const [open, setOpen] = useState(false);
   const [tile, setTile] = useState(0);
-  const [tileMap, setTileMap] = useState(new Array(40*20).fill(0));
+  const [tileMap, setTileMap] = useState(new Array(30*20).fill(0));
 
   function paint(index: number): void {
     const newMap = tileMap.map((oldT, i) => i !== index ? oldT : tile);
@@ -40,16 +62,11 @@ function App() {
     });
   }
 
-  const titleStyle = {
-    flexGrow: 1
-  }
-
   return (
-    <div className="App">
-      
-      <AppBar position='static'>
+    <div className={classes.root}>
+      <AppBar position='absolute' className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" style={titleStyle}>
+          <Typography variant="h6" className={classes.title}>
             Grid Editor
           </Typography>
           <div onClick={() => setOpen(true)}>
@@ -60,13 +77,16 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <TileMap width={40} height={20}>
-        {parseTileMap()}
-      </TileMap>
+      <div>
+        <div className={classes.toolbarMargin} />
+        <TileMap width={30} height={20}>
+          {parseTileMap()}
+        </TileMap>
 
-      <Palette setOpen={setOpen} open={open}>
-        {palette()}
-      </Palette>
+        <Palette setOpen={setOpen} open={open}>
+          {palette()}
+        </Palette>
+      </div>
 
     </div>
   );
