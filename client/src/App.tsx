@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    content: {
+      margin: 'auto'
+    },
     toolbarMargin: theme.mixins.toolbar,
   })
 );
@@ -80,7 +83,7 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <div>
+      <div className={classes.content}>
         <div className={classes.toolbarMargin} />
         <TileMap width={30} height={20}>
           {parseTileMap()}
