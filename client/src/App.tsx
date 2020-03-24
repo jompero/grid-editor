@@ -5,6 +5,7 @@ import Grid from './components/Grid'
 import Tile from './components/Tile';
 import Palette from './components/Palette';
 import TileMap from './components/TileMap';
+import Circle from './components/Circle';
 import image from './9445.png';
 import mapping from './9445.json';
 import { useState } from 'react';
@@ -70,9 +71,11 @@ function App() {
             Grid Editor
           </Typography>
           <div onClick={() => setOpen(true)}>
-            <Grid columns={1} rows={1} tileHeight={16} tileWidth={16} scale={3} >
-              <Tile image={image} posX={mapping[tile]['x']} posY={mapping[tile]['y']} />
-            </Grid>
+            <Circle>
+              <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={2.5} >
+                <Tile image={image} posX={mapping[tile]['x']} posY={mapping[tile]['y']} />
+              </Grid>
+            </Circle>
           </div>
         </Toolbar>
       </AppBar>
