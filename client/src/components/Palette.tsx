@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { Drawer } from '@material-ui/core';
+import { Modal } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from './Grid';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        toolbarMargin: theme.mixins.toolbar,
+        window: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: `translate(-50%, -50%)`,
+            transformOrigin: 'center',
+        }
     })
 );
 
@@ -20,12 +26,13 @@ function Palette({ setOpen, open, children }: Props) {
 
     return (
         <div onClick={() => setOpen(false)}>
-            <Drawer variant='permanent' anchor="right" open={open} onClose={() => setOpen(false)} >
-                <div className={classes.toolbarMargin} />
-                <Grid columns={10} rows={50} tileHeight={17} tileWidth={17} scale={2} >
-                    {children}
-                </Grid>
-            </Drawer>
+            <Modal open={open} onClose={() => setOpen(false)} >
+                <div className={classes.window} >
+                    <Grid columns={24} rows={25} tileHeight={17} tileWidth={17} scale={2} >
+                        {children}
+                    </Grid>
+                </div>
+            </Modal>
         </div>
     );
 }
