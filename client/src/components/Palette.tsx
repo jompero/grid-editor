@@ -28,7 +28,7 @@ function Palette({ setOpen, open, children }: Props) {
         <div onClick={() => setOpen(false)}>
             <Modal open={open} onClose={() => setOpen(false)} >
                 <div className={classes.window} >
-                    <Grid columns={24} rows={25} tileHeight={17} tileWidth={17} scale={2} >
+                    <Grid columns={24} rows={19} tileHeight={17} tileWidth={17} scale={2} >
                         {children}
                     </Grid>
                 </div>
