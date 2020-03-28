@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 export interface Props {
     rows: number,
@@ -9,25 +10,35 @@ export interface Props {
     children: React.ReactNode
 }
 
-function Grid({ rows, columns, tileHeight, tileWidth, scale, children }: Props) {
-    const gridContainerStyle = {
-        display: 'inline-grid',
-        gridTemplateColumns: `repeat(${columns}, ${tileWidth * scale}px [col-start])`,
-        gridTemplateRows: `repeat(${rows}, ${tileHeight * scale}px [row-start])`,
-    }
+function Grid({ children, columns, rows, tileHeight, tileWidth, scale }: Props) {
 
-    const childrenStyle = {
-        transformOrigin: 'top left',
-        transform: `scale(${scale})`,
-    }
+    const useStyles =
+    makeStyles((theme: Theme) =>
+        createStyles({
+            gridContainer: {
+                display: 'inline-grid',
+                gridTemplateColumns: `repeat(${columns}, ${tileWidth * scale}px [col-start])`,
+                gridTemplateRows: `repeat(${rows}, ${tileHeight * scale}px [row-start])`,
+            },
+            children: {
+                transformOrigin: 'top left',
+                transform: `scale(${scale})`,
+                "&:hover": {
+                    cursor: 'pointer'
+                },
+            }
+        })
+    )
+
+    const classes = useStyles();
 
     function styledChildren(): any {
         if (!children) return null;
-        return React.Children.map(children, (child) => <div style={childrenStyle}>{child}</div>);
+        return React.Children.map(children, (child) => <div className={classes.children}>{child}</div>);
     }
     
     return (
-        <div style={gridContainerStyle}>
+        <div className={classes.gridContainer}>
             {styledChildren()}
         </div>
     )
