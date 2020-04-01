@@ -38,7 +38,7 @@ function App() {
 
   const [open, setOpen] = useState(false);
   const [tile, setTile] = useState(0);
-  const [tileMap, setTileMap] = useState(new Array(30*20).fill(0));
+  const [tileMap, setTileMap] = useState(new Array(16*16).fill(0));
 
   function paint(index: number): void {
     const newMap = tileMap.map((oldT, i) => i !== index ? oldT : tile);
@@ -85,7 +85,7 @@ function App() {
 
       <div className={classes.content}>
         <div className={classes.toolbarMargin} />
-        <TileMap width={30} height={20}>
+        <TileMap width={16} height={16}>
           {parseTileMap()}
         </TileMap>
 
