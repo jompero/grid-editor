@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux'
 import { paintTile } from '../reducers/tileMapReducer'
 import Grid from './Grid';
-import { TileMap } from '../types/TileMap';
+import { TileArray } from '../types/TileArray';
 import image from '../9445.png';
 import mapping from '../9445.json';
 import Tile from './Tile';
@@ -13,15 +13,16 @@ export interface Props {
     tileHeight?: number,
     tileWidth?: number,
     //children: React.ReactNode,
-    tileMap: TileMap,
+    tileArray: TileArray,
     paintTile: Function,
 }
 
-const state: TileMap = new Array(16*16).fill(0);
+// const state: TileMap = new Array(16*16).fill(0);
 
-function TileMap({ width, height, tileHeight, tileWidth, tileMap, paintTile }: Props) {
-    function parseTileMap(): any {
-        return tileMap.map((t, i) => {
+function TileMap({ width, height, tileHeight, tileWidth, tileArray, paintTile }: Props) {
+    function parseTileArray(): any {
+        console.log('state', tileArray);
+        return tileArray.tiles.map((t, i) => {
           return (
             <div 
               key={i} 
@@ -38,14 +39,14 @@ function TileMap({ width, height, tileHeight, tileWidth, tileMap, paintTile }: P
       }
     return (
         <Grid columns={width} rows={height} tileHeight={tileHeight ? tileHeight : 16} tileWidth={tileWidth ? tileWidth : 16} scale={2} >
-            {parseTileMap()}
+            {parseTileArray()}
         </Grid>
     );
 }
 
-const mapState = (state: TileMap) => {
+const mapState = (state: TileArray) => {
     return {
-        tileMap: state
+      tileArray: state
     }
 }
 

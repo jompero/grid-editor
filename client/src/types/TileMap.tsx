@@ -1,1 +1,0 @@
-export interface TileMap extends Array<number> { };
