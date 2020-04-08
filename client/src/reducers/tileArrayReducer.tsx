@@ -1,6 +1,6 @@
 import { TileArray } from "../types/TileArray";
 
-interface TileMapAction {
+interface TileArrayAction {
     type: string,
     data: {
         index: number,
@@ -8,7 +8,7 @@ interface TileMapAction {
     }
 }
 
-const tileMapReducer = (state: TileArray = new TileArray(new Array(16*16).fill(0)), action: TileMapAction) => {
+const tileArrayReducer = (state: TileArray = new TileArray(new Array(16*16).fill(0)), action: TileArrayAction) => {
     switch(action.type) {
       case 'PAINT': return paint(state, action.data.index, action.data.tile);
       case 'ERASE': return paint(state, action.data.index, -1);
@@ -29,4 +29,4 @@ export function paintTile(index: number, tile: number) {
   }
 }
 
-export default tileMapReducer;
+export default tileArrayReducer;

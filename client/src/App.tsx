@@ -4,7 +4,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from './components/Grid'
 import Tile from './components/Tile';
 import Palette from './components/Palette';
-import TileMap from './components/TileMap';
+import Canvas from './components/Canvas';
 import Circle from './components/Circle';
 import { useState } from 'react';
 import image from './9445.png';
@@ -62,7 +62,7 @@ function App() {
 
       <div className={classes.content}>
         <div className={classes.toolbarMargin} />
-        <TileMap width={16} height={16} />
+        <Canvas width = {16} height = {16} tileHeight = {16} tileWidth = {16} />
 
         <Palette setOpen={setOpen} open={open}>
           {palette()}
