@@ -1,16 +1,16 @@
 import { createStore, combineReducers } from 'redux';
 import tileArrayReducer from './reducers/tileArrayReducer';
-import ToolsReducer, { ToolsState } from './reducers/toolsReducer';
+import BrushReducer, { BrushState } from './reducers/brushReducer';
 import { TileArray } from './types/TileArray';
 
 export interface RootState {
   tileArray: TileArray,
-  tools: ToolsState
+  tools: BrushState
 }
 
 const reducer = combineReducers({
     tileArray: tileArrayReducer,
-    tools: ToolsReducer
+    tools: BrushReducer
   });
 
 const store = createStore(reducer);

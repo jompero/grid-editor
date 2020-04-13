@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { setBrush } from '../reducers/brushReducer';
 import { AppBar, Toolbar, Typography, makeStyles, Theme, createStyles } from "@material-ui/core";
 import Grid from "./Grid";
 import Tile from "./Tile";
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
+    },
+    tool: {
+      marginRight: '1em'
     },
     content: {
       margin: 'auto'
@@ -55,9 +59,10 @@ function ToolBar({ children }: Props) {
 
     function palette(): any {
         return mapping.map((coordinate: Coordinate, index: number) => 
-            <div key={index} onClick={() => setTile(index)}>
-                <Tile image={image} posX={coordinate.x} posY={coordinate.y} />
-            </div>);
+              <div key={index} onClick={() => setTile(index)}>
+                  <Tile image={image} posX={coordinate.x} posY={coordinate.y} />
+              </div>
+            );
     }
 
     return (
@@ -65,12 +70,21 @@ function ToolBar({ children }: Props) {
             <AppBar position='absolute' className={classes.appBar}>
             <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                Grid Editor
+                  Grid Editor
+                </Typography>
+                <Typography variant="h6" className={classes.tool}>
+                  Eraser
+                </Typography>
+                <Typography variant="h6" className={classes.tool}>
+                  Undo
+                </Typography>
+                <Typography variant="h6" className={classes.title}>
+                  Redo
                 </Typography>
                 <div onClick={() => setOpen(true)}>
                 <Circle>
                     <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={2.5} >
-                    <Tile image={image} posX={mapping[tile]['x']} posY={mapping[tile]['y']} />
+                      <Tile image={image} posX={mapping[tile]['x']} posY={mapping[tile]['y']} />
                     </Grid>
                 </Circle>
                 </div>
