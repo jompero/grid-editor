@@ -15,21 +15,21 @@ const initialState: BrushState = {
 
 function BrushReducer(state: BrushState = initialState, action: BrushAction): BrushState {
     switch(action.type) {
-      case 'SET': 
+      case 'SET_BRUSH': 
         return setTile(state, action.data.brush);
       default:
         return state
     }
   }
 
-function setTile(state: BrushState, tile: number): BrushState {
-    const newState = { ...state, tile };
+function setTile(state: BrushState, brush: number): BrushState {
+    const newState = { ...state, brush };
     return newState;
 }
 
 export function setBrush(brush: number): BrushAction {
     return {
-        type: 'SET',
+        type: 'SET_BRUSH',
         data: { brush }
       }
 }

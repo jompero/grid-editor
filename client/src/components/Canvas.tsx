@@ -17,16 +17,22 @@ interface Props {
 function Canvas({ width, height, tileHeight, tileWidth }: Props) {
     const dispatch = useDispatch();
     const tiles = useSelector((state: RootState) => state.tileArray.tiles);
+    const brush = useSelector((state: RootState) => state.tools.brush);
+
+    function paint(index: number) {
+      dispatch(paintTile(index, brush));
+      console.log('painting', brush, 'on', index);
+    }
 
     function parseTileArray() {
         return tiles.map((t: number, i: number) => {
           return (
             <div 
               key={i} 
-              onClick={() => dispatch(paintTile(i, -1))}
-              onMouseDown={() => dispatch(paintTile(i, -1))}
+              onClick={() => paint(i)}
+              onMouseDown={() => paint(i)}
               onMouseEnter={(event) =>  { 
-                event.nativeEvent.which === 1 && dispatch(paintTile(i, -1));
+                event.nativeEvent.which === 1 && paint(i);
               }} 
             >
               {t >= 0 && <Tile image={image} posX={mapping[t]['x']} posY={mapping[t]['y']} />}

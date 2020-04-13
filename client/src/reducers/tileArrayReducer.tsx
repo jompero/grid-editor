@@ -10,7 +10,7 @@ interface TileArrayAction {
 
 const tileArrayReducer = (state: TileArray = new TileArray(new Array(16*16).fill(0)), action: TileArrayAction) => {
     switch(action.type) {
-      case 'SET': return paint(state, action.data.index, action.data.tile);
+      case 'SET_TILE': return paint(state, action.data.index, action.data.tile);
       default:
       return state;
     }
@@ -23,7 +23,7 @@ function paint(state: TileArray, index: number, tile: number): TileArray {
 
 export function paintTile(index: number, tile: number) {
   return {
-    type: 'SET',
+    type: 'SET_TILE',
     data: { index, tile }
   }
 }
