@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setBrush } from '../reducers/brushReducer';
 import { AppBar, Toolbar, Typography, makeStyles, Theme, createStyles } from "@material-ui/core";
+import Tools from './Tools';
 import Grid from "./Grid";
 import Tile from "./Tile";
 import Circle from "./Circle";
@@ -73,19 +74,14 @@ function ToolBar({ children }: Props) {
                 <Typography variant="h6" className={classes.title}>
                   Grid Editor
                 </Typography>
-                <Typography variant="h6" className={classes.tool}>
-                  Eraser
-                </Typography>
-                <Typography variant="h6" className={classes.tool}>
-                  Undo
-                </Typography>
-                <Typography variant="h6" className={classes.title}>
-                  Redo
-                </Typography>
+                <div className={classes.title} >
+                  <Tools />
+                </div>
+
                 <div onClick={() => setOpen(true)}>
                   <Circle>
                       <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={2.5} >
-                        <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />
+                        {brush >= 0 && <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />}
                       </Grid>
                   </Circle>
                 </div>
