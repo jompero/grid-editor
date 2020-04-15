@@ -52,7 +52,6 @@ export interface Coordinate {
 
 function ToolBar({ children }: Props) {
     const dispatch = useDispatch();
-    const tiles = useSelector((state: RootState) => state.tileArray.tiles);
     const brush = useSelector((state: RootState) => state.tools.brush);
     console.log('brush', brush);
     const classes = useStyles();
