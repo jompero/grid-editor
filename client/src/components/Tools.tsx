@@ -7,9 +7,15 @@ function Tools() {
     const dispatch = useDispatch();
 
     return (
-        <Button onClick={() => dispatch(setBrush(-1))}>
-            Eraser
-        </Button>
+        <div>
+            <Button onClick={() => dispatch(setBrush(-1))}>
+                Eraser
+            </Button>
+            <Button onClick={() => dispatch(setBrush(-1))}>
+                Undo
+            </Button>
+        </div>
+
     )
 }
 
