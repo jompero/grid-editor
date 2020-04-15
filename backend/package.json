@@ -7,7 +7,7 @@
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www",
     "deploy": "git push heroku master",
-    "commit": "git add . && git commit -m \"refresh\"",
+    "commit": "git add . && git commit -m \"deploy\"",
     "deploy:full": "npm run build:ui && npm run commit && npm run deploy"
   },
   "dependencies": {
