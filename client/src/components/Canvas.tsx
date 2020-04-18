@@ -16,7 +16,7 @@ interface Props {
 
 function Canvas({ width, height, tileHeight, tileWidth }: Props) {
     const dispatch = useDispatch();
-    const tiles = useSelector((state: RootState) => state.tileArray.tiles);
+    const tileArray = useSelector((state: RootState) => state.tileArray);
     const brush = useSelector((state: RootState) => state.tools.brush);
 
     function paint(index: number) {
@@ -25,11 +25,11 @@ function Canvas({ width, height, tileHeight, tileWidth }: Props) {
     }
 
     function parseTileArray() {
-        return tiles.map((t: number, i: number) => {
+        return tileArray.history[tileArray.current].tiles.map((t: number, i: number) => {
           return (
             <div 
               key={i} 
-              onClick={() => paint(i)}
+              //onClick={() => paint(i)}
               onMouseDown={() => paint(i)}
               onMouseEnter={(event) =>  { 
                 event.nativeEvent.which === 1 && paint(i);
