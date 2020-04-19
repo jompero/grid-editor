@@ -1,16 +1,18 @@
 import * as React from 'react';
 
 export interface Props {
-  image: string;
-  posX: number;
-  posY: number;
+  image?: string;
+  color?: string;
+  posX?: number;
+  posY?: number;
 }
 
-function Tile({ image, posX, posY }: Props) {
+function Tile({ image, color, posX, posY }: Props) {
 
   const style = {
-    backgroundImage: `url(${image})`,
-    backgroundPosition: `-${posX}px -${posY}px`,
+    backgroundImage: image && `url(${image})`,
+    backgroundColor: `${color}`,
+    backgroundPosition: posX && posY && `-${posX}px -${posY}px`,
     width: '16px',
     height: '16px'
   }

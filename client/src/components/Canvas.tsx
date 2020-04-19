@@ -36,6 +36,7 @@ function Canvas({ width, height, tileHeight, tileWidth }: Props) {
               }} 
             >
               {t >= 0 && <Tile image={image} posX={mapping[t]['x']} posY={mapping[t]['y']} />}
+              {t === -1 && <Tile color={getColor(i, width, height)}/>}
             </div>
           )
         });
@@ -45,6 +46,12 @@ function Canvas({ width, height, tileHeight, tileWidth }: Props) {
             {parseTileArray()}
         </Grid>
     );
+}
+
+function getColor(index: number, columns: number, rows: number): string {
+  const tileValue = (index % columns) + Math.floor(index / rows);
+  console.log('index', index, 'tileValue', tileValue);
+  return tileValue % 2 === 0 ? 'GREY' : 'WHITE';
 }
 
 export default Canvas;

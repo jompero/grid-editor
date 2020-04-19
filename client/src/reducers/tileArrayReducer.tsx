@@ -14,7 +14,7 @@ interface TileArrayAction {
 }
 
 const initializeState = () => {
-  const initialArray = new TileArray(new Array(16*16).fill(0));
+  const initialArray = new TileArray(new Array(16*16).fill(-1));
   return {
     history: [initialArray],
     current: 0

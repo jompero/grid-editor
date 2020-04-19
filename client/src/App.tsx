@@ -3,7 +3,6 @@ import Canvas from './components/Canvas';
 import ToolBar from './components/ToolBar';
 
 function App() {
-
   return (
     <div>
       <ToolBar>
