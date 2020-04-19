@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <ToolBar>
-        <Canvas width = {16} height = {16} tileHeight = {16} tileWidth = {16} />
+        <Canvas width={16} height={16} tileHeight={16} tileWidth={16} />
       </ToolBar>
     </div>
   );
