@@ -1,4 +1,4 @@
-import { TileArray } from "../types/TileArray";
+import TileArray from '../types/TileArray';
 
 export interface TileArrayState {
   history: TileArray[],
@@ -6,20 +6,20 @@ export interface TileArrayState {
 }
 
 interface TileArrayAction {
-    type: string,
-    data: {
-        index: number,
-        tile: number
-    }
+  type: string,
+  data: {
+    index: number,
+    tile: number
+  }
 }
 
 const initializeState = () => {
-  const initialArray = new TileArray(new Array(16*16).fill(-1));
+  const initialArray = new TileArray(new Array(16 * 16).fill(-1));
   return {
     history: [initialArray],
-    current: 0
-  }
-}
+    current: 0,
+  };
+};
 
 const tileArrayReducer = (state: TileArrayState = initializeState(), action: TileArrayAction) => {
     switch(action.type) {
@@ -33,14 +33,15 @@ const tileArrayReducer = (state: TileArrayState = initializeState(), action: Til
         return { ...state, current: state.current + 1 };
       default:
       return state;
-    }
   }
+}
 
 function paint(state: TileArrayState, index: number, tile: number): TileArrayState {
-    const newArray = state.history[state.current].tiles.map((oldTile, i) => i !== index ? oldTile : tile);
-    const history = [ ...state.history.slice(0, state.current + 1), new TileArray(newArray) ];
-    const current = state.current + 1;
-    return { history, current };
+  const tiles = state.history[state.current].tiles;
+  const newArray = tiles.map((oldTile, i) => i !== index ? oldTile : tile);
+  const history = [ ...state.history.slice(0, state.current + 1), new TileArray(newArray) ];
+  const current = state.current + 1;
+  return { history, current };
 }
 
 export function paintTile(index: number, tile: number) {

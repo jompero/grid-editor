@@ -8,8 +8,8 @@ export interface RootState {
 }
 
 const reducer = combineReducers({
-    tileArray: tileArrayReducer,
-    tools: BrushReducer
+  tileArray: tileArrayReducer,
+  tools: BrushReducer,
 });
 
 const store = createStore(reducer);
