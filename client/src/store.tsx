@@ -10,7 +10,7 @@ export interface RootState {
 const reducer = combineReducers({
     tileArray: tileArrayReducer,
     tools: BrushReducer
-  });
+});
 
 const store = createStore(reducer);
 console.log('store', store.getState());

@@ -24,5 +24,9 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    "import/extensions": [
+      "error",
+      "never"
+    ]
   },
 };
