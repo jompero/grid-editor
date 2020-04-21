@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { setBrush } from '../reducers/brushReducer';
 import { useDispatch } from 'react-redux';
+import { setBrush } from '../reducers/brushReducer';
 import { undo, redo } from '../reducers/tileArrayReducer';
 
 function Tools() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    return (
+  return (
         <div>
             <Button onClick={() => dispatch(setBrush(-1))}>
                 Eraser
@@ -20,7 +20,7 @@ function Tools() {
             </Button>
         </div>
 
-    )
+  );
 }
 
 export default Tools;

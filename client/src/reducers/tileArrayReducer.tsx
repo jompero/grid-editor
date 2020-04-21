@@ -22,8 +22,8 @@ const initializeState = () => {
 };
 
 function paint(state: TileArrayState, index: number, tile: number): TileArrayState {
-  const tiles = state.history[state.current].tiles;
-  const newArray = tiles.map((oldTile, i) => i !== index ? oldTile : tile);
+  const { tiles } = state.history[state.current];
+  const newArray = tiles.map((oldTile, i) => (i !== index ? oldTile : tile));
   const history = [...state.history.slice(0, state.current + 1), new TileArray(newArray)];
   const current = state.current + 1;
   return { history, current };

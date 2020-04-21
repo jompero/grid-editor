@@ -7,15 +7,16 @@ export interface Props {
   posY?: number;
 }
 
-function Tile({ image, color, posX, posY }: Props) {
-
+function Tile({
+  image, color, posX, posY,
+}: Props) {
   const style = {
     backgroundImage: image && `url(${image})`,
     backgroundColor: `${color}`,
     backgroundPosition: posX && posY && `-${posX}px -${posY}px`,
     width: '16px',
-    height: '16px'
-  }
+    height: '16px',
+  };
 
   return (
     <div style={style} />
