@@ -8,7 +8,7 @@ function Tools() {
   const dispatch = useDispatch();
 
   return (
-        <div>
+        <div id='tools'>
             <Button onClick={() => dispatch(setBrush(-1))}>
                 Eraser
             </Button>
