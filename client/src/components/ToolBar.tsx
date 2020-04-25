@@ -69,23 +69,23 @@ function ToolBar({ children }: Props) {
   return (
         <div className={classes.root}>
             <AppBar position='absolute' className={classes.appBar}>
-            <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                  Grid Editor
-                </Typography>
-                <div className={classes.title} >
-                  <Tools />
-                </div>
+              <Toolbar>
+                  <Typography variant="h6" className={classes.title}>
+                    Grid Editor
+                  </Typography>
+                  <div className={classes.title} >
+                    <Tools />
+                  </div>
 
-                <div onClick={() => setOpen(true)}>
-                  <Circle>
-                      <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={2.5} >
-                        {brush >= 0
-                        && <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />}
-                      </Grid>
-                  </Circle>
-                </div>
-            </Toolbar>
+                  <div id={'selectedBrush'} onClick={() => setOpen(true)}>
+                    <Circle>
+                        <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={2.5} >
+                          {brush >= 0
+                          && <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />}
+                        </Grid>
+                    </Circle>
+                  </div>
+              </Toolbar>
             </AppBar>
 
             <div className={classes.content}>
