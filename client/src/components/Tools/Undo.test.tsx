@@ -2,17 +2,17 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import ToolBar from './ToolBar';
-import store from '../store';
+import store from '../../store';
+import Undo from './Undo';
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <ToolBar>Content</ToolBar>
+      <Undo />
     </Provider>
   );
 
   expect(component.container).toHaveTextContent(
-    'Content'
+    'Undo'
   );
 });
