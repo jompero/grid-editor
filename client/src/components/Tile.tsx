@@ -19,7 +19,7 @@ function Tile({
   };
 
   return (
-    <div style={style} />
+    <div className='tile' style={style} />
   );
 }
 

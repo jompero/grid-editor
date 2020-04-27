@@ -16,7 +16,3 @@ test('renders content', () => {
     'Eraser'
   );
 });
-
-test('dispatch on click', () => {
-  
-});
