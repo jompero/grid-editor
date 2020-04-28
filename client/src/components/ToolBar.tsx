@@ -68,11 +68,13 @@ function ToolBar({ children }: Props) {
 
   return (
         <div className={classes.root}>
+          
             <AppBar position='absolute' className={classes.appBar}>
               <Toolbar>
                   <Typography variant="h6" className={classes.title}>
                     Grid Editor
                   </Typography>
+
                   <div className={classes.title} >
                     <Tools />
                   </div>
@@ -98,6 +100,7 @@ function ToolBar({ children }: Props) {
                     {palette()}
                 </Palette>
             </div>
+
         </div>
   );
 }

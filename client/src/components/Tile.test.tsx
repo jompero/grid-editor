@@ -6,10 +6,10 @@ import store from '../store';
 import Tile from './Tile';
 import image from '../9445.png';
 
-test('renders content', () => {
+test('style applied correctly', () => {
   const component = render(
     <Provider store={store}>
-      <Tile image={image} posX={0} posY={0}/>
+      <Tile image={image} color='blue' posX={10} posY={10}/>
     </Provider>
   );
 
@@ -18,5 +18,11 @@ test('renders content', () => {
 
   expect(tile).toHaveStyle(
     'background-image: url(9445.png)'
+  );
+  expect(tile).toHaveStyle(
+    'background-color: blue'
+  );
+  expect(tile).toHaveStyle(
+    'background-position: -10px -10px'
   );
 });
