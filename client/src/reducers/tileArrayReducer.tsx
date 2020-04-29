@@ -7,7 +7,7 @@ export interface TileArrayState {
 
 interface TileArrayAction {
   type: string,
-  data: {
+  data?: {
     index: number,
     tile: number
   }

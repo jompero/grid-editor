@@ -18,7 +18,7 @@ function setTile(state: BrushState, brush: number): BrushState {
   return newState;
 }
 
-function BrushReducer(state: BrushState = initialState, action: BrushAction): BrushState {
+function brushReducer(state: BrushState = initialState, action: BrushAction): BrushState {
   switch (action.type) {
     case 'SET_BRUSH':
       return setTile(state, action.data.brush);
@@ -34,4 +34,4 @@ export function setBrush(brush: number): BrushAction {
   };
 }
 
-export default BrushReducer;
+export default brushReducer;
