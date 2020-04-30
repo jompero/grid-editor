@@ -15,13 +15,17 @@ describe('on action', () => {
     });
 });
 
-describe('on initialization', () => {
-    test('brush initializes', () => {
-        const store = createStore(brushReducer);
+describe('reducer', () => {
+    const store = createStore(brushReducer);
 
+    test('is initialized', () => {
         const state = store.getState();
         expect(state).toEqual({ brush: 0 });
     });
-});
 
-// Test reducer result
+    test('can change brush', () => {
+        store.dispatch(setBrush(1));
+        const state = store.getState();
+        expect(state.brush).toBe(1);
+    });
+});

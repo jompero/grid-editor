@@ -55,21 +55,34 @@ describe('reducer', () => {
         const state = store.getState();
         expect(state.current).toBe(1);
         expect(state.history[1].tiles[0]).toBe(1);
-    })
+    });
 
     test('can undo', () => {
         store.dispatch(undo());
         const state = store.getState();
         expect(state.current).toBe(0);
         expect(state.history[0].tiles[0]).toBe(-1);
-    })
+    });
     
     test('cannot undo further than first state', () => {
         store.dispatch(undo());
         const state = store.getState();
         expect(state.current).toBe(0);
         expect(state.history[0].tiles[0]).toBe(-1);
+    });
+
+    test('can redo', () => {
+        store.dispatch(redo());
+        const state = store.getState();
+        expect(state.current).toBe(1);
+        expect(state.history[1].tiles[0]).toBe(1);
     })
 
-    // TODO: Test redo
-})
+    test('cannot redo further than the last state', () => {
+        store.dispatch(redo());
+        const state = store.getState();
+        console.log('state', state);
+        expect(state.current).toBe(1);
+        expect(state.history[1].tiles[0]).toBe(1);
+    });
+});
