@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build:ui": "del /s /q public && cd ..\\client && npm run build --prod && xcopy build ..\\backend\\dist\\public\\ /s",
-    "start": "npx tsc && node ./dist/bin/www.js",
+    "build": "npx tsc",
+    "start": "node ./dist/bin/www.js",
     "watch": "nodemon ./src/bin/www",
     "deploy": "git push heroku master",
     "commit": "git add . && git commit -m \"deploy\"",

@@ -33,6 +33,7 @@ function tileArrayReducer(
   state: TileArrayState = initializeState(),
   action: TileArrayAction,
 ): TileArrayState {
+  if (!action.data) return state;
   switch (action.type) {
     case 'SET_TILE':
       return paint(state, action.data.index, action.data.tile);
