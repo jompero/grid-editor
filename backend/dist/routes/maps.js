@@ -10,8 +10,8 @@ const maps = [
     { width: 4, height: 4, tileMap: new Array(16).fill(1) },
     { width: 4, height: 4, tileMap: new Array(16).fill(2) },
 ];
-router.get('/maps/', function (req, res, next) {
-    res.send(maps);
+router.get('/', function (req, res, next) {
+    res.send(JSON.stringify(maps));
 });
 exports.default = router;
 //# sourceMappingURL=maps.js.map

@@ -2,10 +2,11 @@ import axios from 'axios';
 
 const url = 'http://localhost:3001';
 
-function getMaps(): any {
-    axios.get(`${url}/maps`)
+function getMaps(): Promise<any> {
+    return axios.get(`${url}/api/maps`)
       .then(function (response) {
-        return response;
+        console.log('maps', response);
+        return response.data;
       });
 }
 
