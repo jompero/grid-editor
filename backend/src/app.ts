@@ -1,15 +1,30 @@
 import express from 'express';
 import path from 'path';
-import logger from 'morgan';
+// import logger from 'morgan';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
-import indexRouter from './routes/index';
-import usersRouter from './routes/users';
-import mapsRouter from './routes/maps';
+import indexRouter from './controllers/index';
+import usersRouter from './controllers/users';
+import mapsRouter from './controllers/tileMaps';
+import logger from './utils/logger';
+import config from './utils/config';
+
+logger.info('connecting to MongoDB');
+
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    logger.info('connected to MongoDB')
+  })
+  .catch((error) => {
+    logger.error('error connection to MongoDB:', error.message)
+  });
 
 var app = express();
 
-app.use(logger('dev'));
+// TODO: Make sure to use the 'proper' logger and create a page to inspect it
+// app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
