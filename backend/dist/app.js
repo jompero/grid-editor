@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const config_1 = __importDefault(require("./utils/config"));
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 // import logger from 'morgan';
@@ -12,9 +13,8 @@ const index_1 = __importDefault(require("./controllers/index"));
 const users_1 = __importDefault(require("./controllers/users"));
 const tileMaps_1 = __importDefault(require("./controllers/tileMaps"));
 const logger_1 = __importDefault(require("./utils/logger"));
-const config_1 = __importDefault(require("./utils/config"));
-logger_1.default.info('connecting to MongoDB');
-mongoose_1.default.connect(config_1.default.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+logger_1.default.info('connecting to MongoDB:', config_1.default);
+mongoose_1.default.connect(config_1.default, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
     logger_1.default.info('connected to MongoDB');
 })

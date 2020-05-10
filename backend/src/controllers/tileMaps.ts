@@ -20,5 +20,10 @@ router.get('/', function(req, res, next) {
         .then(response => res.send(JSON.stringify(response)));
 });
 
+router.post('/', function(req, res, next) {
+    Map.create(maps[0])
+        .then((response: any) => res.send(response))
+})
+
 export default router;
   

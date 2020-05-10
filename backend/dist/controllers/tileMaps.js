@@ -15,5 +15,9 @@ router.get('/', function (req, res, next) {
     tileMap_1.default.find()
         .then(response => res.send(JSON.stringify(response)));
 });
+router.post('/', function (req, res, next) {
+    tileMap_1.default.create(maps[0])
+        .then((response) => res.send(response));
+});
 exports.default = router;
 //# sourceMappingURL=tileMaps.js.map

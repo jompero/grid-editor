@@ -1,3 +1,4 @@
+import MONGODB_URI from './utils/config';
 import express from 'express';
 import path from 'path';
 // import logger from 'morgan';
@@ -8,11 +9,11 @@ import indexRouter from './controllers/index';
 import usersRouter from './controllers/users';
 import mapsRouter from './controllers/tileMaps';
 import logger from './utils/logger';
-import config from './utils/config';
 
-logger.info('connecting to MongoDB');
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+logger.info('connecting to MongoDB:', MONGODB_URI);
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     logger.info('connected to MongoDB')
   })
