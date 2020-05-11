@@ -6,8 +6,8 @@
   "scripts": {
     "build:ui": "del /s /q public && cd ..\\client && npm run build --prod && xcopy build ..\\backend\\dist\\public\\ /s",
     "build": "npx tsc",
-    "start": "node ./dist/bin/www.js",
-    "watch": "nodemon ./src/bin/www",
+    "start": "ts-node ./src/bin/www.ts",
+    "start:watch": "nodemon",
     "deploy": "git push heroku master",
     "commit": "git add . && git commit -m \"deploy\"",
     "deploy:full": "npm run build:ui && npm run commit && npm run deploy"
@@ -36,6 +36,20 @@
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-plugin-import": "^2.20.1",
     "nodemon": "^2.0.2",
+    "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm start",
+    "ext": "ts"
   }
 }

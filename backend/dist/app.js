@@ -11,7 +11,7 @@ const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const index_1 = __importDefault(require("./controllers/index"));
 const users_1 = __importDefault(require("./controllers/users"));
-const tileMaps_1 = __importDefault(require("./controllers/tileMaps"));
+const maps_1 = __importDefault(require("./controllers/maps"));
 const logger_1 = __importDefault(require("./utils/logger"));
 logger_1.default.info('connecting to MongoDB:', config_1.default);
 mongoose_1.default.connect(config_1.default, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -32,6 +32,6 @@ console.log('loading static content from', publicFolder);
 app.use(express_1.default.static(publicFolder));
 app.use('/api/', index_1.default);
 app.use('/api/users', users_1.default);
-app.use('/api/maps', tileMaps_1.default);
+app.use('/api/maps', maps_1.default);
 module.exports = app;
 //# sourceMappingURL=app.js.map

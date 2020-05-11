@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 
 import indexRouter from './controllers/index';
 import usersRouter from './controllers/users';
-import mapsRouter from './controllers/tileMaps';
+import mapsRouter from './controllers/maps';
 import logger from './utils/logger';
 
 

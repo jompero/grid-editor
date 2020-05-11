@@ -4,6 +4,7 @@ import Map from '../models/tileMap';
 const router = express.Router();
 
 interface TileMap {
+    name: string,
     width: number,
     height: number,
     tileMap: number[]
@@ -21,9 +22,27 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    Map.create(maps[0])
+    const map: TileMap = req.body;
+    
+    console.log('processing map')
+    if (!map.name) {
+        console.log('setting default name');
+        map.name = `Map${Math.floor(Math.random() * 1000)}`;
+    }
+
+    if (!map.tileMap) {
+        console.log('setting empty tiles');
+        map.tileMap = new Array(map.width * map.height).fill(-1);
+    }
+
+    console.log('saving map', map);
+    Map.create(map)
         .then((response: any) => res.send(response))
-})
+        .catch((err) => {
+
+        });
+
+});
 
 export default router;
   

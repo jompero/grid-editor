@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const tileMapSchema = new mongoose_1.default.Schema({
     name: {
+        required: true,
         type: String,
         minLength: 3
     },

@@ -3,3 +3,13 @@ GET http://localhost:3001/api/maps
 ###
 
 POST http://localhost:3001/api/maps
+
+###
+
+POST http://localhost:3001/api/maps
+content-type: application/json
+
+{
+    "height": 16,
+    "width": 16
+}
