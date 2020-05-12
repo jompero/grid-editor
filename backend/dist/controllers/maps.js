@@ -17,11 +17,19 @@ router.get('/', function (req, res, next) {
 });
 router.post('/', function (req, res, next) {
     const map = req.body;
+    console.log('processing map');
+    if (!map.name) {
+        console.log('setting default name');
+        map.name = `Map${Math.floor(Math.random() * 1000)}`;
+    }
+    if (!map.tileMap) {
+        console.log('setting empty tiles');
+        map.tileMap = new Array(map.width * map.height).fill(-1);
+    }
+    console.log('saving map', map);
     tileMap_1.default.create(map)
         .then((response) => res.send(response))
         .catch((err) => {
-        res.status(422);
-        next(err);
     });
 });
 exports.default = router;

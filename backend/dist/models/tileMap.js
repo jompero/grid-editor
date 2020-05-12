@@ -10,15 +10,24 @@ const tileMapSchema = new mongoose_1.default.Schema({
         type: String,
         minLength: 3
     },
-    width: Number,
-    height: Number,
-    tileMap: [Number],
+    width: {
+        required: true,
+        type: Number
+    },
+    height: {
+        required: true,
+        type: Number
+    },
+    tileMap: {
+        required: true,
+        type: [Number]
+    },
 });
 tileMapSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString();
         delete returnedObject._id;
-        delete returnedObject._v;
+        delete returnedObject.__v;
     }
 });
 exports.default = mongoose_1.default.model('TileMap', tileMapSchema);
