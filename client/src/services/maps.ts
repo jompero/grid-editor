@@ -2,7 +2,14 @@ import axios from 'axios';
 
 const url = 'http://localhost:3001';
 
-function getMaps(): Promise<any> {
+export interface TileMap {
+  name: string,
+  width: number,
+  height: number,
+  tileMap: number[]
+}
+
+export function getMaps(): Promise<any> {
     return axios.get(`${url}/api/maps`)
       .then(function (response) {
         console.log('maps', response);
@@ -10,4 +17,12 @@ function getMaps(): Promise<any> {
       });
 }
 
-export default getMaps;
+export function saveMap(map: TileMap): Promise<any> {
+  return axios.post(`${url}/api/maps`, map)
+  .then(function (response) {
+    console.log('maps', response);
+    return response.data;
+  });
+}
+
+export default { getMaps, saveMap };

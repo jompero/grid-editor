@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
-import getMaps from '../services/maps';
+import { getMaps } from '../services/maps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     // Create styles
