@@ -1,5 +1,5 @@
 export default class TileArray {
-  empty: number = 0;
+  empty: number = -1;
 
   width: number;
 

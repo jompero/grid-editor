@@ -9,6 +9,14 @@ export interface TileMap {
   tileMap: number[]
 }
 
+export interface DBTileMap {
+  id: string,
+  name: string,
+  width: number,
+  height: number,
+  tileMap: number[]
+}
+
 export function getMaps(): Promise<any> {
     return axios.get(`${url}/api/maps`)
       .then(function (response) {

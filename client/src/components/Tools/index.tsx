@@ -3,6 +3,7 @@ import Eraser from './Eraser';
 import Undo from './Undo';
 import Redo from './Redo';
 import Save from './Save';
+import Load from './Load';
 
 function Tools() {
   return (
@@ -11,6 +12,7 @@ function Tools() {
             <Undo />
             <Redo />
             <Save />
+            <Load />
         </div>
   );
 }

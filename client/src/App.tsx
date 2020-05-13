@@ -8,9 +8,6 @@ function App() {
   return (
     <Router>
       <ToolBar>
-        <Link to='/'>Home </Link>
-        <Link to='/maps'>Maps </Link>
-
         <Switch>
           <Route exact path='/'><Canvas width={16} height={16} tileHeight={16} tileWidth={16} /></Route>
           <Route path='/maps'><Maps /></Route>
