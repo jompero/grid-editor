@@ -1,17 +1,17 @@
 import { createStore, combineReducers } from 'redux';
-import tileArrayReducer, { TileArrayState } from './reducers/tileArrayReducer';
+import tileArrayReducer, { HistoryState } from './reducers/historyReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 
 export interface RootState {
   tileSet: string,
-  tileArray: TileArrayState,
+  history: HistoryState,
   tools: BrushState
 }
 
 const reducer = combineReducers({
   tileSet: tileSetReducer,
-  tileArray: tileArrayReducer,
+  history: tileArrayReducer,
   tools: brushReducer,
 });
 

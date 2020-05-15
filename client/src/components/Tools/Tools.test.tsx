@@ -4,11 +4,14 @@ import { render } from '@testing-library/react';
 import Tools from '../Tools';
 import { Provider } from 'react-redux';
 import store from '../../store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders tools', () => {
   const component = render(
     <Provider store={store}>
-      <Tools />
+      <Router>
+        <Tools />
+      </Router>
     </Provider>
   );
 

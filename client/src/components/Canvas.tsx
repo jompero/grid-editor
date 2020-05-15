@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { paintTile } from '../reducers/tileArrayReducer';
+import { paintTile } from '../reducers/historyReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
@@ -24,7 +24,7 @@ function Canvas({
   width, height, tileHeight, tileWidth,
 }: Props) {
   const dispatch = useDispatch();
-  const tileArray = useSelector((state: RootState) => state.tileArray);
+  const tileMap = useSelector((state: RootState) => state.history);
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   function paint(index: number) {
@@ -33,7 +33,7 @@ function Canvas({
   }
 
   function parseTileArray() {
-    return tileArray.history[tileArray.current].tiles.map((t: number, i: number) => (
+    return tileMap.history[tileMap.current].map((t: number, i: number) => (
             <div
               key={i}
               // onClick={() => paint(i)}

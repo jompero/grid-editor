@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { redo } from '../../reducers/tileArrayReducer';
+import { redo } from '../../reducers/historyReducer';
 
 function Eraser() {
     const dispatch = useDispatch();

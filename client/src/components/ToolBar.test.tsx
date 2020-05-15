@@ -4,11 +4,14 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import ToolBar from './ToolBar';
 import store from '../store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <ToolBar>Content</ToolBar>
+      <Router>
+        <ToolBar>Content</ToolBar>
+      </Router>
     </Provider>
   );
 

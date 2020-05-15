@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import tileArrayReducer, { paintTile, undo, redo } from './tileArrayReducer';
+import historyReducer, { paintTile, undo, redo } from './historyReducer';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 
@@ -14,7 +14,7 @@ describe('on action', () => {
         const actions = store.getActions();
         expect(actions).toEqual([{
             type: 'SET_TILE',
-            data: { index: 0, tile: 1 },
+            data: { target: { index: 0, tile: 1 } },
           }]);
     });
 
@@ -41,41 +41,41 @@ describe('on action', () => {
 })
 
 describe('reducer', () => {
-    const store = createStore(tileArrayReducer);
+    const store = createStore(historyReducer);
 
     test('is initialized', () => {
         const state = store.getState();
         expect(state.current).toBe(0);
         expect(state.history.length).toBe(1);
-        expect(state.history[0].tiles.length).toBe(16*16);
+        expect(state.history[0].length).toBe(1);
     });
 
     test('can be painted on', () => {
         store.dispatch(paintTile(0, 1));
         const state = store.getState();
         expect(state.current).toBe(1);
-        expect(state.history[1].tiles[0]).toBe(1);
+        expect(state.history[1][0]).toBe(1);
     });
 
     test('can undo', () => {
         store.dispatch(undo());
         const state = store.getState();
         expect(state.current).toBe(0);
-        expect(state.history[0].tiles[0]).toBe(-1);
+        expect(state.history[0][0]).toBe(-1);
     });
     
     test('cannot undo further than first state', () => {
         store.dispatch(undo());
         const state = store.getState();
         expect(state.current).toBe(0);
-        expect(state.history[0].tiles[0]).toBe(-1);
+        expect(state.history[0][0]).toBe(-1);
     });
 
     test('can redo', () => {
         store.dispatch(redo());
         const state = store.getState();
         expect(state.current).toBe(1);
-        expect(state.history[1].tiles[0]).toBe(1);
+        expect(state.history[1][0]).toBe(1);
     })
 
     test('cannot redo further than the last state', () => {
@@ -83,6 +83,6 @@ describe('reducer', () => {
         const state = store.getState();
         console.log('state', state);
         expect(state.current).toBe(1);
-        expect(state.history[1].tiles[0]).toBe(1);
+        expect(state.history[1][0]).toBe(1);
     });
 });

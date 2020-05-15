@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getMaps, DBTileMap } from '../services/maps';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { load } from '../reducers/tileArrayReducer';
+import { load } from '../reducers/historyReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import mapping from '../9445.json';
