@@ -3,14 +3,7 @@ import axios from 'axios';
 const url = 'http://localhost:3001';
 
 export interface TileMap {
-  name: string,
-  width: number,
-  height: number,
-  tileMap: number[]
-}
-
-export interface DBTileMap {
-  id: string,
+  id?: string,
   name: string,
   width: number,
   height: number,

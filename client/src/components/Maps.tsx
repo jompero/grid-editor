@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
-import { getMaps, DBTileMap } from '../services/maps';
+import { getMaps, TileMap } from '../services/maps';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { load } from '../reducers/historyReducer';
@@ -19,17 +19,17 @@ function Maps() {
   const dispatch = useDispatch();
   const image = useSelector((state: RootState) => state.tileSet);
 
-  const [maps, setMaps] = useState<DBTileMap[]>([]);
+  const [maps, setMaps] = useState<TileMap[]>([]);
 
   useEffect(() => {
     console.log('loading maps');
-    getMaps().then((maps: DBTileMap[]) => {
+    getMaps().then((maps: TileMap[]) => {
       setMaps(maps);
       console.log('maps state', maps);
     });
   }, []);
 
-  function parseMap(map: DBTileMap) {
+  function parseMap(map: TileMap) {
     return map.tileMap.map((tile: number, index: number) => (
       <div>
         {tile >= 0 && <Tile image={image} posX={mapping[tile].x} posY={mapping[tile].y} />}
@@ -38,7 +38,7 @@ function Maps() {
   }
 
   if (maps) return (
-    <div>{maps.map((map: DBTileMap) => {
+    <div>{maps.map((map: TileMap) => {
       return (
         <div>
           <Link key={map.id} to='/' onClick={() => dispatch(load(map))}>

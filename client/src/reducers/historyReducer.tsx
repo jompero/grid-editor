@@ -1,4 +1,4 @@
-import { DBTileMap, TileMap } from '../services/maps';
+import { TileMap } from '../services/maps';
 
 export interface HistoryState {
   tileMap: TileMap,
@@ -85,7 +85,7 @@ export function redo() {
   };
 }
 
-export function load(map: DBTileMap) {
+export function load(map: TileMap) {
   return {
     type: 'LOAD_MAP',
     data: {
