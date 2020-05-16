@@ -9,6 +9,7 @@ import Grid from './Grid';
 import Tile from './Tile';
 import mapping from '../9445.json';
 import { RootState } from '../store';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     // Create styles
@@ -37,26 +38,31 @@ function Maps() {
     ));
   }
 
-  if (maps) return (
-    <div>{maps.map((map: TileMap) => {
-      return (
-        <div>
-          <Link key={map.id} to='/' onClick={() => dispatch(load(map))}>
-            <Grid rows={map.height} columns={map.width} tileHeight={16} tileWidth={16} scale={1} >
-              {parseMap(map)}
-            </Grid>
-            {map.name}
-          </Link>
-        </div>
-      )
-    })}</div>
-  )
+  function parsedMaps() {
+    return (
+      maps.map((map: TileMap) => {
+        return (
+          <div>
+            <Link key={map.id} to='/' onClick={() => dispatch(load(map))}>
+              <Grid rows={map.height} columns={map.width} tileHeight={16} tileWidth={16} scale={1} >
+                {parseMap(map)}
+              </Grid>
+              {map.name}
+            </Link>
+          </div>
+        )
+      })
+    );
+  }
 
   return (
-        <div>
-          Loading
-        </div>
-  );
+    <div>
+      <Button><Link to='/'>Cancel</Link></Button>
+      <div>
+        {parsedMaps()}
+      </div>
+    </div>
+  )
 }
 
 export default Maps;

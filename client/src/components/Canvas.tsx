@@ -24,7 +24,7 @@ function Canvas({
   width, height, tileHeight, tileWidth,
 }: Props) {
   const dispatch = useDispatch();
-  const tileMap = useSelector((state: RootState) => state.history);
+  const canvas = useSelector((state: RootState) => state.history);
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   function paint(index: number) {
@@ -33,10 +33,9 @@ function Canvas({
   }
 
   function parseTileArray() {
-    return tileMap.history[tileMap.current].map((t: number, i: number) => (
+    return canvas.history[canvas.current].map((t: number, i: number) => (
             <div
               key={i}
-              // onClick={() => paint(i)}
               onMouseDown={() => paint(i)}
               onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(i)}
             >
@@ -45,10 +44,13 @@ function Canvas({
             </div>
     ));
   }
+
+  if (canvas.tileMap.width === 0) return null;
+
   return (
         <Grid
-          columns={width || 16}
-          rows={height || 16}
+          columns={canvas.tileMap.width}
+          rows={canvas.tileMap.height}
           tileHeight={tileHeight || 16}
           tileWidth={tileWidth || 16}
           scale={2} >
