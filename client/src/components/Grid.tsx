@@ -22,7 +22,7 @@ function Grid({
     children: {
       transformOrigin: 'top left',
       transform: `scale(${scale})`,
-      '&:hover': {
+      '&:hover': { //TODO: It's not this component's responsibility to provide this behaviour
         cursor: 'pointer',
       },
     },

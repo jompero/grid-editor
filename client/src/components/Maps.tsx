@@ -9,10 +9,16 @@ import Grid from './Grid';
 import Tile from './Tile';
 import mapping from '../9445.json';
 import { RootState } from '../store';
-import { Button } from '@material-ui/core';
+import { Button, Card, CardMedia, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-    // Create styles
+
+    map: {
+      margin: '1em',
+    },
+    mapList: {
+      display: 'flex'
+    }
 }));
 
 function Maps() {
@@ -32,7 +38,7 @@ function Maps() {
 
   function parseMap(map: TileMap) {
     return map.tileMap.map((tile: number, index: number) => (
-      <div>
+      <div key={index}>
         {tile >= 0 && <Tile image={image} posX={mapping[tile].x} posY={mapping[tile].y} />}
       </div>
     ));
@@ -42,14 +48,31 @@ function Maps() {
     return (
       maps.map((map: TileMap) => {
         return (
-          <div>
-            <Link key={map.id} to='/' onClick={() => dispatch(load(map))}>
-              <Grid rows={map.height} columns={map.width} tileHeight={16} tileWidth={16} scale={1} >
-                {parseMap(map)}
-              </Grid>
-              {map.name}
-            </Link>
-          </div>
+          <Card className={classes.map} key={map.name}>
+            <CardActionArea>
+              <CardMedia component={Link} to={'/'} onClick={() => dispatch(load(map))}>
+                <div>
+                  <Grid rows={map.height} columns={map.width} tileHeight={16} tileWidth={16} scale={0.5} >
+                    {parseMap(map)}
+                  </Grid>
+                </div>
+              </CardMedia>
+              <CardContent>
+                <Typography variant="h6">
+                  {map.name}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+
+            <CardActions>
+              <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
+                Load
+              </Button>
+              <Button>
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
         )
       })
     );
@@ -58,7 +81,7 @@ function Maps() {
   return (
     <div>
       <Button><Link to='/'>Cancel</Link></Button>
-      <div>
+      <div className={classes.mapList}>
         {parsedMaps()}
       </div>
     </div>

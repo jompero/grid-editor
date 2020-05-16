@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 function Load() {
 
     return (
-        <Button>
-            <Link to='/maps'>Load</Link>
+        <Button component={Link}  to='/maps'>
+            Load
         </Button>
     )
 }
