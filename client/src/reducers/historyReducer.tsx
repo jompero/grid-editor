@@ -19,12 +19,12 @@ interface HistoryAction {
 
 const nullState = {
   tileMap: {
-    name: "null",
-    width: 0,
-    height: 0,
+    name: "New Map",
+    width: 16,
+    height: 16,
     tileMap: []
   },
-  history: [[-1]],
+  history: [new Array(16*16).fill(-1)],
   current: 0
 }
 

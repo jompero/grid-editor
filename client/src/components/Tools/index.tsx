@@ -4,16 +4,30 @@ import Undo from './Undo';
 import Redo from './Redo';
 import Save from './Save';
 import Load from './Load';
+import Palette from './Palette';
+import { List, ListItemText, ListItem } from '@material-ui/core';
+
+const tools = [
+  <Eraser />,
+  <Undo />,
+  <Redo />,
+  <Save />,
+  <Load />,
+  <Palette />
+];
 
 function Tools() {
   return (
-        <div id='tools'>
-            <Eraser />
-            <Undo />
-            <Redo />
-            <Save />
-            <Load />
-        </div>
+        <List id='tools'>
+          {tools.map(tool => {
+              return (
+                <ListItem>
+                  {tool}
+                </ListItem>
+              )
+            }
+          )}
+        </List>
   );
 }
 

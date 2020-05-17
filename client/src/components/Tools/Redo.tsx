@@ -1,15 +1,20 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { ListItem, IconButton } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { redo } from '../../reducers/historyReducer';
+import RedoIcon from '@material-ui/icons/Redo';
 
 function Eraser() {
     const dispatch = useDispatch();
 
     return (
-        <Button onClick={() => dispatch(redo())}>
-            Redo
-        </Button>
+        <div>
+            <ListItem button onClick={() => dispatch(redo())}>
+                <IconButton>
+                    <RedoIcon />
+                </IconButton>
+            </ListItem>
+        </div>
     )
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { ListItem, IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { saveMap, TileMap } from '../../services/maps';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import SaveIcon from '@material-ui/icons/Save';
 
 function Save() {
     const tileMap = useSelector((state: RootState) => state.history);
@@ -16,9 +18,13 @@ function Save() {
     }
 
     return (
-        <Button onClick={() => save()}>
-            Save
-        </Button>
+        <div>
+            <ListItem button component={Link} to='/maps'>
+                <IconButton onClick={() => save()}>
+                    <SaveIcon />
+                </IconButton>
+            </ListItem>
+        </div>
     )
 }
 
