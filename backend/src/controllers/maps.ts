@@ -39,9 +39,15 @@ router.post('/', function(req, res, next) {
     Map.create(map)
         .then((response: any) => res.send(response))
         .catch((err) => {
-
+            next(err);
         });
 
+});
+
+router.delete('/:mapId/', function(req, res, next) {
+    Map.findByIdAndDelete(req.params.mapId)
+        .then(response => res.send(response))
+        .catch(err => next(err));
 });
 
 export default router;
