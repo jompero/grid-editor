@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
-import { getMaps, TileMap } from '../services/maps';
+import { getMaps, TileMap, deleteMap } from '../services/maps';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { load } from '../reducers/historyReducer';
@@ -44,6 +44,12 @@ function Maps() {
     ));
   }
 
+  function removeMap(id?: string) {
+    const newMaps = maps.filter(map => map.id !== id);
+    setMaps(newMaps);
+    id && deleteMap(id);
+  }
+
   function parsedMaps() {
     return (
       maps.map((map: TileMap) => {
@@ -68,7 +74,7 @@ function Maps() {
               <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
                 Load
               </Button>
-              <Button>
+              <Button onClick={() => removeMap(map.id || '')}>
                 Delete
               </Button>
             </CardActions>

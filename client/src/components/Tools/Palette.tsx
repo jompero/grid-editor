@@ -50,14 +50,14 @@ function Palette() {
 
   return (
     <div>
-      <ListItem id={'selectedBrush'} onClick={() => setOpen(true)}>
+      <div id={'selectedBrush'} onClick={() => setOpen(true)}>
         <IconButton>
           <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={1.5} >
             {brush >= 0
             && <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />}
           </Grid>
         </IconButton>
-      </ListItem>
+      </div>
       
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >

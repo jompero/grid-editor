@@ -11,11 +11,11 @@ function Eraser() {
 
     return (
         <div>
-            <ListItem button onClick={() => dispatch(setBrush(-1))}>
+            <div onClick={() => dispatch(setBrush(-1))}>
                 <IconButton>
                     <Icon icon={eraserIcon} />
                 </IconButton>
-            </ListItem>
+            </div>
         </div>
     )
 }

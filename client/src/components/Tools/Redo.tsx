@@ -9,11 +9,11 @@ function Eraser() {
 
     return (
         <div>
-            <ListItem button onClick={() => dispatch(redo())}>
+            <div onClick={() => dispatch(redo())}>
                 <IconButton>
                     <RedoIcon />
                 </IconButton>
-            </ListItem>
+            </div>
         </div>
     )
 }

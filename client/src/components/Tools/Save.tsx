@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, IconButton } from '@material-ui/core';
+import { ListItem, IconButton, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { saveMap, TileMap } from '../../services/maps';
 import { useSelector } from 'react-redux';
@@ -18,13 +18,11 @@ function Save() {
     }
 
     return (
-        <div>
-            <ListItem button component={Link} to='/maps'>
-                <IconButton onClick={() => save()}>
-                    <SaveIcon />
-                </IconButton>
-            </ListItem>
-        </div>
+        <Link to='/maps'>
+            <IconButton onClick={() => save()}>
+                <SaveIcon />
+            </IconButton>
+        </Link>
     )
 }
 

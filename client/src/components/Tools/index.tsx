@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Eraser from './Eraser';
 import Undo from './Undo';
 import Redo from './Redo';
@@ -19,9 +19,9 @@ const tools = [
 function Tools() {
   return (
         <List id='tools'>
-          {tools.map(tool => {
+          {tools.map((tool: ReactElement, index: number) => {
               return (
-                <ListItem>
+                <ListItem key={index}>
                   {tool}
                 </ListItem>
               )
