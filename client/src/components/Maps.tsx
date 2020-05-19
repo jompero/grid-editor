@@ -10,6 +10,7 @@ import Tile from './Tile';
 import mapping from '../9445.json';
 import { RootState } from '../store';
 import { Button, Card, CardMedia, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
+import { setMaps } from '../reducers/mapsReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 
@@ -22,16 +23,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 function Maps() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const image = useSelector((state: RootState) => state.tileSet);
-
-  const [maps, setMaps] = useState<TileMap[]>([]);
+  const maps = useSelector((state: RootState) => state.maps);
+  const classes = useStyles();
 
   useEffect(() => {
     console.log('loading maps');
     getMaps().then((maps: TileMap[]) => {
-      setMaps(maps);
+      dispatch(setMaps(maps));
       console.log('maps state', maps);
     });
   }, []);
@@ -46,7 +46,7 @@ function Maps() {
 
   function removeMap(id?: string) {
     const newMaps = maps.filter(map => map.id !== id);
-    setMaps(newMaps);
+    dispatch(setMaps(newMaps));
     id && deleteMap(id);
   }
 
