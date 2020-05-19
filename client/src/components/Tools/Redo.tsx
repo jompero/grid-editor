@@ -8,13 +8,9 @@ function Eraser() {
     const dispatch = useDispatch();
 
     return (
-        <div>
-            <div onClick={() => dispatch(redo())}>
-                <IconButton>
-                    <RedoIcon />
-                </IconButton>
-            </div>
-        </div>
+        <IconButton onClick={() => dispatch(redo())}>
+            <RedoIcon />
+        </IconButton>
     )
 }
 

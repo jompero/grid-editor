@@ -5,9 +5,12 @@ import Redo from './Redo';
 import Save from './Save';
 import Load from './Load';
 import Palette from './Palette';
-import { List, ListItemText, ListItem } from '@material-ui/core';
+import Tune from './Tune';
+import { List, ListItem } from '@material-ui/core';
+
 
 const tools = [
+  <Tune />,
   <Eraser />,
   <Undo />,
   <Redo />,
