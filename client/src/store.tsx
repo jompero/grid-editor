@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import tileArrayReducer, { HistoryState } from './reducers/historyReducer';
+import canvasReducer, { HistoryState } from './reducers/canvasReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
@@ -7,14 +7,14 @@ import { TileMap } from './services/maps';
 
 export interface RootState {
   tileSet: string,
-  history: HistoryState,
+  canvas: HistoryState,
   tools: BrushState,
   maps: TileMap[]
 }
 
 const reducer = combineReducers({
   tileSet: tileSetReducer,
-  history: tileArrayReducer,
+  canvas: canvasReducer,
   tools: brushReducer,
   maps: mapsReducer
 });

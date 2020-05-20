@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getMaps, TileMap, deleteMap } from '../services/maps';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { load } from '../reducers/historyReducer';
+import { load } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import mapping from '../9445.json';

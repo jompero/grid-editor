@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import historyReducer, { paintTile, undo, redo } from './historyReducer';
+import canvasReducer, { paintTile, undo, redo } from './canvasReducer';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 
@@ -41,7 +41,7 @@ describe('on action', () => {
 })
 
 describe('reducer', () => {
-    const store = createStore(historyReducer);
+    const store = createStore(canvasReducer);
 
     test('is initialized', () => {
         const state = store.getState();

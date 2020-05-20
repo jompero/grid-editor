@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem, IconButton } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { redo } from '../../reducers/historyReducer';
+import { redo } from '../../reducers/canvasReducer';
 import RedoIcon from '@material-ui/icons/Redo';
 
 function Eraser() {

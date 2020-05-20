@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { paintTile } from '../reducers/historyReducer';
+import { paintTile } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
@@ -24,7 +24,7 @@ function Canvas({
   width, height, tileHeight, tileWidth,
 }: Props) {
   const dispatch = useDispatch();
-  const canvas = useSelector((state: RootState) => state.history);
+  const canvas = useSelector((state: RootState) => state.canvas);
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   function paint(index: number) {

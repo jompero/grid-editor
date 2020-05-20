@@ -13,7 +13,8 @@ interface HistoryAction {
       index: number,
       tile: number
     }
-    tileMap?: TileMap
+    tileMap?: TileMap,
+    name?: string
   }
 }
 
@@ -42,9 +43,9 @@ function paint(state: HistoryState, position: number, newTile: number): HistoryS
   const history = [...state.history.slice(0, state.current + 1), newMap];
   const current = state.current + 1;
   return { ...state, history, current };
-}
+};
 
-function historyReducer(state: HistoryState = nullState as any, action: HistoryAction): HistoryState {
+function canvasReducer(state: HistoryState = nullState as any, action: HistoryAction): HistoryState {
   switch (action.type) {
     case 'LOAD_MAP':
       return action.data?.tileMap ? newState(action.data.tileMap) : state;
@@ -57,10 +58,14 @@ function historyReducer(state: HistoryState = nullState as any, action: HistoryA
     case 'REDO':
       if (state.current === state.history.length - 1) return state;
       return { ...state, current: state.current + 1 };
+    case 'CHANGE_NAME':
+      return action.data?.name 
+        ? { ...state, tileMap: { ...state.tileMap, name: action.data.name} } 
+        : state;
     default:
       return state;
   }
-}
+};
 
 export function paintTile(index: number, tile: number) {
   return {
@@ -71,19 +76,19 @@ export function paintTile(index: number, tile: number) {
       }
     },
   };
-}
+};
 
 export function undo() {
   return {
     type: 'UNDO',
   };
-}
+};
 
 export function redo() {
   return {
     type: 'REDO',
   };
-}
+};
 
 export function load(map: TileMap) {
   return {
@@ -92,6 +97,15 @@ export function load(map: TileMap) {
       tileMap: map
     }
   }
+};
+
+export function changeName(name: string) {
+  return {
+    type: 'CHANGE_NAME',
+    data: {
+      name
+    }
+  }
 }
 
-export default historyReducer;
+export default canvasReducer;
