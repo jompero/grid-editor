@@ -4,6 +4,7 @@ import Map from '../models/tileMap';
 const router = express.Router();
 
 interface TileMap {
+    id?: string,
     name: string,
     width: number,
     height: number,
@@ -48,6 +49,27 @@ router.delete('/:mapId/', function(req, res, next) {
     Map.findByIdAndDelete(req.params.mapId)
         .then(response => res.send(response))
         .catch(err => next(err));
+});
+
+router.put('/:mapId/', function(req, res, next) {
+    const map: TileMap = req.body;
+    if (req.params.mapId !== map.id) {
+        res.status(400);
+        const err = new Error('lol');
+        next(err);
+    }
+
+    console.log('updating map', map);
+    let newMap = { ...map };
+    delete newMap.id;
+
+    Map.findByIdAndUpdate(
+        { _id: map.id }, 
+        { ...newMap }, 
+        function(err, result) {
+            if (err) next(err);
+            res.send(result);
+        });
 });
 
 export default router;

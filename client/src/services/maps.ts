@@ -20,6 +20,15 @@ export function getMaps(): Promise<any> {
 };
 
 export function saveMap(map: TileMap): Promise<any> {
+
+  if (map.id) {
+    return axios.put(`${url}/api/maps/${map.id}`, map)
+    .then(function (response) {
+      console.log('maps', response);
+      return response.data;
+    });
+  }
+
   return axios.post(`${url}/api/maps`, map)
     .then(function (response) {
       console.log('maps', response);
