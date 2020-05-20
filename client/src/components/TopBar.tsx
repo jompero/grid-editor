@@ -35,28 +35,29 @@ interface Props {
   children?: React.ReactNode
 }
 
-function ToolBar({ children }: Props) {
+function TopBar({ children }: Props) {
   const brush = useSelector((state: RootState) => state.tools.brush);
   console.log('brush', brush);
   const classes = useStyles();
 
   return (
-        <div className={classes.root}>
+    <div className={classes.root}>
 
-            <div className={classes.content}>
+      <AppBar position='absolute' className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Grid Editor
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-                <Drawer variant="permanent">
-                  <div className={classes.toolbarMargin} />
-                  <Tools />
-                </Drawer>
+      <div className={classes.content}>
+        <div className={classes.toolbarMargin} />
+        {children}
+      </div>
 
-                <div className={classes.content}>
-                  {children}
-                </div>
-            </div>
-
-        </div>
+    </div>
   );
 }
 
-export default ToolBar;
+export default TopBar;
