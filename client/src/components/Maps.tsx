@@ -10,7 +10,7 @@ import Tile from './Tile';
 import mapping from '../9445.json';
 import { RootState } from '../store';
 import { Button, Card, CardMedia, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
-import { setMaps } from '../reducers/mapsReducer';
+import { deleteMap as cutMap, setMaps } from '../reducers/mapsReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 
@@ -44,10 +44,9 @@ function Maps() {
     ));
   }
 
-  function removeMap(id?: string) {
-    const newMaps = maps.filter(map => map.id !== id);
-    dispatch(setMaps(newMaps));
-    id && deleteMap(id);
+  function removeMap(map: TileMap) {
+    dispatch(cutMap(map));
+    map.id && deleteMap(map.id);
   }
 
   function parsedMaps() {
@@ -74,7 +73,7 @@ function Maps() {
               <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
                 Load
               </Button>
-              <Button onClick={() => removeMap(map.id || '')}>
+              <Button onClick={() => removeMap(map)}>
                 Delete
               </Button>
             </CardActions>

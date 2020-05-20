@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { changeName } from '../../reducers/canvasReducer';
+import { updateMap } from '../../reducers/canvasReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
@@ -17,7 +17,7 @@ function Settings() {
   const classes = useStyles();
 
   const setName = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(changeName(event.target.value));
+    dispatch(updateMap({ ...tileMap, name: event.target.value }));
   }
 
   return (

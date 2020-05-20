@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import SaveIcon from '@material-ui/icons/Save';
 import { appendMap } from '../../reducers/mapsReducer';
+import { updateMap } from '../../reducers/canvasReducer';
 
 function Save() {
   const dispatch = useDispatch();
@@ -13,9 +14,10 @@ function Save() {
 
   function save(): void {
     saveMap(map)
-      .then(response => {
-        console.log('map saved');
-        dispatch(appendMap(response.data));
+      .then(savedMap => {
+        console.log('map saved', savedMap);
+        dispatch(updateMap(savedMap));
+        dispatch(appendMap(savedMap));
       });
   }
 

@@ -1,12 +1,12 @@
 import { TileMap } from '../services/maps';
 
-export interface HistoryState {
+export interface CanvasState {
   tileMap: TileMap,
   history: number[][],
   current: number
 }
 
-interface HistoryAction {
+interface CanvasAction {
   type: string,
   data?: {
     target: {
@@ -37,7 +37,7 @@ const newState = (map: TileMap) => {
   };
 };
 
-function paint(state: HistoryState, position: number, newTile: number): HistoryState {
+function paint(state: CanvasState, position: number, newTile: number): CanvasState {
   const currentMap = state.history[state.current];
   const newMap = currentMap.map((oldTile, index) => (index === position ? newTile : oldTile));
   const history = [...state.history.slice(0, state.current + 1), newMap];
@@ -45,7 +45,7 @@ function paint(state: HistoryState, position: number, newTile: number): HistoryS
   return { ...state, history, current };
 };
 
-function canvasReducer(state: HistoryState = nullState as any, action: HistoryAction): HistoryState {
+function canvasReducer(state: CanvasState = nullState as any, action: CanvasAction): CanvasState {
   switch (action.type) {
     case 'LOAD_MAP':
       return action.data?.tileMap ? newState(action.data.tileMap) : state;
@@ -58,9 +58,10 @@ function canvasReducer(state: HistoryState = nullState as any, action: HistoryAc
     case 'REDO':
       if (state.current === state.history.length - 1) return state;
       return { ...state, current: state.current + 1 };
-    case 'CHANGE_NAME':
-      return action.data?.name 
-        ? { ...state, tileMap: { ...state.tileMap, name: action.data.name} } 
+    case 'UPDATE_MAP':
+      console.log('updating tilemap', action.data?.tileMap);
+      return action.data?.tileMap 
+        ? { ...state, tileMap: action.data.tileMap } 
         : state;
     default:
       return state;
@@ -99,11 +100,11 @@ export function load(map: TileMap) {
   }
 };
 
-export function changeName(name: string) {
+export function updateMap(map: TileMap) {
   return {
-    type: 'CHANGE_NAME',
+    type: 'UPDATE_MAP',
     data: {
-      name
+      tileMap: map
     }
   }
 }

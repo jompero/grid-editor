@@ -53,11 +53,6 @@ router.delete('/:mapId/', function(req, res, next) {
 
 router.put('/:mapId/', function(req, res, next) {
     const map: TileMap = req.body;
-    if (req.params.mapId !== map.id) {
-        res.status(400);
-        const err = new Error('lol');
-        next(err);
-    }
 
     console.log('updating map', map);
     let newMap = { ...map };
@@ -66,6 +61,7 @@ router.put('/:mapId/', function(req, res, next) {
     Map.findByIdAndUpdate(
         { _id: map.id }, 
         { ...newMap }, 
+        { upsert: true, setDefaultsOnInsert: true },
         function(err, result) {
             if (err) next(err);
             res.send(result);
