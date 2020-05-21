@@ -4,28 +4,19 @@ import { paintTile } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
-import image from '../9445.png';
 import mapping from '../9445.json';
 
-interface Props {
-  width: number,
-  height: number,
-  tileHeight?: number,
-  tileWidth?: number,
-}
-
-function getColor(index: number, columns: number, rows: number): string {
-  const tileValue = (index % columns) + Math.floor(index / rows);
+function getColor(index: number, columns: number): string {
+  const tileValue = (index % columns) + Math.floor(index / columns);
   console.log('index', index, 'tileValue', tileValue);
   return tileValue % 2 === 0 ? 'GREY' : 'WHITE';
 }
 
-function Canvas({
-  width, height, tileHeight, tileWidth,
-}: Props) {
+function Canvas() {
   const dispatch = useDispatch();
   const canvas = useSelector((state: RootState) => state.canvas);
   const brush = useSelector((state: RootState) => state.tools.brush);
+  const tileSet = useSelector((state: RootState) => state.tileSet);
 
   function paint(index: number) {
     dispatch(paintTile(index, brush));
@@ -33,14 +24,14 @@ function Canvas({
   }
 
   function parseTileArray() {
-    return canvas.history[canvas.current].map((t: number, i: number) => (
+    return canvas.history[canvas.current].map((tile: number, index: number) => (
             <div
-              key={i}
-              onMouseDown={() => paint(i)}
-              onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(i)}
+              key={index}
+              onMouseDown={() => paint(index)}
+              onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(index)}
             >
-              {t >= 0 && <Tile image={image} posX={mapping[t].x} posY={mapping[t].y} />}
-              {t === -1 && <Tile color={getColor(i, width, height)}/>}
+              {tile >= 0 && <Tile image={tileSet} posX={mapping[tile].x} posY={mapping[tile].y} />}
+              {tile === -1 && <Tile color={getColor(index, canvas.tileMap.width)}/>}
             </div>
     ));
   }
@@ -51,8 +42,8 @@ function Canvas({
         <Grid
           columns={canvas.tileMap.width}
           rows={canvas.tileMap.height}
-          tileHeight={tileHeight || 16}
-          tileWidth={tileWidth || 16}
+          tileHeight={16}
+          tileWidth={16}
           scale={2} >
             {parseTileArray()}
         </Grid>

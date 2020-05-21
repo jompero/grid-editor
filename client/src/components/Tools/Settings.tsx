@@ -1,11 +1,13 @@
-import React from 'react';
-import { TextField, makeStyles, Theme, createStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+import { TextField, makeStyles, Theme, createStyles, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { updateMap } from '../../reducers/canvasReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
+    display: 'grid',
+    gridGap: '2em',
     background: 'white',
     padding: '2em'
   },
@@ -16,14 +18,22 @@ function Settings() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const setName = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(updateMap({ ...tileMap, name: event.target.value }));
-  }
+  const [name, setName] = useState(tileMap.name);
+  const [width, setWidth] = useState(tileMap.width.toString());
+  const [height, setHeight] = useState(tileMap.height.toString());
+
+  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(updateMap({ ...tileMap, name, width: Number.parseInt(width), height: Number.parseInt(height) }));
+  };
 
   return (
-    <form className={classes.form} autoComplete='off'>
-      <TextField label='Name' variant='outlined' defaultValue={tileMap.name} onChange={(event) => setName(event)} />
-    </form>
+    <div className={classes.form}>
+      <TextField label='Name' variant='outlined' defaultValue={name} onChange={(event) => setName(event.target.value)} />
+      <TextField label='Width' type='number' variant='outlined' defaultValue={width} onChange={(event) => setWidth(event.target.value)} />
+      <TextField label='Height' type='number' variant='outlined' defaultValue={height} onChange={(event) => setHeight(event.target.value)} />
+      <Button type="submit" onClick={(event) => handleSubmit(event)} >Save</Button>
+    </div>
   )
 }
 

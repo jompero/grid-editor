@@ -59,9 +59,10 @@ function canvasReducer(state: CanvasState = nullState as any, action: CanvasActi
       if (state.current === state.history.length - 1) return state;
       return { ...state, current: state.current + 1 };
     case 'UPDATE_MAP':
-      console.log('updating tilemap', action.data?.tileMap);
-      return action.data?.tileMap 
-        ? { ...state, tileMap: action.data.tileMap } 
+      const updatedTileMap = action.data?.tileMap;
+      console.log('updating tilemap', updatedTileMap);
+      return updatedTileMap
+        ? { ...state, tileMap: updatedTileMap, history: [new Array(updatedTileMap.width * updatedTileMap.height).fill(-1)], current: 0 } 
         : state;
     default:
       return state;
