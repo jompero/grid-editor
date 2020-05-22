@@ -61,7 +61,7 @@ router.put('/:mapId/', function(req, res, next) {
     Map.findByIdAndUpdate(
         { _id: map.id }, 
         { ...newMap }, 
-        { upsert: true, setDefaultsOnInsert: true },
+        { upsert: true, setDefaultsOnInsert: true, new: true },
         function(err, result) {
             if (err) next(err);
             res.send(result);
