@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
-import TuneIcon from '@material-ui/icons/Tune';
+import { IconButton, Typography, Grid as MUIGrid } from '@material-ui/core';
 import { Modal, makeStyles, Theme, createStyles } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import Settings from './Settings';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -11,17 +11,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     transformOrigin: 'center',
-  },
+  }
 }));
 
-function Tune() {
+function Edit() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   return (
     <div>
       <IconButton onClick={() => setOpen(true)}>
-        <TuneIcon />
+        <EditIcon />
       </IconButton>
 
       <Modal open={open} onClose={() => setOpen(false)} >
@@ -33,4 +33,4 @@ function Tune() {
   )
 }
 
-export default Tune;
+export default Edit;
