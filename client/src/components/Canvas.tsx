@@ -5,6 +5,7 @@ import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
 import mapping from '../9445.json';
+import getTileProps from '../utils/tileMapping';
 
 function getColor(index: number, columns: number): string {
   const tileValue = (index % columns) + Math.floor(index / columns);
@@ -30,7 +31,7 @@ function Canvas() {
               onMouseDown={() => paint(index)}
               onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(index)}
             >
-              {tile >= 0 && <Tile image={tileSet} posX={mapping[tile].x} posY={mapping[tile].y} />}
+              {tile >= 0 && <Tile {...getTileProps(tile, tileSet)} />}
               {tile === -1 && <Tile color={getColor(index, canvas.tileMap.width)}/>}
             </div>
     ));

@@ -4,9 +4,10 @@ import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/maps';
+import { TileSet } from './services/tileSets';
 
 export interface RootState {
-  tileSet: string,
+  tileSet: TileSet,
   canvas: CanvasState,
   tools: BrushState,
   maps: TileMap[]

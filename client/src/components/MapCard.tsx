@@ -9,6 +9,7 @@ import mapping from '../9445.json';
 import { RootState } from '../store';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
+import getTileProps from '../utils/tileMapping';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
@@ -29,14 +30,14 @@ interface Props {
 }
 
 function MapCard({ map }: Props) {
-  const image = useSelector((state: RootState) => state.tileSet);
+  const tileSet = useSelector((state: RootState) => state.tileSet);
   const dispatch = useDispatch();
   const classes = useStyles();
 
   function parseMap(map: TileMap) {
     return map.tileMap.map((tile: number, index: number) => (
       <div key={index}>
-        {tile >= 0 && <Tile image={image} posX={mapping[tile].x} posY={mapping[tile].y} />}
+        {tile >= 0 && <Tile {...getTileProps(tile, tileSet)} />}
       </div>
     ));
   }

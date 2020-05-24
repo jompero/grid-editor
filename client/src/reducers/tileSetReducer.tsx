@@ -1,25 +1,26 @@
-import image from '../9445.png';
+import image from '../tileSets/9445.png';
+import tileSets, { TileSet } from '../services/tileSets';
 
 export interface TileSetAction {
     type: string,
     data: {
-        image: string
+        tileSet: string
     }
 }
 
-function tileSetReducer(state: string = image, action: TileSetAction) {
+function tileSetReducer(state: TileSet = tileSets.City, action: TileSetAction) {
     switch (action.type) {
-        case 'LOAD_TILESET':
-          return image;
+        case 'SET_TILESET':
+          return action.data.tileSet;
         default:
           return state;
       }
 }
 
-export function loadTileSet(image: string) {
+export function setTileSet(tileSet: string) {
     return {
-        type: 'LOAD_TILESET',
-        data: { image },
+        type: 'SET_TILESET',
+        data: { tileSet: tileSets[tileSet] }
       };
 }
 

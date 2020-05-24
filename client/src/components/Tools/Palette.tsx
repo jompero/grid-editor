@@ -8,6 +8,7 @@ import Circle from '../Circle';
 import Tile from '../Tile';
 import mapping from '../../9445.json';
 import { setBrush } from '../../reducers/brushReducer';
+import getTileProps from '../../utils/tileMapping';
 
 export interface Coordinate {
   x: number,
@@ -35,16 +36,21 @@ export interface Props {
 function Palette() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const image = useSelector((state: RootState) => state.tileSet);
+  const tileSet = useSelector((state: RootState) => state.tileSet);
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   const [open, setOpen] = React.useState(false);
 
   function palette(): any {
-    return mapping.map((coordinate: Coordinate, index: number) => (
-        <div key={index} onClick={() => dispatch(setBrush(index))}>
-          <Tile image={image} posX={coordinate.x} posY={coordinate.y} />
-        </div>
+    //return mapping.map((coordinate: Coordinate, index: number) => (
+    //    <div key={index} onClick={() => dispatch(setBrush(index))}>
+    //      <Tile {...getTileProps()} />
+    //    </div>
+    //));
+    return Array(tileSet.tiles).fill(0).map((n: number, index: number) => (
+      <div key={index} onClick={() => dispatch(setBrush(index))}>
+        <Tile {...getTileProps(index, tileSet)} />
+      </div>
     ));
   }
 
@@ -54,7 +60,7 @@ function Palette() {
         <IconButton>
           <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={1.5} >
             {brush >= 0
-            && <Tile image={image} posX={mapping[brush].x} posY={mapping[brush].y} />}
+            && <Tile {...getTileProps(brush, tileSet)} />}
           </Grid>
         </IconButton>
       </div>
