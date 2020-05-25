@@ -15,7 +15,7 @@ const City = {
     imageHeight: 48,
     tileWidth: 8,
     tileHeight: 8,
-    tiles: 26
+    tiles: 46
 }
 
 const tileSets = {

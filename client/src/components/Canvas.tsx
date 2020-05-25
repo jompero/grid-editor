@@ -6,12 +6,7 @@ import Tile from './Tile';
 import { RootState } from '../store';
 import mapping from '../9445.json';
 import getTileProps from '../utils/tileMapping';
-
-function getColor(index: number, columns: number): string {
-  const tileValue = (index % columns) + Math.floor(index / columns);
-  console.log('index', index, 'tileValue', tileValue);
-  return tileValue % 2 === 0 ? 'GREY' : 'WHITE';
-}
+import tileSets from '../services/tileSets';
 
 function Canvas() {
   const dispatch = useDispatch();
@@ -24,6 +19,16 @@ function Canvas() {
     console.log('painting', brush, 'on', index);
   }
 
+  function getColor(index: number, columns: number) {
+    const tileValue = (index % columns) + Math.floor(index / columns);
+    console.log('index', index, 'tileValue', tileValue);
+    return {
+      color: tileValue % 2 === 0 ? 'GREY' : 'WHITE',
+      width: tileSet.tileWidth,
+      height: tileSet.tileHeight
+    }
+  }
+
   function parseTileArray() {
     return canvas.history[canvas.current].map((tile: number, index: number) => (
             <div
@@ -32,7 +37,7 @@ function Canvas() {
               onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(index)}
             >
               {tile >= 0 && <Tile {...getTileProps(tile, tileSet)} />}
-              {tile === -1 && <Tile color={getColor(index, canvas.tileMap.width)}/>}
+              {tile === -1 && <Tile {...getColor(index, canvas.tileMap.width)}/>}
             </div>
     ));
   }
@@ -43,9 +48,9 @@ function Canvas() {
         <Grid
           columns={canvas.tileMap.width}
           rows={canvas.tileMap.height}
-          tileHeight={16}
-          tileWidth={16}
-          scale={2} >
+          tileHeight={tileSet.tileHeight}
+          tileWidth={tileSet.tileWidth}
+          scale={32/tileSet.tileWidth} >
             {parseTileArray()}
         </Grid>
   );

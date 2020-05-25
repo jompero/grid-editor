@@ -8,7 +8,7 @@ import Circle from '../Circle';
 import Tile from '../Tile';
 import mapping from '../../9445.json';
 import { setBrush } from '../../reducers/brushReducer';
-import getTileProps from '../../utils/tileMapping';
+import getTileProps, { computeTilesPerRow, computeTilesPerColumn } from '../../utils/tileMapping';
 
 export interface Coordinate {
   x: number,
@@ -58,7 +58,7 @@ function Palette() {
     <div>
       <div id={'selectedBrush'} onClick={() => setOpen(true)}>
         <IconButton>
-          <Grid columns={1} rows={1} tileHeight={14} tileWidth={16} scale={1.5} >
+          <Grid columns={1} rows={1} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={24/tileSet.tileWidth} >
             {brush >= 0
             && <Tile {...getTileProps(brush, tileSet)} />}
           </Grid>
@@ -68,7 +68,7 @@ function Palette() {
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={24} rows={19} tileHeight={17} tileWidth={17} scale={2} >
+            <Grid columns={computeTilesPerRow(tileSet)} rows={computeTilesPerColumn(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>

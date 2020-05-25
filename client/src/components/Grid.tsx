@@ -13,6 +13,7 @@ export interface Props {
 function Grid({
   children, columns, rows, tileHeight, tileWidth, scale,
 }: Props) {
+  
   const useStyles = makeStyles((theme: Theme) => createStyles({
     gridContainer: {
       display: 'inline-grid',
