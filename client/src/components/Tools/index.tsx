@@ -5,17 +5,15 @@ import Redo from './Redo';
 import Save from './Save';
 import Load from './Load';
 import Palette from './Palette';
-import Edit from './Edit';
 import { List, ListItem } from '@material-ui/core';
 
 
 const tools = [
-  //<Edit />,
-  <Eraser />,
+  <Load />,
+  <Save />,
   <Undo />,
   <Redo />,
-  <Save />,
-  <Load />,
+  <Eraser />,
   <Palette />
 ];
 
