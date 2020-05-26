@@ -41,7 +41,7 @@ function Settings() {
   }
 
   return (
-    <div className={classes.form}>
+    <div className={classes.form} >
       <TextField label='Name' variant='outlined' defaultValue={name} onChange={(event) => setName(event.target.value)} />
       <TextField label='Width' type='number' variant='outlined' defaultValue={width} onChange={(event) => setWidth(Number.parseInt(event.target.value))} />
       <TextField label='Height' type='number' variant='outlined' defaultValue={height} onChange={(event) => setHeight(Number.parseInt(event.target.value))} />

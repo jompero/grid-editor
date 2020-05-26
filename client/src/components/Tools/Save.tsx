@@ -10,7 +10,10 @@ import { updateMap } from '../../reducers/canvasReducer';
 function Save() {
   const dispatch = useDispatch();
   const tileMap = useSelector((state: RootState) => state.canvas);
+  const token = useSelector((state: RootState) => state.user.token);
   const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current] };
+
+  if (!token) return (null);
 
   function save(): void {
     saveMap(map)

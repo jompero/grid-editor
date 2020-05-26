@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import {
-  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid,
+  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, Button,
 } from '@material-ui/core';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -44,6 +46,19 @@ function TopBar({ children }: Props) {
   console.log('brush', brush);
   const classes = useStyles();
 
+  const canvasName = () => {
+    return (
+      <MUIGrid container alignItems='center' >
+        <MUIGrid item >
+          <Edit />
+        </MUIGrid>
+        <MUIGrid item >
+          <Typography variant='h6' display='inline' align='justify'>{mapName}</Typography>
+        </MUIGrid>
+      </MUIGrid>
+    )
+  };
+
   return (
     <div className={classes.root}>
 
@@ -55,7 +70,7 @@ function TopBar({ children }: Props) {
             justify="space-between"
             alignItems="center"
           >
-            
+
             <MUIGrid item alignContent='flex-start' xs={3} >
               <Typography variant="h6" className={classes.title}>
                 Grid Editor
@@ -63,17 +78,19 @@ function TopBar({ children }: Props) {
             </MUIGrid>
 
             <MUIGrid item>
-              <MUIGrid container alignItems='center' >
-                <MUIGrid item >
-                  <Edit />
-                </MUIGrid>
-                <MUIGrid item >
-                  <Typography variant='h6' display='inline' align='justify'>{mapName}</Typography>
-                </MUIGrid>
-              </MUIGrid>
+              
+                <Switch>
+                  <Route exact path='/login' />
+                  <Route exact path='/'>
+                    {canvasName()}
+                  </Route>
+                </Switch>
+
             </MUIGrid>
 
-            <MUIGrid item xs={3} />
+            <MUIGrid item xs={3} justify='flex-end' style={{ textAlign: 'right' }}>
+              <Button component={Link} to='/login' >Login</Button>
+            </MUIGrid>
 
           </MUIGrid>
         </Toolbar>
