@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { TextField, makeStyles, Theme, createStyles, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { updateMap } from '../../reducers/canvasReducer';
+import { updateMap, load } from '../../reducers/canvasReducer';
+import { TileMap } from '../../services/maps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
@@ -19,20 +20,33 @@ function Settings() {
   const classes = useStyles();
 
   const [name, setName] = useState(tileMap.name);
-  const [width, setWidth] = useState(tileMap.width.toString());
-  const [height, setHeight] = useState(tileMap.height.toString());
+  const [width, setWidth] = useState(tileMap.width);
+  const [height, setHeight] = useState(tileMap.height);
 
-  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+  const handleSave = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(updateMap({ ...tileMap, name, width: Number.parseInt(width), height: Number.parseInt(height) }));
+    dispatch(updateMap({ ...tileMap, name, width, height }));
   };
+
+  const handleCreateNew = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const newMap: TileMap = {
+      name: 'New Map',
+      width,
+      height,
+      tileMap: new Array(width * height).fill(-1)
+    }
+    dispatch(load(newMap));
+  }
 
   return (
     <div className={classes.form}>
       <TextField label='Name' variant='outlined' defaultValue={name} onChange={(event) => setName(event.target.value)} />
-      <TextField label='Width' type='number' variant='outlined' defaultValue={width} onChange={(event) => setWidth(event.target.value)} />
-      <TextField label='Height' type='number' variant='outlined' defaultValue={height} onChange={(event) => setHeight(event.target.value)} />
-      <Button type="submit" onClick={(event) => handleSubmit(event)} >Save</Button>
+      <TextField label='Width' type='number' variant='outlined' defaultValue={width} onChange={(event) => setWidth(Number.parseInt(event.target.value))} />
+      <TextField label='Height' type='number' variant='outlined' defaultValue={height} onChange={(event) => setHeight(Number.parseInt(event.target.value))} />
+      <Button type="submit" variant='contained' color='primary' onClick={(event) => handleSave(event)} >Save Changes</Button>
+      <Button type="submit" variant='outlined' onClick={(event) => handleCreateNew(event)} >New</Button>
     </div>
   )
 }
