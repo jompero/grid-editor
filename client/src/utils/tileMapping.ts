@@ -1,4 +1,4 @@
-import tileSets, { TileSet } from "../services/tileSets";
+import { TileSet } from "../services/tileSets";
 
 export function computeTilesPerRow(tileSet: TileSet): number {
   return Math.floor(tileSet.imageWidth / tileSet.tileWidth);

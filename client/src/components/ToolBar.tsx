@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Drawer,
+  makeStyles, Theme, createStyles, Drawer,
 } from '@material-ui/core';
 import Tools from './Tools';
 import { RootState } from '../store';

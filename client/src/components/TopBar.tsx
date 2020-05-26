@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Drawer, Grid as MUIGrid, IconButton,
+  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid,
 } from '@material-ui/core';
-import Tools from './Tools';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
 

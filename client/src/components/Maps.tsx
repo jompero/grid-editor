@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { Button } from '@material-ui/core';
-import { deleteMap as cutMap, setMaps } from '../reducers/mapsReducer';
+import { setMaps } from '../reducers/mapsReducer';
 import MapCard from './MapCard';
 
 const useStyles = makeStyles(() => createStyles({ 
@@ -29,7 +29,7 @@ function Maps() {
       dispatch(setMaps(maps));
       console.log('maps state', maps);
     });
-  }, []);
+  }, [dispatch]);
 
   function parsedMaps() {
     return (

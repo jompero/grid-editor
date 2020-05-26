@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Modal, ListItem, IconButton } from '@material-ui/core';
+import { Modal, IconButton } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '../Grid';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import Circle from '../Circle';
 import Tile from '../Tile';
-import mapping from '../../9445.json';
 import { setBrush } from '../../reducers/brushReducer';
 import getTileProps, { computeTilesPerRow, computeTilesPerColumn } from '../../utils/tileMapping';
 

@@ -5,7 +5,6 @@ import { TileMap, deleteMap } from '../services/maps';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
-import mapping from '../9445.json';
 import { RootState } from '../store';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';

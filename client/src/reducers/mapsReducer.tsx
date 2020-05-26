@@ -1,4 +1,4 @@
-import maps, { TileMap } from "../services/maps";
+import { TileMap } from "../services/maps";
 
 interface MapAction {
   type: string,

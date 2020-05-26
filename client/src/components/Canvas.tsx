@@ -4,9 +4,7 @@ import { paintTile } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
-import mapping from '../9445.json';
 import getTileProps from '../utils/tileMapping';
-import tileSets from '../services/tileSets';
 
 function Canvas() {
   const dispatch = useDispatch();

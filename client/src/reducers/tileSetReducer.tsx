@@ -1,4 +1,3 @@
-import image from '../tileSets/9445.png';
 import tileSets, { TileSet } from '../services/tileSets';
 
 export interface TileSetAction {
