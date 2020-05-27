@@ -23,7 +23,7 @@ function userReducer(state: User = {}, action: UserAction) {
 
 export function login(username: string, password: string) {
     return {
-        type: 'Login',
+        type: 'LOGIN',
         data: {
             username,
             token: password
