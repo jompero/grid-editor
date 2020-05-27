@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Theme, createStyles, makeStyles } from '@material-ui/core';
 import Grid from './Grid';
-import { TileMap, deleteMap } from '../services/maps';
+import { TileMap, deleteMap } from '../services/mapsService';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';

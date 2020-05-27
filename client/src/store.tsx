@@ -1,11 +1,13 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import canvasReducer, { CanvasState } from './reducers/canvasReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
-import { TileMap } from './services/maps';
+import { TileMap } from './services/mapsService';
 import { TileSet } from './services/tileSets';
 import userReducer, { User } from './reducers/userReducer';
+import thunk from 'redux-thunk'
 
 export interface RootState {
   user: User,
@@ -23,7 +25,11 @@ const reducer = combineReducers({
   maps: mapsReducer
 });
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  ));
 console.log('store', store.getState());
 
 export default store;

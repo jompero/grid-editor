@@ -1,4 +1,5 @@
-import { TileMap } from "../services/maps";
+import mapsService, { TileMap } from "../services/mapsService";
+import GridEditorThunk from "../utils/GridEditorThunk";
 
 interface MapAction {
   type: string,
@@ -30,6 +31,20 @@ function mapsReducer(state: TileMap[] = [], action: MapAction) {
       return state;
   }
 }
+
+export function initializeMaps(): GridEditorThunk {
+  return dispatch => {
+    mapsService.getAll()
+      .then(maps => {
+        dispatch({
+          type: 'SET_MAPS',
+          data: {
+            maps
+          }
+        })
+      })
+  }
+};
 
 export function setMaps(maps: TileMap[]) {
   return {

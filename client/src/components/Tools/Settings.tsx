@@ -3,7 +3,7 @@ import { TextField, makeStyles, Theme, createStyles, Button } from '@material-ui
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { updateMap, load } from '../../reducers/canvasReducer';
-import { TileMap } from '../../services/maps';
+import { TileMap } from '../../services/mapsService';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {

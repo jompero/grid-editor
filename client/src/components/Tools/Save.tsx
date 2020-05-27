@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
-import { saveMap, TileMap } from '../../services/maps';
+import { saveMap, TileMap } from '../../services/mapsService';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import SaveIcon from '@material-ui/icons/Save';

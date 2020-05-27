@@ -10,7 +10,7 @@ export interface TileMap {
   tileMap: number[]
 };
 
-export function getMaps(): Promise<any> {
+export function getAll(): Promise<any> {
     return axios.get(`${url}/api/maps`)
       .then(function (response) {
         console.log('maps', response);
@@ -43,4 +43,4 @@ export function deleteMap(id: string): Promise<any> {
     })
 }
 
-export default { getMaps, saveMap, deleteMap };
+export default { getAll, saveMap, deleteMap };

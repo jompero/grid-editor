@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
-import { getMaps, TileMap, } from '../services/maps';
+import { getAll, TileMap, } from '../services/mapsService';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { Button } from '@material-ui/core';
-import { setMaps } from '../reducers/mapsReducer';
+import { setMaps, initializeMaps } from '../reducers/mapsReducer';
 import MapCard from './MapCard';
 
 const useStyles = makeStyles(() => createStyles({ 
@@ -20,16 +20,23 @@ const useStyles = makeStyles(() => createStyles({
 
 function Maps() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeMaps());
+  }, [dispatch]);
+
   const maps = useSelector((state: RootState) => state.maps);
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log('loading maps');
-    getMaps().then((maps: TileMap[]) => {
-      dispatch(setMaps(maps));
-      console.log('maps state', maps);
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   console.log('loading maps');
+  //   getMaps().then((maps: TileMap[]) => {
+  //     dispatch(setMaps(maps));
+  //     console.log('maps state', maps);
+  //   });
+  // }, [dispatch]);
+
+
 
   function parsedMaps() {
     return (

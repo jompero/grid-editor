@@ -1,4 +1,4 @@
-import { TileMap } from '../services/maps';
+import { TileMap } from '../services/mapsService';
 
 export interface CanvasState {
   tileMap: TileMap,
