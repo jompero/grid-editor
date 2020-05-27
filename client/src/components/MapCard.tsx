@@ -51,7 +51,7 @@ function MapCard({ map }: Props) {
       <CardActionArea>
         <CardMedia component={Link} to={'/'} onClick={() => dispatch(load(map))}>
           <div className={classes.mapThumbnail}>
-            <Grid rows={map.height} columns={map.width} tileHeight={16} tileWidth={16} scale={0.5} >
+            <Grid rows={map.height} columns={map.width} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={8/tileSet.tileWidth} >
               {parseMap(map)}
             </Grid>
           </div>
