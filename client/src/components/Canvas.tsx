@@ -19,7 +19,7 @@ function Canvas() {
 
   function getColor(index: number, columns: number) {
     const tileValue = (index % columns) + Math.floor(index / columns);
-    console.log('index', index, 'tileValue', tileValue);
+    //console.log('index', index, 'tileValue', tileValue);
     return {
       color: tileValue % 2 === 0 ? 'GREY' : 'WHITE',
       width: tileSet.tileWidth,
