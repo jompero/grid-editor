@@ -2,11 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import {
-  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, Button,
+  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, Button, IconButton,
 } from '@material-ui/core';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
 import { Link } from 'react-router-dom';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -34,10 +35,8 @@ interface Props {
 }
 
 function TopBar({ children }: Props) {
-  const brush = useSelector((state: RootState) => state.tools.brush);
   const mapName = useSelector((state: RootState) => state.canvas.tileMap.name);
   const history = useHistory();
-  //console.log('brush', brush);
   const classes = useStyles();
 
   const canvasName = () => {
@@ -75,6 +74,13 @@ function TopBar({ children }: Props) {
               
                 <Switch>
                   <Route exact path='/login' />
+                    
+                  <Route exact path='/maps'>
+                    <IconButton onClick={() => history.push('/')}>
+                      <CancelIcon/>
+                    </IconButton>
+                  </Route>
+
                   <Route exact path='/'>
                     {canvasName()}
                   </Route>

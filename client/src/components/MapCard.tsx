@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Theme, createStyles, makeStyles } from '@material-ui/core';
 import Grid from './Grid';
 import { TileMap, deleteMap } from '../services/mapsService';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import { RootState } from '../store';
@@ -29,6 +29,7 @@ interface Props {
 }
 
 function MapCard({ map }: Props) {
+  const history = useHistory();
   const tileSet = useSelector((state: RootState) => state.tileSet);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -46,10 +47,15 @@ function MapCard({ map }: Props) {
     map.id && deleteMap(map.id);
   }
 
+  function clickHandler() {
+    dispatch(load(map));
+    history.push('/');
+  }
+
   return (
     <Card className={classes.map} key={map.name}>
-      <CardActionArea>
-        <CardMedia component={Link} to={'/'} onClick={() => dispatch(load(map))}>
+      <CardActionArea onClick={() => clickHandler()}>
+        <CardMedia>
           <div className={classes.mapThumbnail}>
             <Grid rows={map.height} columns={map.width} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={8/tileSet.tileWidth} >
               {parseMap(map)}
