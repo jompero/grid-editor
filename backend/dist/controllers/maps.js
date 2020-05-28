@@ -30,6 +30,23 @@ router.post('/', function (req, res, next) {
     tileMap_1.default.create(map)
         .then((response) => res.send(response))
         .catch((err) => {
+        next(err);
+    });
+});
+router.delete('/:mapId/', function (req, res, next) {
+    tileMap_1.default.findByIdAndDelete(req.params.mapId)
+        .then(response => res.send(response))
+        .catch(err => next(err));
+});
+router.put('/:mapId/', function (req, res, next) {
+    const map = req.body;
+    console.log('updating map', map);
+    let newMap = Object.assign({}, map);
+    delete newMap.id;
+    tileMap_1.default.findByIdAndUpdate({ _id: map.id }, Object.assign({}, newMap), { upsert: true, setDefaultsOnInsert: true, new: true }, function (err, result) {
+        if (err)
+            next(err);
+        res.send(result);
     });
 });
 exports.default = router;

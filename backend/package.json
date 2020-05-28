@@ -6,7 +6,7 @@
   "scripts": {
     "build:ui": "del /s /q public && cd ..\\client && npm run build --prod && xcopy build ..\\backend\\dist\\public\\ /s",
     "build": "npx tsc",
-    "start": "ts-node ./src/bin/www.ts",
+    "start": "node ./dist/bin/www",
     "start:watch": "nodemon",
     "deploy": "git push heroku master",
     "commit": "git add . && git commit -m \"deploy\"",
