@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import {
   AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, Button,
 } from '@material-ui/core';
@@ -15,18 +15,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  drawer: {
-    flexShrink: 0,
-  },
   title: {
-    flexGrow: 1
-  },
-  mapName: {
-    textAlign: 'center',
-    background: 'red'
-  },
-  tool: {
-    marginRight: '1em',
+    flexGrow: 1,
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   content: {
     margin: 'auto',
@@ -43,7 +36,8 @@ interface Props {
 function TopBar({ children }: Props) {
   const brush = useSelector((state: RootState) => state.tools.brush);
   const mapName = useSelector((state: RootState) => state.canvas.tileMap.name);
-  console.log('brush', brush);
+  const history = useHistory();
+  //console.log('brush', brush);
   const classes = useStyles();
 
   const canvasName = () => {
@@ -72,7 +66,7 @@ function TopBar({ children }: Props) {
           >
 
             <MUIGrid item alignContent='flex-start' xs={3} >
-              <Typography variant="h6" className={classes.title}>
+              <Typography variant="h6" className={classes.title} onClick={() => history.push('/')}>
                 Grid Editor
               </Typography>
             </MUIGrid>
