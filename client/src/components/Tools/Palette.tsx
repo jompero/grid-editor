@@ -67,7 +67,7 @@ function Palette() {
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={computeTilesPerColumn(tileSet)} rows={computeTilesPerRow(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
+            <Grid columns={computeTilesPerRow(tileSet)} rows={computeTilesPerColumn(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>
