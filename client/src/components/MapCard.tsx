@@ -30,14 +30,15 @@ interface Props {
 
 function MapCard({ map }: Props) {
   const history = useHistory();
-  const tileSet = useSelector((state: RootState) => state.tileSet);
+  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
+  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
   const dispatch = useDispatch();
   const classes = useStyles();
 
   function parseMap(map: TileMap) {
     return map.tileMap.map((tile: number, index: number) => (
       <div key={index}>
-        {tile >= 0 && <Tile {...getTileProps(tile, tileSet)} />}
+        {tile >= 0 && <Tile {...mapping[tile]} />}
       </div>
     ));
   }

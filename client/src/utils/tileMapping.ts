@@ -1,61 +1,56 @@
 import { TileSet } from "../services/tileSets";
-
-interface Map {
-  posY: number,
-  posX: number
-}
+import { Props as TileProps } from "../components/Tile";
 
 interface Mapping {
-  tileSet: TileSet;
-  tilesPerRow: number;
-  mapping: Map[];
-}
+  posY: number,
+  posX: number
+};
 
 let tileMapping: Mapping;
 
 export function computeTilesPerRow(tileSet: TileSet): number {
-  if (tileMapping && tileMapping.tileSet === tileSet) return tileMapping.tilesPerRow;
-  const tilesPerRow = Math.floor(tileSet.imageWidth / tileSet.tileWidth);
-  tileMapping = { tileSet, tilesPerRow, mapping: [] };
-  return tilesPerRow;
-}
+  return Math.floor(tileSet.imageWidth / tileSet.tileWidth);
+};
 
 export function computeTilesPerColumn(tileSet: TileSet) {
   return Math.floor(tileSet.imageHeight / tileSet.tileHeight);
-}
-
-function getPosY(index: number) {
-  const posY = Math.floor(index / tileMapping.tilesPerRow) * tileMapping.tileSet.tileHeight;
-  return posY;
 };
 
-function getPosX(index: number) {
-  const posX = (index % tileMapping.tilesPerRow) * tileMapping.tileSet.tileWidth;
-  return posX;
-}
+function getPosY(tileSet: TileSet, tilesPerRow: number, index: number) {
+  return Math.floor(index / tilesPerRow) * tileSet.tileHeight;
+};
 
-function getPos(index: number) {
-  if (tileMapping.mapping[index]) return tileMapping.mapping[index];
-  tileMapping.mapping[index] = {
-    posY: getPosY(index),
-    posX: getPosX(index),
+function getPosX(tileSet: TileSet, tilesPerRow: number, index: number) {
+  return (index % tilesPerRow) * tileSet.tileWidth;
+};
+
+function getPos(tileSet: TileSet, tilesPerRow: number, index: number) {
+  return {
+    posY: getPosY(tileSet, tilesPerRow, index),
+    posX: getPosX(tileSet, tilesPerRow, index)
   };
-  return tileMapping.mapping[index];
-}
+};
 
-function getTileProps(index: number, tileSet: TileSet) {
-    computeTilesPerRow(tileSet);
-    getPos(index);
+function getTileProps(index: number, tileSet: TileSet): TileProps {
+    const tilesPerRow = computeTilesPerRow(tileSet);
+    getPos(tileSet, tilesPerRow, index);
 
-    //console.log('tile', index, 'posX', posX, 'posY', posY);
+    //console.log('tile', index, 'posX', posX, 'posY', posY); 
 
     return {
       image: tileSet.image,
-      posX: tileMapping.mapping[index].posX,
-      posY: tileMapping.mapping[index].posY,
+      posX: getPosX(tileSet, tilesPerRow, index),
+      posY: getPosY(tileSet, tilesPerRow, index),
       width: tileSet.tileWidth,
       height: tileSet.tileHeight
     }
-}
+};
 
-export default getTileProps;
+function getMapping(tileSet: TileSet): TileProps[] {
+  return new Array(tileSet.tiles).fill(0).map((n: number, index: number) => {
+      return getTileProps(index, tileSet);
+    }
+  )
+};
+
+export default getMapping;

@@ -2,16 +2,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import canvasReducer, { CanvasState } from './reducers/canvasReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
-import tileSetReducer from './reducers/tileSetReducer';
+import tileSetReducer, { TileSetState } from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/mapsService';
-import { TileSet } from './services/tileSets';
 import userReducer, { User } from './reducers/userReducer';
 import thunk from 'redux-thunk'
 
 export interface RootState {
   user: User,
-  tileSet: TileSet,
+  tileSet: TileSetState,
   canvas: CanvasState,
   tools: BrushState,
   maps: TileMap[]

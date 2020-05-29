@@ -1,4 +1,6 @@
 import tileSets, { TileSet } from '../services/tileSets';
+import { Props as TileProps } from '../components/Tile';
+import getMapping from '../utils/tileMapping';
 
 export interface TileSetAction {
     type: string,
@@ -7,10 +9,22 @@ export interface TileSetAction {
     }
 }
 
-function tileSetReducer(state: TileSet = tileSets.City, action: TileSetAction) {
+export interface TileSetState {
+    tileSet: TileSet,
+    tileProps: TileProps[];
+}
+
+function newState(tileSet: TileSet): TileSetState {
+    return {
+        tileSet: tileSet,
+        tileProps: getMapping(tileSet),
+    }
+}
+
+function tileSetReducer(state: TileSetState = newState(tileSets.City), action: TileSetAction) {
     switch (action.type) {
         case 'SET_TILESET':
-          return action.data.tileSet;
+          return state;
         default:
           return state;
       }

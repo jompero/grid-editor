@@ -4,13 +4,13 @@ import { paintTile } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
-import getTileProps from '../utils/tileMapping';
 
 function Canvas() {
   const dispatch = useDispatch();
   const canvas = useSelector((state: RootState) => state.canvas);
   const brush = useSelector((state: RootState) => state.tools.brush);
-  const tileSet = useSelector((state: RootState) => state.tileSet);
+  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
+  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
 
   function paint(index: number) {
     dispatch(paintTile(index, brush));
@@ -34,7 +34,7 @@ function Canvas() {
               onMouseDown={() => paint(index)}
               onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(index)}
             >
-              {tile >= 0 && <Tile {...getTileProps(tile, tileSet)} />}
+              {tile >= 0 && <Tile {...mapping[tile]} />}
               {tile === -1 && <Tile {...getColor(index, canvas.tileMap.width)}/>}
             </div>
     ));

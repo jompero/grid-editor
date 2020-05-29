@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import Tile from '../Tile';
 import { setBrush } from '../../reducers/brushReducer';
-import getTileProps, { computeTilesPerRow, computeTilesPerColumn } from '../../utils/tileMapping';
+import { computeTilesPerColumn, computeTilesPerRow } from '../../utils/tileMapping';
 
 export interface Coordinate {
   x: number,
@@ -34,7 +34,8 @@ export interface Props {
 function Palette() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const tileSet = useSelector((state: RootState) => state.tileSet);
+  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
+  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   const [open, setOpen] = React.useState(false);
@@ -47,7 +48,7 @@ function Palette() {
     //));
     return Array(tileSet.tiles).fill(0).map((n: number, index: number) => (
       <div key={index} onClick={() => dispatch(setBrush(index))}>
-        <Tile {...getTileProps(index, tileSet)} />
+        <Tile {...mapping[index]} />
       </div>
     ));
   }
@@ -58,7 +59,7 @@ function Palette() {
         <IconButton>
           <Grid columns={1} rows={1} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={24/tileSet.tileWidth} >
             {brush >= 0
-            && <Tile {...getTileProps(brush, tileSet)} />}
+            && <Tile {...mapping[brush]} />}
           </Grid>
         </IconButton>
       </div>
@@ -66,7 +67,7 @@ function Palette() {
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={computeTilesPerRow(tileSet)} rows={computeTilesPerColumn(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
+            <Grid columns={computeTilesPerColumn(tileSet)} rows={computeTilesPerRow(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>
