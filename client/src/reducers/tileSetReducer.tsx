@@ -21,10 +21,10 @@ function newState(tileSet: TileSet): TileSetState {
     }
 }
 
-function tileSetReducer(state: TileSetState = newState(tileSets.City), action: TileSetAction) {
+function tileSetReducer(state: TileSetState = newState(tileSets.Cave), action: TileSetAction) {
     switch (action.type) {
         case 'SET_TILESET':
-          return state;
+          return action.data.tileSet || state;
         default:
           return state;
       }
@@ -33,7 +33,7 @@ function tileSetReducer(state: TileSetState = newState(tileSets.City), action: T
 export function setTileSet(tileSet: string) {
     return {
         type: 'SET_TILESET',
-        data: { tileSet: tileSets[tileSet] }
+        data: { tileSet: tileSets.tileSet }
       };
 }
 
