@@ -8,7 +8,6 @@ import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import { RootState } from '../store';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
-import getTileProps from '../utils/tileMapping';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {

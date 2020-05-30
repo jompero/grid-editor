@@ -1,13 +1,6 @@
 import { TileSet } from "../services/tileSets";
 import { Props as TileProps } from "../components/Tile";
 
-interface Mapping {
-  posY: number,
-  posX: number
-};
-
-let tileMapping: Mapping;
-
 export function computeTilesPerRow(tileSet: TileSet): number {
   return Math.floor(tileSet.imageWidth / tileSet.tileWidth);
 };
