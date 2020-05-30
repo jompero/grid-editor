@@ -21,7 +21,7 @@ function newState(tileSet: TileSet): TileSetState {
     }
 }
 
-function tileSetReducer(state: TileSetState = newState(tileSets.Cave), action: TileSetAction) {
+function tileSetReducer(state: TileSetState = newState(tileSets.Harbour), action: TileSetAction) {
     switch (action.type) {
         case 'SET_TILESET':
           return action.data.tileSet || state;

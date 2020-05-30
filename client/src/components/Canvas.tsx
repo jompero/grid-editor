@@ -14,7 +14,7 @@ function Canvas() {
 
   function paint(index: number) {
     dispatch(paintTile(index, brush));
-    console.log('painting', brush, 'on', index);
+    // console.log('painting', brush, 'on', index);
   }
 
   function getColor(index: number, columns: number) {

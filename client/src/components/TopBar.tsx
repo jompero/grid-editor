@@ -64,7 +64,7 @@ function TopBar({ children }: Props) {
             alignItems="center"
           >
 
-            <MUIGrid item alignContent='flex-start' xs={3} >
+            <MUIGrid item xs={3} >
               <Typography variant="h6" className={classes.title} onClick={() => history.push('/')}>
                 Grid Editor
               </Typography>
@@ -88,7 +88,7 @@ function TopBar({ children }: Props) {
 
             </MUIGrid>
 
-            <MUIGrid item xs={3} justify='flex-end' style={{ textAlign: 'right' }}>
+            <MUIGrid item xs={3} style={{ textAlign: 'right' }}>
               <Button component={Link} to='/login' >Login</Button>
             </MUIGrid>
 
