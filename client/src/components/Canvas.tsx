@@ -4,13 +4,15 @@ import { paintTile } from '../reducers/canvasReducer';
 import Grid from './Grid';
 import Tile from './Tile';
 import { RootState } from '../store';
+import tileSets from '../services/tileSets';
 
 function Canvas() {
   const dispatch = useDispatch();
   const canvas = useSelector((state: RootState) => state.canvas);
   const brush = useSelector((state: RootState) => state.tools.brush);
-  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
-  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
+  const tileSetName = useSelector((state: RootState) => state.tileSet);
+  const tileSet = tileSets[tileSetName];
+  const mapping = tileSet.mapping;
 
   function paint(index: number) {
     dispatch(paintTile(index, brush));

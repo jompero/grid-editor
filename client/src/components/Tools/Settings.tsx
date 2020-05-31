@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 function Settings() {
   const tileMap = useSelector((state: RootState) => state.canvas.tileMap);
+  const tileSetName = useSelector((state: RootState) => state.tileSet);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -32,6 +33,7 @@ function Settings() {
     event.preventDefault();
 
     const newMap: TileMap = {
+      tileSet: tileSetName,
       name: 'New Map',
       width,
       height,

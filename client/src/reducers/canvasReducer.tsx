@@ -98,11 +98,11 @@ export function redo() {
   };
 };
 
-export function load(map: TileMap) {
+export function load(tileMap: TileMap) {
   return {
     type: 'LOAD_MAP',
     data: {
-      tileMap: map
+      tileMap
     }
   }
 };

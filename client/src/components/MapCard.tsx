@@ -8,6 +8,7 @@ import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import { RootState } from '../store';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
+import tileSets from '../services/tileSets';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
@@ -29,8 +30,11 @@ interface Props {
 
 function MapCard({ map }: Props) {
   const history = useHistory();
-  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
-  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
+  //const tileSetName = useSelector((state: RootState) => state.tileSet);
+  //const tileSet = tileSets[tileSetName];
+  //const mapping = tileSet.mapping;
+  const tileSet = tileSets[map.tileSet];
+  const mapping = tileSet.mapping;
   const dispatch = useDispatch();
   const classes = useStyles();
 

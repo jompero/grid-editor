@@ -6,12 +6,15 @@ import { RootState } from '../../store';
 import SaveIcon from '@material-ui/icons/Save';
 import { appendMap } from '../../reducers/mapsReducer';
 import { updateMap } from '../../reducers/canvasReducer';
+import tileSets from '../../services/tileSets';
 
 function Save() {
   const dispatch = useDispatch();
   const tileMap = useSelector((state: RootState) => state.canvas);
   const token = useSelector((state: RootState) => state.user.token);
-  const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current] };
+  const tileSetName = useSelector((state: RootState) => state.tileSet);
+  const tileSet = tileSets[tileSetName];
+  const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current], tileSet: tileSet.name };
 
   if (!token) return (null);
 

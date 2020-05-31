@@ -7,6 +7,7 @@ import { RootState } from '../../store';
 import Tile from '../Tile';
 import { setBrush } from '../../reducers/brushReducer';
 import { computeTilesPerColumn, computeTilesPerRow } from '../../utils/tileMapping';
+import tileSets from '../../services/tileSets';
 
 export interface Coordinate {
   x: number,
@@ -34,8 +35,9 @@ export interface Props {
 function Palette() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const tileSet = useSelector((state: RootState) => state.tileSet.tileSet);
-  const mapping = useSelector((state: RootState) => state.tileSet.tileProps);
+  const tileSetName = useSelector((state: RootState) => state.tileSet);
+  const tileSet = tileSets[tileSetName];
+  const mapping = tileSet.mapping;
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   const [open, setOpen] = React.useState(false);
@@ -67,7 +69,7 @@ function Palette() {
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={computeTilesPerRow(tileSet)} rows={computeTilesPerColumn(tileSet)} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
+            <Grid columns={tileSets[tileSetName].tilesPerRow} rows={tileSets[tileSetName].tilesPerColumn} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>

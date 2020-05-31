@@ -1,47 +1,43 @@
 import { TileSet } from "../services/tileSets";
 import { Props as TileProps } from "../components/Tile";
 
-export function computeTilesPerRow(tileSet: TileSet): number {
-  return Math.floor(tileSet.imageWidth / tileSet.tileWidth);
+export function computeTilesPerRow(imageWidth: number, tileWidth: number): number {
+  return Math.floor(imageWidth / tileWidth);
 };
 
-export function computeTilesPerColumn(tileSet: TileSet) {
-  return Math.floor(tileSet.imageHeight / tileSet.tileHeight);
+export function computeTilesPerColumn(imageHeight: number, tileHeight: number) {
+  return Math.floor(imageHeight / tileHeight);
 };
 
-function getPosY(tileSet: TileSet, tilesPerRow: number, index: number) {
-  return Math.floor(index / tilesPerRow) * tileSet.tileHeight;
+function getPosY(tileHeight: number, tilesPerRow: number, index: number) {
+  return Math.floor(index / tilesPerRow) * tileHeight;
 };
 
-function getPosX(tileSet: TileSet, tilesPerRow: number, index: number) {
-  return (index % tilesPerRow) * tileSet.tileWidth;
+function getPosX(tileWidth: number, tilesPerRow: number, index: number) {
+  return (index % tilesPerRow) * tileWidth;
 };
 
-function getPos(tileSet: TileSet, tilesPerRow: number, index: number) {
+function getPos(tileHeight: number, tileWidth: number, tilesPerRow: number, index: number) {
   return {
-    posY: getPosY(tileSet, tilesPerRow, index),
-    posX: getPosX(tileSet, tilesPerRow, index)
+    posY: getPosY(tileHeight, tilesPerRow, index),
+    posX: getPosX(tileWidth, tilesPerRow, index)
   };
 };
 
-function getTileProps(index: number, tileSet: TileSet): TileProps {
-    const tilesPerRow = computeTilesPerRow(tileSet);
-    getPos(tileSet, tilesPerRow, index);
-
+function getTileProps(index: number, image: string, tilesPerRow: number, imageHeight: number, tileHeight: number, tileWidth: number): TileProps {
     //console.log('tile', index, 'posX', posX, 'posY', posY); 
 
     return {
-      image: tileSet.image,
-      posX: getPosX(tileSet, tilesPerRow, index),
-      posY: getPosY(tileSet, tilesPerRow, index),
-      width: tileSet.tileWidth,
-      height: tileSet.tileHeight
+      image: image,
+      ...getPos(tileHeight, tileWidth, tilesPerRow, index),
+      width: tileWidth,
+      height: tileHeight
     }
 };
 
-function getMapping(tileSet: TileSet): TileProps[] {
-  return new Array(tileSet.tiles).fill(0).map((n: number, index: number) => {
-      return getTileProps(index, tileSet);
+function getMapping(image: string,  tilesPerRow: number, imageHeight: number, tileWidth: number, tileHeight: number, tiles: number): TileProps[] {
+  return new Array(tiles).fill(0).map((n: number, index: number) => {
+      return getTileProps(index, image, tilesPerRow, imageHeight, tileHeight, tileWidth);
     }
   )
 };

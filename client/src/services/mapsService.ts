@@ -7,7 +7,8 @@ export interface TileMap {
   name: string,
   width: number,
   height: number,
-  tileMap: number[]
+  tileMap: number[],
+  tileSet: string
 };
 
 export function getAll(): Promise<any> {
