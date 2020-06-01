@@ -1,4 +1,4 @@
-import tileSets, { TileSet } from '../services/tileSets';
+import tileSets from '../services/tileSets';
 import { TileMap } from '../services/mapsService';
 
 export interface TileSetAction {
@@ -14,7 +14,8 @@ function tileSetReducer(state: string = 'Harbour', action: TileSetAction) {
     case 'SET_TILESET':
       return action.data.tileSet || state;
     case 'LOAD_MAP':
-      console.log(action.data);
+    case 'UPDATE_MAP':
+      console.log('TileSet', action.data);
       return action.data?.tileMap ? action.data.tileMap.tileSet : state;
     default:
       return state;

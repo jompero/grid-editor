@@ -6,15 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import Tile from '../Tile';
 import { setBrush } from '../../reducers/brushReducer';
-import { computeTilesPerColumn, computeTilesPerRow } from '../../utils/tileMapping';
 import tileSets from '../../services/tileSets';
-
-export interface Coordinate {
-  x: number,
-  y: number,
-  height: number,
-  width: number
-}
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   window: {
@@ -28,8 +20,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export interface Props {
   setOpen: Function,
-  open: boolean,
-  children: React.ReactNode
+  open: boolean
 }
 
 function Palette() {
@@ -43,11 +34,6 @@ function Palette() {
   const [open, setOpen] = React.useState(false);
 
   function palette(): any {
-    //return mapping.map((coordinate: Coordinate, index: number) => (
-    //    <div key={index} onClick={() => dispatch(setBrush(index))}>
-    //      <Tile {...getTileProps()} />
-    //    </div>
-    //));
     return Array(tileSet.tiles).fill(0).map((n: number, index: number) => (
       <div key={index} onClick={() => dispatch(setBrush(index))}>
         <Tile {...mapping[index]} />
@@ -69,7 +55,7 @@ function Palette() {
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={tileSets[tileSetName].tilesPerRow} rows={tileSets[tileSetName].tilesPerColumn} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
+            <Grid columns={tileSet.tilesPerRow} rows={tileSet.tilesPerColumn} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>

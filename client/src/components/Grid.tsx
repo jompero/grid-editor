@@ -14,6 +14,8 @@ function Grid({
   children, columns, rows, tileHeight, tileWidth, scale,
 }: Props) {
   
+  console.log('columns', columns, 'rows', rows)
+
   const useStyles = makeStyles((theme: Theme) => createStyles({
     gridContainer: {
       display: 'inline-grid',
