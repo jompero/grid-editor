@@ -1,4 +1,3 @@
-import { TileSet } from "../services/tileSets";
 import { Props as TileProps } from "../components/Tile";
 
 export function computeTilesPerRow(imageWidth: number, tileWidth: number): number {

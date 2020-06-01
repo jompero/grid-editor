@@ -5,7 +5,6 @@ import { TileMap, deleteMap } from '../services/mapsService';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
-import { RootState } from '../store';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
 import tileSets from '../services/tileSets';
@@ -30,9 +29,6 @@ interface Props {
 
 function MapCard({ map }: Props) {
   const history = useHistory();
-  //const tileSetName = useSelector((state: RootState) => state.tileSet);
-  //const tileSet = tileSets[tileSetName];
-  //const mapping = tileSet.mapping;
   const tileSet = tileSets[map.tileSet];
   const mapping = tileSet.mapping;
   const dispatch = useDispatch();
