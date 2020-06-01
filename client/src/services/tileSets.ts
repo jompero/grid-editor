@@ -47,6 +47,7 @@ const Cave: TileSet = {
 }
 
 Cave.tilesPerRow = computeTilesPerRow(Cave.imageWidth, Cave.tileWidth);
+Cave.tilesPerColumn = computeTilesPerRow(Cave.imageHeight, Cave.tileHeight);
 Cave.mapping = getMapping(Cave.image, Harbour.tilesPerRow,  Cave.imageHeight, Cave.tileWidth, Cave.tileHeight, Cave.tiles);
 
 const tileSets = {
