@@ -3,7 +3,7 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, 
 import Grid from './Grid';
 import { TileMap, deleteMap } from '../services/mapsService';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
