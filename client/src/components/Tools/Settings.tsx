@@ -30,7 +30,7 @@ function Settings() {
     return Object.keys(tileSets).map((tileSet: string) => {
       return <MenuItem key={tileSet} value={tileSet}>{tileSet}</MenuItem>
     });
-  }
+  };
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     console.log(event.target.value);
@@ -46,14 +46,14 @@ function Settings() {
     event.preventDefault();
 
     const newMap: TileMap = {
-      tileSet: tileSetName,
+      tileSet,
       name: 'New Map',
       width,
       height,
-      tileMap: new Array(width * height).fill(-1)
+      tileMap: new Array(width * height).fill(-1),
     }
     dispatch(load(newMap));
-  }
+  };
 
   return (
     <div className={classes.form} >
@@ -70,6 +70,6 @@ function Settings() {
       <Button type="submit" variant='outlined' onClick={(event) => handleCreateNew(event)} >New</Button>
     </div>
   )
-}
+};
 
 export default Settings;
