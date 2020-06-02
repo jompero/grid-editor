@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 export interface TileMap {
-  id: String,
-  _id: mongoose.Types.ObjectId,
+  id?: String,
+  _id?: mongoose.Types.ObjectId,
   name: string,
   width: number,
   height: number,

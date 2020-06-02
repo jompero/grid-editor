@@ -24,6 +24,10 @@ const tileMapSchema = new mongoose_1.default.Schema({
         required: true,
         type: [Number]
     },
+    tileSet: {
+        type: String,
+        required: true
+    }
 });
 tileMapSchema.set('toJSON', {
     transform: (document, returnedObject) => {

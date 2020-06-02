@@ -1,21 +1,7 @@
 import express from 'express';
-import Map from '../models/tileMap';
+import Map, { TileMap } from '../models/tileMap';
 
 const router = express.Router();
-
-interface TileMap {
-    id?: string,
-    name: string,
-    width: number,
-    height: number,
-    tileMap: number[]
-}
-
-const maps = [
-    { name: 'yksi', width: 16, height: 16, tileMap: new Array(16*16).fill(0) },
-    { name: 'kaksi', height: 16, tileMap: new Array(16*16).fill(1) },
-    { name: 'kolme', height: 16, tileMap: new Array(16*16).fill(2) },
-];
 
 router.get('/', function(req, res, next) {
     Map.find()
@@ -38,7 +24,7 @@ router.post('/', function(req, res, next) {
 
     console.log('saving map', map);
     Map.create(map)
-        .then((response: any) => res.send(response))
+        .then((response) => res.send(response))
         .catch((err) => {
             next(err);
         });
