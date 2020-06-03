@@ -14,8 +14,6 @@ function Save() {
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current], tileSet: tileSetName };
 
-  if (!token) return (null);
-
   function save(): void {
     saveMap(map)
       .then(savedMap => {
@@ -26,7 +24,7 @@ function Save() {
   }
 
   return (
-    <IconButton onClick={() => save()}>
+    <IconButton onClick={() => save()} disabled={!token}>
       <SaveIcon />
     </IconButton>
   )

@@ -1,12 +1,14 @@
 export interface User {
-    username?: string,
+    name?: string,
+    id?: string,
     token?: string
 } 
 
 interface UserAction {
     type: string,
     data: {
-        username: string,
+        name: string,
+        id: string,
         token: string
     }
 }
@@ -14,20 +16,28 @@ interface UserAction {
 function userReducer(state: User = {}, action: UserAction) {
     switch (action.type) {
         case ('LOGIN'):
-            const { username, token } = action.data;
-            return { username, token };
+            return action.data;
+        case ('LOGOUT'):
+            return {};
         default:
           return state;
       }
 }
 
-export function login(username: string, password: string) {
+export function login(id: string, name: string, token: string) {
     return {
         type: 'LOGIN',
         data: {
-            username,
-            token: password
+            name,
+            id,
+            token
         }
+    }
+}
+
+export function logout() {
+    return {
+        type: 'LOGOUT'
     }
 }
 

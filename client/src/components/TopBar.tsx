@@ -8,6 +8,8 @@ import { RootState } from '../store';
 import Edit from './Tools/Edit';
 import { Link } from 'react-router-dom';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Login from './Login';
+import Logout from './Logout';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -36,6 +38,7 @@ interface Props {
 
 function TopBar({ children }: Props) {
   const mapName = useSelector((state: RootState) => state.canvas.tileMap.name);
+  const user = useSelector((state: RootState) => state.user);
   const history = useHistory();
   const classes = useStyles();
 
@@ -89,7 +92,8 @@ function TopBar({ children }: Props) {
             </MUIGrid>
 
             <MUIGrid item xs={3} style={{ textAlign: 'right' }}>
-              <Button component={Link} to='/login' >Login</Button>
+              {!user.token && <Login />}
+              {user.token && <Logout />}
             </MUIGrid>
 
           </MUIGrid>
