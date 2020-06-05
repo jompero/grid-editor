@@ -8,7 +8,8 @@ export interface TileMap {
   width: number,
   height: number,
   tileMap: number[],
-  tileSet: string
+  tileSet: string,
+  user: string
 }
 
 const tileMapSchema = new mongoose.Schema({
@@ -33,7 +34,8 @@ const tileMapSchema = new mongoose.Schema({
     tileSet: {
       type: String,
       required: true
-    }
+    },
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 

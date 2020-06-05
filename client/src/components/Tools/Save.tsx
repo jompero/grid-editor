@@ -15,7 +15,7 @@ function Save() {
   const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current], tileSet: tileSetName };
 
   function save(): void {
-    saveMap(map)
+    token && saveMap(map, token)
       .then(savedMap => {
         console.log('map saved', savedMap);
         dispatch(updateMap(savedMap));

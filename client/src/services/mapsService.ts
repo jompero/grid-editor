@@ -19,7 +19,11 @@ export function getAll(): Promise<any> {
       });
 };
 
-export function saveMap(map: TileMap): Promise<any> {
+export function saveMap(map: TileMap, token: string): Promise<any> {
+
+  const headers = {
+    'Authorization': `bearer ${token}`
+  }
 
   if (map.id) {
     return axios.put(`${url}/api/maps/${map.id}`, map)

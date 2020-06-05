@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+    console.log(req);
     const map: TileMap = req.body;
     
     console.log('processing map')
@@ -21,6 +22,8 @@ router.post('/', function(req, res, next) {
         console.log('setting empty tiles');
         map.tileMap = new Array(map.width * map.height).fill(-1);
     }
+
+    //map.user = req.user.id;
 
     console.log('saving map', map);
     Map.create(map)
