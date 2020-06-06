@@ -5,6 +5,7 @@ export interface User {
   id?: String,
   _id?: mongoose.Types.ObjectId,
   name: string,
+  email: string,
   profileId: string,
 }
 

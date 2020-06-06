@@ -9,7 +9,7 @@ function Login() {
   const responseGoogle = (response: any) => {
     console.log(response);
     if (response.error) return;
-    dispatch(login(response.googleId, response.Ut.Bd, response.tokenId))
+    dispatch(login(response.googleId, response.Ut.Bd, response.accessToken));
   }
 
   return (

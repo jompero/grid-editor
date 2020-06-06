@@ -1,5 +1,6 @@
 import express from 'express';
 import Map, { TileMap } from '../models/tileMap';
+import { getUser } from '../utils/google-auth';
 
 const router = express.Router();
 
@@ -8,8 +9,8 @@ router.get('/', function(req, res, next) {
         .then(response => res.send(JSON.stringify(response)));
 });
 
-router.post('/', function(req, res, next) {
-    console.log(req);
+router.post('/', getUser, function(req, res, next) {
+    //console.log(req);
     const map: TileMap = req.body;
     
     console.log('processing map')
@@ -23,7 +24,7 @@ router.post('/', function(req, res, next) {
         map.tileMap = new Array(map.width * map.height).fill(-1);
     }
 
-    //map.user = req.user.id;
+    map.user = req.user;
 
     console.log('saving map', map);
     Map.create(map)
@@ -40,7 +41,7 @@ router.delete('/:mapId/', function(req, res, next) {
         .catch(err => next(err));
 });
 
-router.put('/:mapId/', function(req, res, next) {
+router.put('/:mapId/', getUser, function(req, res, next) {
     const map: TileMap = req.body;
 
     console.log('updating map', map);

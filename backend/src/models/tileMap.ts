@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { MongooseDocument } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 export interface TileMap {
@@ -9,7 +9,7 @@ export interface TileMap {
   height: number,
   tileMap: number[],
   tileSet: string,
-  user: string
+  user: MongooseDocument
 }
 
 const tileMapSchema = new mongoose.Schema({
