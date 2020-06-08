@@ -29,9 +29,7 @@ userSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
-    delete returnedObject.user._id;
-    delete returnedObject.user._v;
-    delete returnedObject.user.profileId;
+    delete returnedObject.email;
   }
 });
 

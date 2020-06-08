@@ -1,61 +1,73 @@
 import express from 'express';
 import Map, { TileMap } from '../models/tileMap';
 import { getUser } from '../utils/google-auth';
+import { User } from '../models/user';
 
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
-    Map.find()
-        .then(response => res.send(JSON.stringify(response)));
+router.get('/', function (req, res, next) {
+  Map.find()
+    .then(response => res.send(JSON.stringify(response)));
 });
 
-router.post('/', getUser, function(req, res, next) {
-    const map: TileMap = req.body;
-        
-    console.log('processing map')
-    if (!map.name) {
-        console.log('setting default name');
-        map.name = `Map${Math.floor(Math.random() * 1000)}`;
-    }
+router.post('/', getUser, function (req, res, next) {
+  const map: TileMap = req.body;
 
-    if (!map.tileMap) {
-        console.log('setting empty tiles');
-        map.tileMap = new Array(map.width * map.height).fill(-1);
-    }
+  console.log('processing map')
+  if (!map.name) {
+    console.log('setting default name');
+    map.name = `Map${Math.floor(Math.random() * 1000)}`;
+  }
 
-    map.user = req.user;
+  if (!map.tileMap) {
+    console.log('setting empty tiles');
+    map.tileMap = new Array(map.width * map.height).fill(-1);
+  }
 
-    console.log('saving map', map);
-    Map.create(map)
-        .then((response) => res.send(response))
-        .catch((err) => {
-            next(err);
-        });
+  map.user = req.user as User;
+
+  Map.create(map)
+    .then((response) => { 
+      console.log('saving map', response);
+      return res.send(response)
+     })
+    .catch((err) => {
+      next(err);
+    });
 
 });
 
-router.delete('/:mapId/', function(req, res, next) {
-    Map.findByIdAndDelete(req.params.mapId)
-        .then(response => res.send(response))
-        .catch(err => next(err));
+router.delete('/:mapId/', function (req, res, next) {
+  Map.findByIdAndDelete(req.params.mapId)
+    .then(response => res.send(response))
+    .catch(err => next(err));
 });
 
-router.put('/:mapId/', getUser, function(req, res, next) {
-    const map: TileMap = req.body;
+router.put('/:mapId/', getUser, function (req, res, next) {
+  const map: TileMap = req.body;
 
-    console.log('updating map', map);
-    let newMap = { ...map };
-    delete newMap.id;
+  let newMap = { ...map };
+  delete newMap.id;
 
-    Map.findByIdAndUpdate(
-        { _id: map.id }, 
-        { ...newMap }, 
-        { upsert: true, setDefaultsOnInsert: true, new: true },
-        function(err, result) {
-            if (err) next(err);
-            res.send(result);
-        });
+  Map.findByIdAndUpdate(
+    { _id: map.id },
+    {
+      name: newMap.name,
+      width: newMap.width,
+      height: newMap.height,
+      tileMap: newMap.tileMap,
+      tileSet: newMap.tileSet
+    },
+    { upsert: true, setDefaultsOnInsert: true, new: true })
+    .populate('User')
+      .then((result) => {
+        console.log('updated map', map);
+        res.send(result);
+      })
+      .catch((err) => {
+        console.log('error while saving map', err);
+        next(err);
+      });
 });
 
 export default router;
-  
