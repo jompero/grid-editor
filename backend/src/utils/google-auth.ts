@@ -62,6 +62,7 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
         .then((user) => {
           console.log('passing user to req', user)
           req.user = user;
+          next();
         });
     });
 }

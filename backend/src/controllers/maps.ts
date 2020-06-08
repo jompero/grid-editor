@@ -10,9 +10,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', getUser, function(req, res, next) {
-    //console.log(req);
     const map: TileMap = req.body;
-    
+        
     console.log('processing map')
     if (!map.name) {
         console.log('setting default name');
