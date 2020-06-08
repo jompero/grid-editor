@@ -52,7 +52,10 @@ function Settings() {
       height,
       tileMap: new Array(width * height).fill(-1),
     }
+
+    console.log('creating new map', newMap);
     dispatch(load(newMap));
+    setName('New Map');
   };
 
   return (
@@ -66,8 +69,8 @@ function Settings() {
           {tileSetNames()}
         </Select>
       </FormControl>
-      <Button type="submit" variant='contained' color='primary' onClick={(event) => handleSave(event)} >Save Changes</Button>
-      <Button type="submit" variant='outlined' onClick={(event) => handleCreateNew(event)} >New</Button>
+      <Button type="submit" variant='contained' color='primary' onClick={(event) => handleSave(event)} >Apply Changes</Button>
+      <Button type="submit" variant='outlined' onClick={(event) => handleCreateNew(event)} >Create New</Button>
     </div>
   )
 };
