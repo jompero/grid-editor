@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3001';
+const url = process.env.NODE_ENV === 'development' 
+  ? 'http://localhost:3001'
+  : 'https://mysterious-meadow-32567.herokuapp.com';
 
 export interface TileMap {
   id?: string,
