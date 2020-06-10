@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
-import { Link } from 'react-router-dom';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Login from './Login';
 import Logout from './Logout';

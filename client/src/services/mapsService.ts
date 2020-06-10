@@ -24,18 +24,18 @@ export function getAll(): Promise<any> {
 export function saveMap(map: TileMap, token: string): Promise<any> {
   console.log(token);
   const headers = {
-    'Authorization': `Bearer ${token}`,
+    'Authorization': `bearer ${token}`,
   }
 
   if (map.id) {
-    return axios.put(`${url}/api/maps/${map.id}`, map, { headers: { Authorization: `bearer ${token}` } })
+    return axios.put(`${url}/api/maps/${map.id}`, map, { headers: headers })
     .then(function (response) {
       console.log('maps', response);
       return response.data;
     });
   }
 
-  return axios.post(`${url}/api/maps`, map, { headers: { Authorization: `bearer ${token}` } })
+  return axios.post(`${url}/api/maps`, map, { headers: headers })
     .then(function (response) {
       console.log('maps', response);
       return response.data;
