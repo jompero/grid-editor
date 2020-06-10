@@ -14,9 +14,16 @@ function Canvas() {
   const tileSet = tileSets[tileSetName];
   const mapping = tileSet.mapping;
 
+  const [click, setClick] = React.useState(false);
+
   function paint(index: number) {
     dispatch(paintTile(index, brush));
+    setClick(true);
     // console.log('painting', brush, 'on', index);
+  }
+
+  function handleMouseRelease() {
+    setClick(false);
   }
 
   function getColor(index: number, columns: number) {
@@ -34,7 +41,8 @@ function Canvas() {
             <div
               key={index}
               onMouseDown={() => paint(index)}
-              onMouseEnter={(event) => event.nativeEvent.which === 1 && paint(index)}
+              onMouseUp={() => handleMouseRelease()}
+              onMouseEnter={(event) => click && paint(index)}
             >
               {tile >= 0 && <Tile {...mapping[tile]} />}
               {tile === -1 && <Tile {...getColor(index, canvas.tileMap.width)}/>}
