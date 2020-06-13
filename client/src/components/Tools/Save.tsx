@@ -12,7 +12,7 @@ function Save() {
   const tileMap = useSelector((state: RootState) => state.canvas);
   const token = useSelector((state: RootState) => state.user.token);
   const tileSetName = useSelector((state: RootState) => state.tileSet);
-  const map: TileMap = { ...tileMap.tileMap, tileMap: tileMap.history[tileMap.current], tileSet: tileSetName };
+  const map: TileMap = { ...tileMap.present  };
 
   function save(): void {
     token && saveMap(map, token)

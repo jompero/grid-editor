@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 function Settings() {
-  const tileMap = useSelector((state: RootState) => state.canvas.tileMap);
+  const tileMap = useSelector((state: RootState) => state.canvas.present);
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const dispatch = useDispatch();
   const classes = useStyles();

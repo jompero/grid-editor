@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import {
-  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, Button, IconButton,
+  AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, IconButton,
 } from '@material-ui/core';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
@@ -36,7 +36,7 @@ interface Props {
 }
 
 function TopBar({ children }: Props) {
-  const mapName = useSelector((state: RootState) => state.canvas.tileMap.name);
+  const mapName = useSelector((state: RootState) => state.canvas.present.name);
   const user = useSelector((state: RootState) => state.user);
   const history = useHistory();
   const classes = useStyles();

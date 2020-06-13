@@ -1,14 +1,14 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { redo } from '../../reducers/canvasReducer';
 import RedoIcon from '@material-ui/icons/Redo';
+import { ActionCreators } from 'redux-undo';
 
 function Eraser() {
     const dispatch = useDispatch();
 
     return (
-        <IconButton onClick={() => dispatch(redo())}>
+        <IconButton onClick={() => dispatch(ActionCreators.redo())}>
             <RedoIcon />
         </IconButton>
     )

@@ -8,8 +8,8 @@ import ClickableTile from './ClickableTile';
 
 function Canvas() {
   const dispatch = useDispatch();
-  const canvas = useSelector((state: RootState) => state.canvas.history[state.canvas.current]);
-  const { width, height } = useSelector((state: RootState) => state.canvas.tileMap);
+  const canvas = useSelector((state: RootState) => state.canvas.present.tileMap);
+  const { width, height } = useSelector((state: RootState) => state.canvas.present);
   const brush = useSelector((state: RootState) => state.tools.brush);
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const tileSet = tileSets[tileSetName];

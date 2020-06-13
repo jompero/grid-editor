@@ -14,7 +14,7 @@ export interface Props {
 
 function ClickableTile({ index, tile, mouseDown, onMouseClick, onMouseRelease }: Props) {
   const tileSetName = useSelector((state: RootState) => state.tileSet);
-  const columns = useSelector((state: RootState) => state.canvas.tileMap.width);
+  const columns = useSelector((state: RootState) => state.canvas.present.width);
   const tileSet = tileSets[tileSetName];
   const mapping = tileSet.mapping;
 

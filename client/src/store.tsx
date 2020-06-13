@@ -1,17 +1,18 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import canvasReducer, { CanvasState } from './reducers/canvasReducer';
+import canvasReducer from './reducers/canvasReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/mapsService';
 import userReducer, { User } from './reducers/userReducer';
 import thunk from 'redux-thunk'
+import undoable, { StateWithHistory } from 'redux-undo';
 
 export interface RootState {
   user: User,
   tileSet: string,
-  canvas: CanvasState,
+  canvas: StateWithHistory<TileMap>,
   tools: BrushState,
   maps: TileMap[]
 }
@@ -19,7 +20,7 @@ export interface RootState {
 const reducer = combineReducers({
   user: userReducer,
   tileSet: tileSetReducer,
-  canvas: canvasReducer,
+  canvas: undoable(canvasReducer),
   tools: brushReducer,
   maps: mapsReducer
 });
