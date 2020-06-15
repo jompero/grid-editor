@@ -3,6 +3,7 @@ import Tile from './Tile';
 import tileSets from '../services/tileSets';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
 
 export interface Props {
   index: number;
@@ -12,11 +13,21 @@ export interface Props {
   onMouseRelease: Function;
 }
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  tile: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  }
+}));
+
 function ClickableTile({ index, tile, mouseDown, onMouseClick, onMouseRelease }: Props) {
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const columns = useSelector((state: RootState) => state.canvas.present.width);
   const tileSet = tileSets[tileSetName];
   const mapping = tileSet.mapping;
+
+  const classes = useStyles();
 
   const color = () => {
     const tileValue = (index % columns) + Math.floor(index / columns);
@@ -34,6 +45,7 @@ function ClickableTile({ index, tile, mouseDown, onMouseClick, onMouseRelease }:
       onMouseDown={() => onMouseClick()}
       onMouseUp={() => onMouseRelease()}
       onMouseEnter={(event) => mouseDown && onMouseClick()}
+      className={classes.tile}
     >
       {tile >= 0 && <Tile {...mapping[tile]} />}
       {tile === -1 && <Tile {...color()} />}

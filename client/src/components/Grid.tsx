@@ -25,16 +25,12 @@ function Grid({
     children: {
       transformOrigin: 'top left',
       transform: `scale(${scale})`,
-      '&:hover': { //TODO: It's not this component's responsibility to provide this behaviour
-        cursor: 'pointer',
-      },
     },
   }));
 
   const classes = useStyles();
 
   function styledChildren(): any {
-    if (!children) return null;
     return React.Children.map(children, (child) => <div className={classes.children}>{child}</div>);
   }
 
