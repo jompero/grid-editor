@@ -28,7 +28,7 @@ function Canvas() {
 
   function parseTileArray() {
     return canvas.map((tile: number, index: number) => (
-      <ClickableTile key={index} index={index} tile={tile} onMouseClick={() => paint(index)} mouseDown={click} onMouseRelease={() => handleMouseRelease()} />
+      <ClickableTile key={index} index={index} onMouseClick={() => paint(index)} mouseDown={click} onMouseRelease={() => handleMouseRelease()} />
     ));
   }
 

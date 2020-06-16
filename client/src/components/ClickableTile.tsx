@@ -7,7 +7,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 
 export interface Props {
   index: number;
-  tile: number;
   onMouseClick: Function;
   mouseDown: boolean;
   onMouseRelease: Function;
@@ -21,8 +20,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }));
 
-function ClickableTile({ index, tile, mouseDown, onMouseClick, onMouseRelease }: Props) {
+function ClickableTile({ index, mouseDown, onMouseClick, onMouseRelease }: Props) {
   const tileSetName = useSelector((state: RootState) => state.tileSet);
+  const tile = useSelector((state: RootState) => state.canvas.present.tileMap[index]);
   const columns = useSelector((state: RootState) => state.canvas.present.width);
   const tileSet = tileSets[tileSetName];
   const mapping = tileSet.mapping;
