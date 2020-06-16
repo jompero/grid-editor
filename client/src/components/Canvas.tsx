@@ -14,21 +14,13 @@ function Canvas() {
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const tileSet = tileSets[tileSetName];
 
-  const [click, setClick] = React.useState(false);
-
   function paint(index: number) {
     dispatch(paintTile(index, brush));
-    setClick(true);
-    // console.log('painting', brush, 'on', index);
-  }
-
-  function handleMouseRelease() {
-    setClick(false);
   }
 
   function parseTileArray() {
     return canvas.map((tile: number, index: number) => (
-      <ClickableTile key={index} index={index} onMouseClick={() => paint(index)} mouseDown={click} onMouseRelease={() => handleMouseRelease()} />
+      <ClickableTile key={index} index={index} onMouseClick={() => paint(index)} />
     ));
   }
 
