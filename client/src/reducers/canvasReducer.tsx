@@ -8,7 +8,6 @@ interface CanvasAction {
       tile: number
     }
     tileMap?: TileMap,
-    name?: string
   }
 }
 
@@ -20,12 +19,6 @@ const nullState: TileMap = {
   tileMap: new Array(16*16).fill(-1)
 }
 
-const newState = (map: TileMap) => {
-  return {
-    tileMap: map
-  };
-};
-
 function paint(state: TileMap, position: number, newTile: number): TileMap {
   const currentMap = state.tileMap;
   const newMap = currentMap.map((oldTile, index) => (index === position ? newTile : oldTile));
@@ -36,7 +29,11 @@ function canvasReducer(state: TileMap = nullState as any, action: CanvasAction):
   switch (action.type) {
     case 'LOAD_MAP':
     case 'UPDATE_MAP':
-      return action.data?.tileMap || state;
+      let newMap = action.data?.tileMap;
+      if (newMap && (newMap.width !== state.width || newMap.height !== state.height)) {
+        newMap = { ...newMap, tileMap: new Array(newMap.width * newMap.height).fill(-1) };
+      }
+      return newMap || state;
     case 'SET_TILE':
       return action.data?.target ? paint(state, action.data.target.index, action.data.target.tile) : state;
     default:
