@@ -8,13 +8,15 @@ import { TileMap } from './services/mapsService';
 import userReducer, { User } from './reducers/userReducer';
 import thunk from 'redux-thunk'
 import undoable, { StateWithHistory } from 'redux-undo';
+import notificationsReducer, { NotificationsState } from './reducers/notificationsReducer';
 
 export interface RootState {
   user: User,
   tileSet: string,
   canvas: StateWithHistory<TileMap>,
   tools: BrushState,
-  maps: TileMap[]
+  maps: TileMap[],
+  notification: NotificationsState
 }
 
 const reducer = combineReducers({
@@ -22,7 +24,8 @@ const reducer = combineReducers({
   tileSet: tileSetReducer,
   canvas: undoable(canvasReducer),
   tools: brushReducer,
-  maps: mapsReducer
+  maps: mapsReducer,
+  notification: notificationsReducer
 });
 
 const store = createStore(

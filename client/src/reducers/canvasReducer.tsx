@@ -28,6 +28,7 @@ function paint(state: TileMap, position: number, newTile: number): TileMap {
 function canvasReducer(state: TileMap = nullState as any, action: CanvasAction): TileMap {
   switch (action.type) {
     case 'LOAD_MAP':
+      return action.data?.tileMap || state;
     case 'UPDATE_MAP':
       let newMap = action.data?.tileMap;
       if (newMap && (newMap.width !== state.width || newMap.height !== state.height)) {
