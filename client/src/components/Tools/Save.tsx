@@ -6,7 +6,7 @@ import { RootState } from '../../store';
 import SaveIcon from '@material-ui/icons/Save';
 import { appendMap } from '../../reducers/mapsReducer';
 import { updateMap } from '../../reducers/canvasReducer';
-import { notifyError } from '../../reducers/notificationsReducer';
+import { notify } from '../../reducers/notificationsReducer';
 
 function Save() {
   const dispatch = useDispatch();
@@ -20,7 +20,11 @@ function Save() {
         console.log('map saved', savedMap);
         dispatch(updateMap(savedMap));
         dispatch(appendMap(savedMap));
-        dispatch(notifyError('Map saved succesfully'));
+        dispatch(notify('Map saved succesfully', 'success'));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(notify('Error occured while saving map', 'error'));
       });
   }
 

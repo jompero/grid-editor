@@ -1,5 +1,6 @@
 import mapsService, { TileMap } from "../services/mapsService";
 import GridEditorThunk from "../utils/GridEditorThunk";
+import { notify } from "./notificationsReducer";
 
 interface MapAction {
   type: string,
@@ -42,6 +43,9 @@ export function initializeMaps(): GridEditorThunk {
             maps
           }
         })
+      })
+      .catch((error) => {
+        return dispatch(notify('Something went wrong while loading maps.', 'error'));
       })
   }
 };

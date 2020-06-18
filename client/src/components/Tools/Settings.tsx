@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-function Settings() {
+interface Props {
+  handleSubmit?: Function;
+}
+
+function Settings({ handleSubmit }: Props) {
   const tileMap = useSelector((state: RootState) => state.canvas.present);
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const dispatch = useDispatch();
@@ -35,11 +39,13 @@ function Settings() {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     console.log(event.target.value);
     setTileSet(event.target.value as string);
+    handleSubmit && handleSubmit();
   };
 
   const handleSave = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     dispatch(updateMap({ ...tileMap, name, width, height, tileSet }));
+    handleSubmit && handleSubmit();
   };
 
   const handleCreateNew = (event: React.FormEvent<HTMLButtonElement>) => {

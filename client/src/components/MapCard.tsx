@@ -8,6 +8,7 @@ import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
 import tileSets from '../services/tileSets';
+import { notify } from '../reducers/notificationsReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
@@ -44,7 +45,8 @@ function MapCard({ map }: Props) {
 
   function removeMap(map: TileMap) {
     dispatch(cutMap(map));
-    map.id && deleteMap(map.id);
+    map.id && deleteMap(map.id)
+      .catch((error) => dispatch(notify('Something went wrong while removing the map.', 'error')));
   }
 
   function clickHandler() {

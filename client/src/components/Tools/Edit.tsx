@@ -26,7 +26,7 @@ function Edit() {
 
       <Modal open={open} onClose={() => setOpen(false)} >
         <div className={classes.window} >
-          <Settings />
+          <Settings handleSubmit={() => setOpen(false)} />
         </div>
       </Modal>
     </div>

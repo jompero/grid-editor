@@ -22,17 +22,17 @@ function notificationsReducer(state: NotificationsState | {} = {}, action: Notif
   }
 }
 
-export function notifyError(message: string) {
+export function notify(message: string, severity: "success" | "info" | "warning" | "error" | undefined = undefined) {
   return {
     type: 'NOTIFY',
     data: {
       message,
-      severity: "error"
+      severity
     }
   }
 }
 
-export function reset() {
+export function resetNotifications() {
   return {
     type: 'RESET_NOTIFICATION'
   }
