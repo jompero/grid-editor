@@ -11,11 +11,23 @@ import tileSets from '../../services/tileSets';
 const useStyles = makeStyles((theme: Theme) => createStyles({
   window: {
     position: 'absolute',
+    zIndex: 0,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     transformOrigin: 'center',
   },
+  tile: {
+    position: 'absolute',
+    transition:' all 0.1s ease-in-out',
+    zIndex: 0,
+    transformOrigin: '50% 50%',
+    '&:hover': {
+      zIndex: 1,
+      cursor: 'pointer',
+      transform: 'scale(1.2)',
+    },
+  }
 }));
 
 export interface Props {
@@ -35,7 +47,7 @@ function Palette() {
 
   function palette(): any {
     return Array(tileSet.tiles).fill(0).map((n: number, index: number) => (
-      <div key={index} onClick={() => dispatch(setBrush(index))}>
+      <div className={classes.tile} style={{ width: tileSet.tileWidth }} key={index} onClick={() => dispatch(setBrush(index))}>
         <Tile {...mapping[index]} />
       </div>
     ));
