@@ -12,7 +12,8 @@ import { notify } from '../reducers/notificationsReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
-    margin: '1em'
+    margin: '1em',
+    maxWidth: '10em'
   },
   mapThumbnail: {
     display: 'flex',
@@ -65,8 +66,11 @@ function MapCard({ map }: Props) {
           </div>
         </CardMedia>
         <CardContent>
-          <Typography variant="h6">
+          <Typography variant='h6'>
             {map.name}
+          </Typography>
+          <Typography variant='caption'>
+            {map.user && map.user.name}
           </Typography>
         </CardContent>
       </CardActionArea>

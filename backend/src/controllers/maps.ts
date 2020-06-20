@@ -7,7 +7,11 @@ const router = express.Router();
 
 router.get('/', function (req, res, next) {
   Map.find()
-    .then(response => res.send(JSON.stringify(response)));
+    .populate('user')
+      .then(response => {
+        console.log('all maps: ', response)
+        res.send(JSON.stringify(response))
+      });
 });
 
 router.post('/', getUser, function (req, res, next) {
@@ -59,7 +63,7 @@ router.put('/:mapId/', getUser, function (req, res, next) {
       tileSet: newMap.tileSet
     },
     { upsert: true, setDefaultsOnInsert: true, new: true })
-    .populate('User')
+    .populate('user')
       .then((result) => {
         console.log('updated map', map);
         res.send(result);
