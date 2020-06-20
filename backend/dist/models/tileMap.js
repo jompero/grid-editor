@@ -27,13 +27,17 @@ const tileMapSchema = new mongoose_1.default.Schema({
     tileSet: {
         type: String,
         required: true
-    }
+    },
+    user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User' }
 });
 tileMapSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString();
         delete returnedObject._id;
         delete returnedObject.__v;
+        delete returnedObject.user._id;
+        delete returnedObject.user._v;
+        delete returnedObject.user.profileId;
     }
 });
 mongoose_1.default.plugin(mongoose_unique_validator_1.default);

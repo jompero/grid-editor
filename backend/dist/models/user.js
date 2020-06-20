@@ -10,6 +10,10 @@ const userSchema = new mongoose_1.default.Schema({
         required: true,
         type: String,
     },
+    email: {
+        required: true,
+        type: String,
+    },
     profileId: {
         type: String,
         required: true,
@@ -21,6 +25,7 @@ userSchema.set('toJSON', {
         returnedObject.id = returnedObject._id.toString();
         delete returnedObject._id;
         delete returnedObject.__v;
+        delete returnedObject.email;
     }
 });
 mongoose_1.default.plugin(mongoose_unique_validator_1.default);
