@@ -18,7 +18,7 @@ export interface TileMap {
 export function getAll(): Promise<any> {
     return axios.get(`${url}/api/maps`)
       .then(function (response) {
-        console.log('maps', response);
+        console.log('maps', response.data);
         return response.data;
       });
 };

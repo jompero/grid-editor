@@ -9,8 +9,8 @@ router.get('/', function (req, res, next) {
   Map.find()
     .populate('user')
       .then(response => {
-        console.log('all maps: ', response)
-        res.send(JSON.stringify(response))
+        console.log('all maps: ', response);
+        res.send(response);
       });
 });
 

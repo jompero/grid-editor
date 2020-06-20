@@ -3,12 +3,13 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, 
 import Grid from './Grid';
 import { TileMap, deleteMap } from '../services/mapsService';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
 import tileSets from '../services/tileSets';
 import { notify } from '../reducers/notificationsReducer';
+import { RootState } from '../store';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
@@ -30,6 +31,7 @@ interface Props {
 }
 
 function MapCard({ map }: Props) {
+  const profile = useSelector((state: RootState) => state.user.profile)
   const history = useHistory();
   const tileSet = tileSets[map.tileSet];
   const mapping = tileSet.mapping;
@@ -79,9 +81,12 @@ function MapCard({ map }: Props) {
         <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
           Load
           </Button>
-        <Button onClick={() => removeMap(map)}>
-          Delete
+        {
+          profile === map.user?.profile &&
+          <Button onClick={() => removeMap(map)}>
+            Delete
           </Button>
+        }
       </CardActions>
     </Card>
   )

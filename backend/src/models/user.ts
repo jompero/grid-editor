@@ -26,10 +26,13 @@ const userSchema = new mongoose.Schema({
 
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
+    console.log('returned object:', returnedObject);
     returnedObject.id = returnedObject._id.toString();
+    returnedObject.profile = returnedObject.profileId.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.email;
+    console.log('after toJson:', returnedObject);
   }
 });
 

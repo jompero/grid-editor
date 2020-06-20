@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
-import { login } from '../reducers/userReducer';
+import { login, User } from '../reducers/userReducer';
 
 function Login() {
   const dispatch = useDispatch();
@@ -9,7 +9,11 @@ function Login() {
   const responseGoogle = (response: any) => {
     console.log(response);
     if (response.error) return;
-    dispatch(login(response.googleId, response.profileObj.name, response.accessToken));
+    dispatch(login({
+      name: response.profileObj.name,
+      token: response.accessToken,
+      profile: response.googleId
+    }));
   }
 
   return (
