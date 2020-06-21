@@ -2,6 +2,7 @@ import express from 'express';
 import Map, { TileMap } from '../models/tileMap';
 import { getUser } from '../utils/google-auth';
 import { User } from '../models/user';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
@@ -41,9 +42,17 @@ router.post('/', getUser, function (req, res, next) {
 
 });
 
-router.delete('/:mapId/', function (req, res, next) {
-  Map.findByIdAndDelete(req.params.mapId)
-    .then(response => res.send(response))
+router.delete('/:mapId/', getUser, function (req, res, next) {
+  const user = req.user as User;
+  console.log(`User, ${user}, requesting deletion of map ${req.params.mapId}`);
+  Map.findOneAndDelete({ id: req.params.mapId, user: new mongoose.Types.ObjectId(user._id) })
+    .then(response => {
+      if (!response) {
+        console.log(`No map deleted: Map ${req.params.mapId} from user ${user._id} not found`);
+        res.statusCode = 204;
+      } 
+      res.send(response);     
+    })
     .catch(err => next(err));
 });
 

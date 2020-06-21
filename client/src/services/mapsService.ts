@@ -44,12 +44,18 @@ export function saveMap(map: TileMap, token: string): Promise<any> {
     });
 };
 
-export function deleteMap(id: string): Promise<any> {
-  return axios.delete(`${url}/api/maps/${id}`)
+export function deleteMap(id: string, token: string): Promise<any> {
+  const headers = {
+    'Authorization': `bearer ${token}`,
+  }
+
+  console.log('deleting map');
+  
+  return axios.delete(`${url}/api/maps/${id}`, { headers: headers })
     .then(function (response) {
       console.log('deleted', response);
       return response.data;
-    })
+    });
 }
 
 export default { getAll, saveMap, deleteMap };

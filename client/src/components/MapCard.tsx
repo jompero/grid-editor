@@ -31,7 +31,7 @@ interface Props {
 }
 
 function MapCard({ map }: Props) {
-  const profile = useSelector((state: RootState) => state.user.profile)
+  const user = useSelector((state: RootState) => state.user)
   const history = useHistory();
   const tileSet = tileSets[map.tileSet];
   const mapping = tileSet.mapping;
@@ -48,7 +48,7 @@ function MapCard({ map }: Props) {
 
   function removeMap(map: TileMap) {
     dispatch(cutMap(map));
-    map.id && deleteMap(map.id)
+    map.id && deleteMap(map.id, user.token)
       .catch((error) => dispatch(notify('Something went wrong while removing the map.', 'error')));
   }
 
@@ -82,8 +82,8 @@ function MapCard({ map }: Props) {
           Load
           </Button>
         {
-          profile === map.user?.profile &&
-          <Button onClick={() => removeMap(map)}>
+          user.profile === map.user?.profile &&
+          <Button onClick={() => removeMap(map, )}>
             Delete
           </Button>
         }
