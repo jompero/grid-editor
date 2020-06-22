@@ -29,7 +29,7 @@ router.post('/', getUser, function (req, res, next) {
     map.tileMap = new Array(map.width * map.height).fill(-1);
   }
 
-  map.user = req.user as User;
+  map.user = mongoose.Types.ObjectId(req.user._id);
 
   Map.create(map)
     .then((response) => { 
@@ -45,13 +45,19 @@ router.post('/', getUser, function (req, res, next) {
 router.delete('/:mapId/', getUser, function (req, res, next) {
   const user = req.user as User;
   console.log(`User, ${user}, requesting deletion of map ${req.params.mapId}`);
-  Map.findOneAndDelete({ id: req.params.mapId, user: new mongoose.Types.ObjectId(user._id) })
+  Map.findById(req.params.mapId)
     .then(response => {
-      if (!response) {
-        console.log(`No map deleted: Map ${req.params.mapId} from user ${user._id} not found`);
+      console.log('Response', response);
+      if (response && (response as TileMap).user.equals(user._id)) {
+        response.remove();
+        console.log(`Map deleted: Map ${req.params.mapId} from user ${user._id}.`, 'Response:', response);
+        res.send(response); 
+      } else {
+        console.log(`No map deleted: Map ${req.params.mapId} from user ${user._id} not found.`, 'Response:', response);
         res.statusCode = 204;
-      } 
-      res.send(response);     
+        res.send();
+      }
+    
     })
     .catch(err => next(err));
 });

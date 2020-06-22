@@ -7,7 +7,7 @@ export interface TileMap extends mongoose.Document  {
   height: number,
   tileMap: number[],
   tileSet: string,
-  user: MongooseDocument
+  user: mongoose.Types.ObjectId
 }
 
 const tileMapSchema = new mongoose.Schema({
