@@ -39,7 +39,6 @@ function Settings({ handleSubmit }: Props) {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     console.log(event.target.value);
     setTileSet(event.target.value as string);
-    handleSubmit && handleSubmit();
   };
 
   const handleSave = (event: React.FormEvent<HTMLButtonElement>) => {
@@ -62,6 +61,7 @@ function Settings({ handleSubmit }: Props) {
     console.log('creating new map', newMap);
     dispatch(load(newMap));
     setName('New Map');
+    handleSubmit && handleSubmit();
   };
 
   return (
