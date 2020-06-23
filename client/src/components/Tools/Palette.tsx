@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     transform: 'translate(-50%, -50%)',
     transformOrigin: 'center',
   },
+  brush: {
+    boxShadow: '0px 0px 3px 0px rgba(0,0,0,0.75)',
+  },
   tile: {
     position: 'absolute',
     transition:' all 0.1s ease-in-out',
@@ -55,8 +58,8 @@ function Palette() {
 
   return (
     <div>
-      <div id={'selectedBrush'} onClick={() => setOpen(true)}>
-        <IconButton>
+      <div onClick={() => setOpen(true)}>
+        <IconButton className={classes.brush} >
           <Grid columns={1} rows={1} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={24/tileSet.tileWidth} >
             {brush >= 0
             && <Tile {...mapping[brush]} />}
