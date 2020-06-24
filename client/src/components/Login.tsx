@@ -1,20 +1,21 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
-import { login, User } from '../reducers/userReducer';
+import { login } from '../reducers/userReducer';
+import Debug from '../utils/Debug';
 
 function Login() {
   const dispatch = useDispatch();
 
   const responseGoogle = (response: any) => {
-    console.log(response);
+    Debug(response);
     if (response.error) return;
     dispatch(login({
       name: response.profileObj.name,
       token: response.accessToken,
-      profile: response.googleId
+      profile: response.googleId,
     }));
-  }
+  };
 
   return (
       <GoogleLogin
@@ -25,7 +26,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
       />
-  )
+  );
 }
 
 export default Login;

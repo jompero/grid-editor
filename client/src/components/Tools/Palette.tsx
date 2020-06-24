@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Modal, IconButton } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '../Grid';
 import { useSelector, useDispatch } from 'react-redux';
+import Grid from '../Grid';
 import { RootState } from '../../store';
 import Tile from '../Tile';
 import { setBrush } from '../../reducers/brushReducer';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   tile: {
     position: 'absolute',
-    transition:' all 0.1s ease-in-out',
+    transition: ' all 0.1s ease-in-out',
     zIndex: 0,
     transformOrigin: '50% 50%',
     '&:hover': {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       cursor: 'pointer',
       transform: 'scale(1.2)',
     },
-  }
+  },
 }));
 
 export interface Props {
@@ -43,14 +43,18 @@ function Palette() {
   const dispatch = useDispatch();
   const tileSetName = useSelector((state: RootState) => state.tileSet);
   const tileSet = tileSets[tileSetName];
-  const mapping = tileSet.mapping;
+  const { mapping } = tileSet;
   const brush = useSelector((state: RootState) => state.tools.brush);
 
   const [open, setOpen] = React.useState(false);
 
   function palette(): any {
     return Array(tileSet.tiles).fill(0).map((n: number, index: number) => (
-      <div className={classes.tile} style={{ width: tileSet.tileWidth }} key={index} onClick={() => dispatch(setBrush(index))}>
+      <div
+        className={classes.tile}
+        style={{ width: tileSet.tileWidth }}
+        key={index}
+        onClick={() => dispatch(setBrush(index))}>
         <Tile {...mapping[index]} />
       </div>
     ));
@@ -60,17 +64,27 @@ function Palette() {
     <div>
       <div onClick={() => setOpen(true)}>
         <IconButton className={classes.brush} >
-          <Grid columns={1} rows={1} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={24/tileSet.tileWidth} >
+          <Grid
+            columns={1}
+            rows={1}
+            tileHeight={tileSet.tileHeight}
+            tileWidth={tileSet.tileWidth}
+            scale={24 / tileSet.tileWidth} >
             {brush >= 0
             && <Tile {...mapping[brush]} />}
           </Grid>
         </IconButton>
       </div>
-      
+
       <div onClick={() => setOpen(false)}>
         <Modal open={open} onClose={() => setOpen(false)} >
           <div className={classes.window} >
-            <Grid columns={tileSet.tilesPerRow} rows={tileSet.tilesPerColumn} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={32 / tileSet.tileWidth} >
+            <Grid
+              columns={tileSet.tilesPerRow}
+              rows={tileSet.tilesPerColumn}
+              tileHeight={tileSet.tileHeight}
+              tileWidth={tileSet.tileWidth}
+              scale={32 / tileSet.tileWidth} >
               {palette()}
             </Grid>
           </div>

@@ -1,6 +1,7 @@
-import mapsService, { TileMap } from "../services/mapsService";
-import GridEditorThunk from "../utils/GridEditorThunk";
-import { notify } from "./notificationsReducer";
+import { getAll as getAllMaps, TileMap } from '../services/mapsService';
+import GridEditorThunk from '../utils/GridEditorThunk';
+import { notify } from './notificationsReducer';
+import Debug from '../utils/Debug';
 
 interface MapAction {
   type: string,
@@ -12,69 +13,76 @@ interface MapAction {
 
 function mapsReducer(state: TileMap[] = [], action: MapAction) {
   switch (action.type) {
-    case 'SET_MAPS':
+    case 'SET_MAPS': {
       return action.data?.maps ? action.data.maps : state;
-    case 'DELETE_MAP':
+    }
+    case 'DELETE_MAP': {
       const deletedMapId = action.data?.map?.id;
-      return deletedMapId ? state.filter(map => map.id !== deletedMapId) : state;
-    case 'SAVE_MAP':
+      return deletedMapId ? state.filter((map) => map.id !== deletedMapId) : state;
+    }
+    case 'SAVE_MAP': {
       const savedMap = action.data?.map;
       if (savedMap) {
-        const index = state.reduce((prevValue, map, i) => map.id === savedMap.id ? i : prevValue, -1);
+        const index = state.reduce(
+          (prevValue, map, i) => (map.id === savedMap.id ? i : prevValue),
+          -1,
+        );
         if (index >= 0) {
-          return state.map((map, i) => i === index ? savedMap : map);
-        } else {
-          return state.concat(savedMap);
+          return state.map((map, i) => (i === index ? savedMap : map));
         }
+        return state.concat(savedMap);
       }
       return state;
-    default:
+    }
+    default: {
       return state;
+    }
   }
 }
 
 export function initializeMaps(): GridEditorThunk {
-  return dispatch => {
-    mapsService.getAll()
-      .then(maps => {
+  return (dispatch) => {
+    getAllMaps()
+      .then((maps) => {
         dispatch({
           type: 'SET_MAPS',
           data: {
-            maps
-          }
-        })
+            maps,
+          },
+        });
       })
       .catch((error) => {
-        return dispatch(notify('Something went wrong while loading maps.', 'error'));
-      })
-  }
-};
+        Debug(error);
+        dispatch(notify('Something went wrong while loading maps.', 'error'));
+      });
+  };
+}
 
 export function setMaps(maps: TileMap[]) {
   return {
     type: 'SET_MAPS',
     data: {
-      maps
-    }
-  }
+      maps,
+    },
+  };
 }
 
 export function deleteMap(map: TileMap) {
   return {
     type: 'DELETE_MAP',
     data: {
-      map
-    }
-  }
+      map,
+    },
+  };
 }
 
 export function appendMap(map: TileMap) {
   return {
     type: 'SAVE_MAP',
     data: {
-      map
-    }
-  }
+      map,
+    },
+  };
 }
 
 export default mapsReducer;

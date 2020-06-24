@@ -1,14 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import undoable, { StateWithHistory } from 'redux-undo';
 import canvasReducer from './reducers/canvasReducer';
 import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/mapsService';
 import userReducer, { User } from './reducers/userReducer';
-import thunk from 'redux-thunk'
-import undoable, { StateWithHistory } from 'redux-undo';
 import notificationsReducer, { NotificationsState } from './reducers/notificationsReducer';
+import Debug from './utils/Debug';
 
 export interface RootState {
   user: User,
@@ -25,14 +26,15 @@ const reducer = combineReducers({
   canvas: undoable(canvasReducer),
   tools: brushReducer,
   maps: mapsReducer,
-  notification: notificationsReducer
+  notification: notificationsReducer,
 });
 
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(thunk)
-  ));
-console.log('store', store.getState());
+    applyMiddleware(thunk),
+  ),
+);
+Debug('store', store.getState());
 
 export default store;

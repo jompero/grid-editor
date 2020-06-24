@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
-import { Modal, makeStyles, Theme, createStyles } from '@material-ui/core';
+import {
+  IconButton, Modal, makeStyles, Theme, createStyles,
+} from '@material-ui/core';
+
 import EditIcon from '@material-ui/icons/Edit';
 import Settings from './Settings';
 
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     transformOrigin: 'center',
-  }
+  },
 }));
 
 function Edit() {
@@ -30,7 +32,7 @@ function Edit() {
         </div>
       </Modal>
     </div>
-  )
+  );
 }
 
 export default Edit;

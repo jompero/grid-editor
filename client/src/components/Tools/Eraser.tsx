@@ -1,15 +1,15 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { setBrush } from '../../reducers/brushReducer';
 import { Icon } from '@iconify/react';
 import eraserIcon from '@iconify/icons-mdi/eraser';
+import { setBrush } from '../../reducers/brushReducer';
 
 
 function Eraser() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    return (
+  return (
         <div>
             <div onClick={() => dispatch(setBrush(-1))}>
                 <IconButton>
@@ -17,7 +17,7 @@ function Eraser() {
                 </IconButton>
             </div>
         </div>
-    )
+  );
 }
 
 export default Eraser;

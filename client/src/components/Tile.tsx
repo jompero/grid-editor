@@ -11,9 +11,8 @@ export interface Props {
 }
 
 function Tile({
-  image, color, posX, posY, width, height
+  image, color, posX, posY, width, height,
 }: Props) {
-
   const useStyles = makeStyles((theme: Theme) => createStyles({
     tile: {
       backgroundImage: `url(${image})`,
@@ -22,7 +21,7 @@ function Tile({
       width,
       height,
       imageRendering: 'pixelated',
-    }
+    },
   }));
 
   const classes = useStyles();

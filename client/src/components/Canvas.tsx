@@ -30,7 +30,7 @@ function Canvas() {
           rows={height}
           tileHeight={tileSet.tileHeight}
           tileWidth={tileSet.tileWidth}
-          scale={32/tileSet.tileWidth} >
+          scale={32 / tileSet.tileWidth} >
             {parseTileArray()}
         </Grid>
   );

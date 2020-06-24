@@ -11,6 +11,6 @@ function Load() {
       <StorageIcon />
     </IconButton>
   );
-};
+}
 
 export default Load;

@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import Tools from './Tools';
 import { RootState } from '../store';
+import Debug from '../utils/Debug';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -37,7 +38,7 @@ interface Props {
 
 function ToolBar({ children }: Props) {
   const brush = useSelector((state: RootState) => state.tools.brush);
-  console.log('brush', brush);
+  Debug('brush', brush);
   const classes = useStyles();
 
   return (

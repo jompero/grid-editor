@@ -2,6 +2,7 @@ import React from 'react';
 import { GoogleLogout } from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { logout } from '../reducers/userReducer';
+import Debug from '../utils/Debug';
 
 
 function Logout() {
@@ -9,8 +10,8 @@ function Logout() {
 
   const handleLogout = () => {
     dispatch(logout());
-    console.log('logged out');
-  }
+    Debug('logged out');
+  };
 
   return (
     <GoogleLogout
@@ -19,7 +20,7 @@ function Logout() {
       onLogoutSuccess={handleLogout}
     >
     </GoogleLogout>
-  )
+  );
 }
 
 export default Logout;

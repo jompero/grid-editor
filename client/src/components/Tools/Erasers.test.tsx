@@ -9,10 +9,10 @@ test('renders content', () => {
   const component = render(
     <Provider store={store}>
       <Eraser />
-    </Provider>
+    </Provider>,
   );
 
   expect(component.container).toHaveTextContent(
-    'Eraser'
+    'Eraser',
   );
 });

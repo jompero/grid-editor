@@ -1,29 +1,40 @@
 import React from 'react';
-import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Theme, createStyles, makeStyles } from '@material-ui/core';
-import Grid from './Grid';
-import { TileMap, deleteMap } from '../services/mapsService';
+import {
+  Card,
+  CardActionArea,
+  CardMedia, CardContent,
+  Typography,
+  CardActions,
+  Button,
+  Theme,
+  createStyles,
+  makeStyles,
+} from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Grid from './Grid';
+import { TileMap, deleteMap } from '../services/mapsService';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
 import Tile from './Tile';
 import { load } from '../reducers/canvasReducer';
 import tileSets from '../services/tileSets';
 import { notify } from '../reducers/notificationsReducer';
 import { RootState } from '../store';
+import Debug from '../utils/Debug';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   map: {
     margin: '1em',
-    maxWidth: '10em'
+    maxWidth: '10em',
   },
   mapThumbnail: {
     display: 'flex',
-    height: '10em',  
+    height: '10em',
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '0.5em'
-  }
+    margin: '0.5em',
+  },
 }));
 
 interface Props {
@@ -31,25 +42,30 @@ interface Props {
 }
 
 function MapCard({ map }: Props) {
-  const user = useSelector((state: RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user);
   const history = useHistory();
   const tileSet = tileSets[map.tileSet];
-  const mapping = tileSet.mapping;
+  const { mapping } = tileSet;
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  function parseMap(map: TileMap) {
-    return map.tileMap.map((tile: number, index: number) => (
+  function parseMap(mapToParse: TileMap) {
+    return mapToParse.tileMap.map((tile: number, index: number) => (
       <div key={index}>
         {tile >= 0 && <Tile {...mapping[tile]} />}
       </div>
     ));
   }
 
-  function removeMap(map: TileMap) {
-    dispatch(cutMap(map));
-    map.id && deleteMap(map.id, user.token)
-      .catch((error) => dispatch(notify('Something went wrong while removing the map.', 'error')));
+  function removeMap(mapToRemove: TileMap) {
+    dispatch(cutMap(mapToRemove));
+    if (mapToRemove.id) {
+      deleteMap(mapToRemove.id, user.token)
+        .catch((error) => {
+          Debug(error);
+          dispatch(notify('Something went wrong while removing the map.', 'error'));
+        });
+    }
   }
 
   function clickHandler() {
@@ -62,7 +78,12 @@ function MapCard({ map }: Props) {
       <CardActionArea onClick={() => clickHandler()}>
         <CardMedia>
           <div className={classes.mapThumbnail}>
-            <Grid rows={map.height} columns={map.width} tileHeight={tileSet.tileHeight} tileWidth={tileSet.tileWidth} scale={8/tileSet.tileWidth} >
+            <Grid
+              rows={map.height}
+              columns={map.width}
+              tileHeight={tileSet.tileHeight}
+              tileWidth={tileSet.tileWidth}
+              scale={8 / tileSet.tileWidth} >
               {parseMap(map)}
             </Grid>
           </div>
@@ -82,14 +103,14 @@ function MapCard({ map }: Props) {
           Load
           </Button>
         {
-          user.profile === map.user?.profile &&
-          <Button onClick={() => removeMap(map, )}>
+          user.profile === map.user?.profile
+          && <Button onClick={() => removeMap(map)}>
             Delete
           </Button>
         }
       </CardActions>
     </Card>
-  )
-};
+  );
+}
 
 export default MapCard;

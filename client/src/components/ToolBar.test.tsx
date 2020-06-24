@@ -2,9 +2,9 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import ToolBar from './ToolBar';
 import store from '../store';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders content', () => {
   const component = render(
@@ -12,10 +12,10 @@ test('renders content', () => {
       <Router>
         <ToolBar>Content</ToolBar>
       </Router>
-    </Provider>
+    </Provider>,
   );
 
   expect(component.container).toHaveTextContent(
-    'Content'
+    'Content',
   );
 });

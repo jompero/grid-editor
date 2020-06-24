@@ -1,9 +1,9 @@
 import React from 'react';
 import { Snackbar } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
+import { Alert } from '@material-ui/lab';
 import { RootState } from '../store';
 import { resetNotifications } from '../reducers/notificationsReducer';
-import { Alert } from '@material-ui/lab';
 
 function Notification() {
   const notification = useSelector((state: RootState) => state.notification);
@@ -11,16 +11,14 @@ function Notification() {
 
   if (!notification.message) return null;
 
-  const handleClose = () => { 
+  const handleClose = () => {
     dispatch(resetNotifications());
   };
 
-  const alert = () => {
-    return <Alert severity={notification.severity}>{notification.message}</Alert>
-  }
+  const alert = () => <Alert severity={notification.severity}>{notification.message}</Alert>;
 
   return (
-    <Snackbar   
+    <Snackbar
       open={true}
       onClose={handleClose}
       autoHideDuration={6000}
@@ -29,7 +27,7 @@ function Notification() {
     >
       {notification.severity && alert()}
     </Snackbar>
-  )
+  );
 }
 
 export default Notification;

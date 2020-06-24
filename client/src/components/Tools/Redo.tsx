@@ -5,13 +5,13 @@ import RedoIcon from '@material-ui/icons/Redo';
 import { ActionCreators } from 'redux-undo';
 
 function Eraser() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    return (
+  return (
         <IconButton onClick={() => dispatch(ActionCreators.redo())}>
             <RedoIcon />
         </IconButton>
-    )
+  );
 }
 
 export default Eraser;

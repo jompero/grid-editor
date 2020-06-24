@@ -4,9 +4,9 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import {
   AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Grid as MUIGrid, IconButton,
 } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { RootState } from '../store';
 import Edit from './Tools/Edit';
-import CancelIcon from '@material-ui/icons/Cancel';
 import Login from './Login';
 import Logout from './Logout';
 
@@ -41,8 +41,7 @@ function TopBar({ children }: Props) {
   const history = useHistory();
   const classes = useStyles();
 
-  const canvasName = () => {
-    return (
+  const canvasName = () => (
       <MUIGrid container alignItems='center' >
         <MUIGrid item >
           <Edit />
@@ -51,8 +50,7 @@ function TopBar({ children }: Props) {
           <Typography variant='h6' display='inline' align='justify'>{mapName}</Typography>
         </MUIGrid>
       </MUIGrid>
-    )
-  };
+  );
 
   return (
     <div className={classes.root}>
@@ -73,10 +71,10 @@ function TopBar({ children }: Props) {
             </MUIGrid>
 
             <MUIGrid item>
-              
+
                 <Switch>
                   <Route exact path='/login' />
-                    
+
                   <Route exact path='/maps'>
                     <IconButton onClick={() => history.push('/')}>
                       <CancelIcon/>

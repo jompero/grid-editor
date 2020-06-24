@@ -1,5 +1,6 @@
 import tileSets from '../services/tileSets';
 import { TileMap } from '../services/mapsService';
+import Debug from '../utils/Debug';
 
 export interface TileSetAction {
   type: string,
@@ -15,7 +16,7 @@ function tileSetReducer(state: string = 'Harbour', action: TileSetAction) {
       return action.data.tileSet || state;
     case 'LOAD_MAP':
     case 'UPDATE_MAP':
-      console.log('TileSet', action.data);
+      Debug('TileSet', action.data);
       return action.data?.tileMap ? action.data.tileMap.tileSet : state;
     default:
       return state;
@@ -25,7 +26,7 @@ function tileSetReducer(state: string = 'Harbour', action: TileSetAction) {
 export function setTileSet(tileSet: string) {
   return {
     type: 'SET_TILESET',
-    data: { tileSet: tileSets.tileSet }
+    data: { tileSet: tileSets[tileSet] },
   };
 }
 

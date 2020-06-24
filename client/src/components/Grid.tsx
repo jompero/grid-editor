@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Debug from '../utils/Debug';
 
 export interface Props {
   rows: number,
@@ -13,8 +14,7 @@ export interface Props {
 function Grid({
   children, columns, rows, tileHeight, tileWidth, scale,
 }: Props) {
-  
-  console.log('columns', columns, 'rows', rows)
+  Debug('columns', columns, 'rows', rows);
 
   const useStyles = makeStyles((theme: Theme) => createStyles({
     gridContainer: {
