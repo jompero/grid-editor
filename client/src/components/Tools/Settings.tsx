@@ -34,7 +34,7 @@ function Settings({ handleSubmit }: Props) {
   const [tileSet, setTileSet] = useState(tileSetName);
 
   const tileSetNames = () => {
-    Object.keys(tileSets)
+    return Object.keys(tileSets)
       .map((key: string) => <MenuItem key={key} value={key}>{key}</MenuItem>);
   };
 
