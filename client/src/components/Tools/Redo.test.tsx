@@ -12,7 +12,7 @@ test('renders content', () => {
     </Provider>,
   );
 
-  expect(component.container).toHaveTextContent(
-    'Redo',
-  );
+  const icon = component.getByTestId('redo-icon');
+
+  expect(component.container).toContainElement(icon);
 });
