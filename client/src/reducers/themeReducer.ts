@@ -4,9 +4,9 @@ interface ThemeAction {
 }
 
 function themeReducer(
-  state: 'light' | 'dark' = 'light', 
-  action: ThemeAction) {
-    
+  state: 'light' | 'dark' = 'light',
+  action: ThemeAction,
+) {
   switch (action.type) {
     case ('CHANGE_THEME'):
       return action.data;

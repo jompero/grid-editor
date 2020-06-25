@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Debug from '../utils/Debug';
 
 export interface Props {
@@ -16,7 +16,7 @@ function Grid({
 }: Props) {
   Debug('columns', columns, 'rows', rows);
 
-  const useStyles = makeStyles((theme: Theme) => createStyles({
+  const useStyles = makeStyles(() => createStyles({
     gridContainer: {
       display: 'inline-grid',
       gridTemplateColumns: `repeat(${columns}, ${tileWidth * scale}px [col-start])`,

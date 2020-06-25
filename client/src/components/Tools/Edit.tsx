@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  IconButton, Modal, makeStyles, Theme, createStyles,
+  IconButton, Modal, makeStyles, createStyles,
 } from '@material-ui/core';
 
 import EditIcon from '@material-ui/icons/Edit';
 import Settings from './Settings';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles(() => createStyles({
   window: {
     position: 'absolute',
     top: '50%',

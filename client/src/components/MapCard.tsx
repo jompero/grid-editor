@@ -6,7 +6,6 @@ import {
   Typography,
   CardActions,
   Button,
-  Theme,
   createStyles,
   makeStyles,
 } from '@material-ui/core';
@@ -22,10 +21,11 @@ import { notify } from '../reducers/notificationsReducer';
 import { RootState } from '../store';
 import Debug from '../utils/Debug';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles(() => createStyles({
   map: {
     margin: '1em',
-    maxWidth: '10em',
+    minWidth: '11em',
+    maxWidth: '12em',
   },
   mapThumbnail: {
     display: 'flex',

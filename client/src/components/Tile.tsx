@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 
 export interface Props {
   image?: string;
@@ -13,7 +13,7 @@ export interface Props {
 function Tile({
   image, color, posX, posY, width, height,
 }: Props) {
-  const useStyles = makeStyles((theme: Theme) => createStyles({
+  const useStyles = makeStyles(() => createStyles({
     tile: {
       backgroundImage: `url(${image})`,
       backgroundColor: `${color}`,

@@ -11,9 +11,9 @@ import Debug from '../../utils/Debug';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
+    background: theme.palette.background.default,
     display: 'grid',
     gridGap: '2em',
-    background: 'white',
     padding: '2em',
   },
 }));

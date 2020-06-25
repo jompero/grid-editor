@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 import Tile from './Tile';
 import tileSets from '../services/tileSets';
 import { RootState } from '../store';
@@ -10,7 +10,7 @@ export interface Props {
   onMouseClick: Function;
 }
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles(() => createStyles({
   tile: {
     '&:hover': {
       cursor: 'pointer',

@@ -10,6 +10,7 @@ import tileSets from '../../services/tileSets';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   window: {
+    background: theme.palette.background.default,
     position: 'absolute',
     zIndex: 0,
     top: '50%',
