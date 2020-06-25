@@ -33,10 +33,8 @@ function Settings({ handleSubmit }: Props) {
   const [height, setHeight] = useState(tileMap.height);
   const [tileSet, setTileSet] = useState(tileSetName);
 
-  const tileSetNames = () => {
-    return Object.keys(tileSets)
-      .map((key: string) => <MenuItem key={key} value={key}>{key}</MenuItem>);
-  };
+  const tileSetNames = () => Object.keys(tileSets)
+    .map((key: string) => <MenuItem key={key} value={key}>{key}</MenuItem>);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     Debug(event.target.value);

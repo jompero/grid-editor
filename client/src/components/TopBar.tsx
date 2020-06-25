@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   content: {
     margin: 'auto',
+    marginTop: '1em',
   },
   toolbarMargin: theme.mixins.toolbar,
 }));

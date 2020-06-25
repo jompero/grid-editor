@@ -9,6 +9,7 @@ import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/mapsService';
 import userReducer, { User } from './reducers/userReducer';
 import notificationsReducer, { NotificationsState } from './reducers/notificationsReducer';
+import themeReducer from './reducers/themeReducer';
 import Debug from './utils/Debug';
 
 export interface RootState {
@@ -17,7 +18,8 @@ export interface RootState {
   canvas: StateWithHistory<TileMap>,
   tools: BrushState,
   maps: TileMap[],
-  notification: NotificationsState
+  notification: NotificationsState,
+  theme: 'dark' | 'light'
 }
 
 const reducer = combineReducers({
@@ -27,6 +29,7 @@ const reducer = combineReducers({
   tools: brushReducer,
   maps: mapsReducer,
   notification: notificationsReducer,
+  theme: themeReducer,
 });
 
 const store = createStore(
