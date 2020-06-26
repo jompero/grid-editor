@@ -27,7 +27,7 @@ function Tile({
   const classes = useStyles();
 
   return (
-    <div className={classes.tile} />
+    <div data-testid='tile' className={classes.tile} />
   );
 }
 

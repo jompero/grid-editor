@@ -9,7 +9,7 @@ function Eraser() {
 
   return (
         <div onClick={() => dispatch(ActionCreators.undo())}>
-            <IconButton>
+            <IconButton data-testid='undo-icon'>
                 <UndoIcon />
             </IconButton>
         </div>

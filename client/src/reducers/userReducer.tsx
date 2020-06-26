@@ -7,15 +7,21 @@ export interface User {
 
 interface UserAction {
   type: string,
-  data: User
+  data?: User
 }
 
-function userReducer(state: User | {} = {}, action: UserAction) {
+const loggedOut = {
+  name: '',
+  token: '',
+  profile: ''
+}
+
+function userReducer(state: User = loggedOut, action: UserAction): User {
   switch (action.type) {
     case ('LOGIN'):
-      return action.data;
+      return action.data || state;
     case ('LOGOUT'):
-      return {};
+      return loggedOut;
     default:
       return state;
   }

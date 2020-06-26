@@ -12,7 +12,7 @@ test('renders content', () => {
     </Provider>,
   );
 
-  expect(component.container).toHaveTextContent(
-    'Eraser',
-  );
+  const icon = component.getByTestId('eraser-icon');
+
+  expect(component.container).toContainElement(icon);
 });

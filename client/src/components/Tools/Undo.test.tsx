@@ -12,7 +12,7 @@ test('renders content', () => {
     </Provider>,
   );
 
-  expect(component.container).toHaveTextContent(
-    'Undo',
-  );
+  const icon = component.getByTestId('undo-icon');
+
+  expect(component.container).toContainElement(icon);
 });

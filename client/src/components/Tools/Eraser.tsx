@@ -12,7 +12,7 @@ function Eraser() {
   return (
         <div>
             <div onClick={() => dispatch(setBrush(-1))}>
-                <IconButton>
+                <IconButton data-testid='eraser-icon'>
                     <Icon icon={eraserIcon} />
                 </IconButton>
             </div>

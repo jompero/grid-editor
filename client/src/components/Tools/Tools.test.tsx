@@ -15,13 +15,7 @@ test('renders tools', () => {
     </Provider>,
   );
 
-  expect(component.container).toHaveTextContent(
-    'Eraser',
-  );
-  expect(component.container).toHaveTextContent(
-    'Undo',
-  );
-  expect(component.container).toHaveTextContent(
-    'Redo',
-  );
+  const tools = component.getByTestId('tools');
+
+  expect(component.container).toContainElement(tools);
 });

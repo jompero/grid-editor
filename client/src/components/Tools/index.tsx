@@ -19,7 +19,7 @@ const tools = [
 
 function Tools() {
   return (
-        <List id='tools'>
+        <List data-testid='tools'>
           {tools.map((tool: ReactElement, index: number) => (
                 <ListItem key={index}>
                   {tool}

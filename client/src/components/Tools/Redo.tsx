@@ -9,7 +9,7 @@ function Eraser() {
 
   return (
         <IconButton onClick={() => dispatch(ActionCreators.redo())}>
-            <RedoIcon data-testid="redo-icon" />
+            <RedoIcon data-testid='redo-icon' />
         </IconButton>
   );
 }

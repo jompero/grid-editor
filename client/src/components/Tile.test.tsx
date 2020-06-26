@@ -14,11 +14,11 @@ test('style applied correctly', () => {
     </Provider>,
   );
 
-  const tile = component.container.querySelector('.tile') || undefined;
-  Debug(prettyDOM(tile));
+  const tile = component.getByTestId('tile');
+  tile && Debug(prettyDOM(tile));
 
   expect(tile).toHaveStyle(
-    'background-image: url(9445.png)',
+    'background-image: url(bw_tiles.png)',
   );
   expect(tile).toHaveStyle(
     'background-color: blue',
