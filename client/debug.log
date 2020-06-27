@@ -1,3 +1,0 @@
-[0311/203521.590:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
-[0316/131640.290:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
-[0319/204616.972:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)

@@ -1,39 +1,39 @@
-import mongoose, { MongooseDocument } from 'mongoose';
+import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
-export interface TileMap extends mongoose.Document  {
-  name: string,
-  width: number,
-  height: number,
-  tileMap: number[],
-  tileSet: string,
-  user: mongoose.Types.ObjectId
+export interface TileMap extends mongoose.Document {
+  name: string;
+  width: number;
+  height: number;
+  tileMap: number[];
+  tileSet: string;
+  user: mongoose.Types.ObjectId;
 }
 
 const tileMapSchema = new mongoose.Schema({
-    name: {
-      required: true,
-      type: String,
-      minLength: 3,
-      unique: true
-    },
-    width: {
-      required: true,
-      type: Number
-    },
-    height: {
-      required: true,
-      type: Number
-    },
-    tileMap: {
-      required: true,
-      type: [Number]
-    },
-    tileSet: {
-      type: String,
-      required: true
-    },
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  name: {
+    required: true,
+    type: String,
+    minLength: 3,
+    unique: true,
+  },
+  width: {
+    required: true,
+    type: Number,
+  },
+  height: {
+    required: true,
+    type: Number,
+  },
+  tileMap: {
+    required: true,
+    type: [Number],
+  },
+  tileSet: {
+    type: String,
+    required: true,
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 
@@ -45,9 +45,9 @@ tileMapSchema.set('toJSON', {
     delete returnedObject.user._id;
     delete returnedObject.user._v;
     delete returnedObject.user.profileId;
-  }
+  },
 });
-  
+
 mongoose.plugin(uniqueValidator);
 
-export default mongoose.model('TileMap', tileMapSchema)
+export default mongoose.model('TileMap', tileMapSchema);
