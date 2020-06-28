@@ -2,7 +2,10 @@
 
 Grid-editor is a working progress project. The goal is to create a tool that allows editing a grid based layout with preset 'palette'. An example will be created with a tileset from Zelda: Link's Awakening and the ability to create and edit a level layout.  
   
-The example is available on [Heroku](https://mysterious-meadow-32567.herokuapp.com/).
+The example is available on [Heroku](https://mysterious-meadow-32567.herokuapp.com/).  
+  
+Backend built on express-generator.  
+Client built on create-react-app.
   
 ## Goals
 
@@ -12,12 +15,16 @@ The example is available on [Heroku](https://mysterious-meadow-32567.herokuapp.c
   
 ### Stretch Goals  
 
-- Create a custom tileset (from an image file) - IN PROGRESS
-- Social options (view and like other users' maps)
+- Create a custom tileset (from an image file) - MET!
+
+Social options:
+
+- view other users' maps - MET!
+- like other users' maps - BACKLOG
 
 ## Setup
 
-Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project.
+Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. If you need to publish to your server using git, initiatilizing backend folder as a git repository is recommended.
 
 ```bash
 cd client
