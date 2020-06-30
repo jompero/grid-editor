@@ -24,26 +24,35 @@ function getTokenFrom(request: Request) {
 }
 
 export function getUser(req: Request, res: Response, next: NextFunction) {
-  const accessToken = getTokenFrom(req);
-  const auth = google.oauth2({
-    version: 'v2',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  auth.userinfo.get({})
-    .then((response) => {
-      const user = response.data;
-      logger.info('user', user);
-
-      Users.findOneAndUpdate({ profileId: user.id }, {
-        name: user.name,
-        email: user.email,
-      }, { upsert: true, new: true })
-        .then((foundUser) => {
-          logger.info('passing user to req', foundUser);
-          req.user = foundUser;
-          next();
-        });
+  if (process.env.NODE_ENV === 'test') {
+    console.log('test user logging in', req.body)
+    Users.findById(req.body.user)
+      .then((user) => {
+        req.user = user;
+        next();
+      })
+  } else {  
+    const accessToken = getTokenFrom(req);
+    const auth = google.oauth2({
+      version: 'v2',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+    auth.userinfo.get({})
+      .then((response) => {
+        const user = response.data;
+        logger.info('user', user);
+
+        Users.findOneAndUpdate({ profileId: user.id }, {
+          name: user.name,
+          email: user.email,
+        }, { upsert: true, new: true })
+          .then((foundUser) => {
+            logger.info('passing user to req', foundUser);
+            req.user = foundUser;
+            next();
+          });
+      });
+  }
 }
