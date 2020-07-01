@@ -1,0 +1,5 @@
+
+> backend@0.0.0 start C:\Users\dani.jompero\Documents\GitHub\grid-editor\backend
+> cross-env NODE_ENV=production node ./dist/bin/www
+
+connecting to MongoDB: undefined
