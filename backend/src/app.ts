@@ -5,7 +5,6 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import config from './utils/config';
 
-import indexRouter from './controllers/index';
 import usersRouter from './controllers/users';
 import mapsRouter from './controllers/maps';
 import logger from './utils/logger';
@@ -36,7 +35,6 @@ const publicFolder = path.join(__dirname, 'public');
 logger.info('loading static content from', publicFolder);
 app.use(express.static(publicFolder));
 
-app.use('/api/', indexRouter);
 app.use('/api/users/', usersRouter);
 app.use('/api/maps/', mapsRouter);
 
