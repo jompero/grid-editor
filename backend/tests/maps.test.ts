@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import app from '../app';
+import app from '../src/app';
 import supertest from 'supertest';
-import maps from '../models/tileMap';
-import users, { User } from '../models/user';
+import maps from '../src/models/tileMap';
+import users, { User } from '../src/models/user';
 
 const userInfo = {
   profile: 'profile',

@@ -17,6 +17,6 @@
         }
     },
     "include": [
-        "src/**/*", "babel.config.js"
+        "src/**/*", "babel.config.js", "tests"
     ]
 }
