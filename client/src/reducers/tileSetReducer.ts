@@ -1,4 +1,3 @@
-import tileSets from '../services/tileSets';
 import { TileMap } from '../services/mapsService';
 import Debug from '../utils/Debug';
 
@@ -26,7 +25,7 @@ function tileSetReducer(state: string = 'Harbour', action: TileSetAction) {
 export function setTileSet(tileSet: string) {
   return {
     type: 'SET_TILESET',
-    data: { tileSet: tileSets[tileSet] },
+    data: { tileSet },
   };
 }
 

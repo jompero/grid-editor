@@ -1,33 +1,35 @@
-import tileSets from '../services/tileSets';
-import { TileMap } from '../services/mapsService';
-import Debug from '../utils/Debug';
+import '@testing-library/jest-dom/extend-expect';
+import configureStore from 'redux-mock-store';
+import { createStore } from 'redux';
+import tileSetReducer, { setTileSet } from './tileSetReducer';
 
-export interface TileSetAction {
-  type: string,
-  data: {
-    tileSet?: string,
-    tileMap?: TileMap
-  }
-}
+const mockStore = configureStore([]);
 
-function tileSetReducer(state: string = 'Harbour', action: TileSetAction) {
-  switch (action.type) {
-    case 'SET_TILESET':
-      return action.data.tileSet || state;
-    case 'LOAD_MAP':
-    case 'UPDATE_MAP':
-      Debug('TileSet', action.data);
-      return action.data?.tileMap ? action.data.tileMap.tileSet : state;
-    default:
-      return state;
-  }
-}
+describe('on action', () => {
+  
+  test('set, tile set is changed', () => {
+    const store = mockStore({});
+    store.dispatch(setTileSet('Cave'));
 
-export function setTileSet(tileSet: string) {
-  return {
-    type: 'SET_TILESET',
-    data: { tileSet: tileSets[tileSet] },
-  };
-}
+    const actions = store.getActions();
+    expect(actions).toEqual([{
+      type: 'SET_TILESET',
+      data: { tileSet: 'Cave' },
+    }]);
+  });
+});
 
-export default tileSetReducer;
+describe('reducer', () => {
+  const store = createStore(tileSetReducer);
+
+  test('is initialized', () => {
+    const state = store.getState();
+    expect(state).toStrictEqual('Harbour');
+  });
+
+  test('changes tile set', () => {
+    store.dispatch(setTileSet('Cave'));
+    const state = store.getState();
+    expect(state).toBe('Cave');
+  });
+});
