@@ -48,6 +48,8 @@ cd backend
 npm run start:watch
 ```
 
+Note that your IDE may flag tests for errors. I managed to fix this by installing mocha and eslint globally.
+
 ## Tests
 
 For now, only client has tests. Tests are written using jest.  
