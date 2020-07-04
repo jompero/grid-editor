@@ -3,9 +3,11 @@ import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 import mapsReducer, { initializeMaps, setMaps, deleteMap, appendMap } from './mapsReducer';
 import { User } from './userReducer';
-import { TileMap } from '../services/mapsService';
+import mapsService, { TileMap } from '../services/mapsService';
+import thunk from 'redux-thunk';
 
-const mockStore = configureStore([]);
+jest.mock('../services/mapsService');
+const mockStore = configureStore([ thunk ]);
 
 // id?: string,
 // name: string,
@@ -63,6 +65,19 @@ describe('on action', () => {
       data: {
         maps: testMaps
       }
+    }]);
+  });
+
+  test('initializeMaps, maps are fetched from the server', () => {
+    const store = mockStore({});
+    mapsService.getAll.mockImplementation(() => Promise.resolve({ ...testMaps }));
+    
+    store.dispatch(initializeMaps());
+
+    const actions = store.getActions();
+    expect(actions).toEqual([{
+      type: 'SET_MAPS',
+      data: { ...testMaps }
     }]);
   });
 
