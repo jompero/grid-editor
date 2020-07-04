@@ -6,9 +6,6 @@ import { User } from './userReducer';
 import mapsService, { TileMap } from '../services/mapsService';
 import thunk from 'redux-thunk';
 
-jest.mock('../services/mapsService');
-const mockStore = configureStore([ thunk ]);
-
 // id?: string,
 // name: string,
 // width: number,
@@ -53,7 +50,50 @@ const testMaps: TileMap[] = [
   },
 ]
 
+const mockStore = configureStore([ thunk ]);
+
 describe('on action', () => {
+  beforeAll(() => {
+    jest.mock('../services/mapsService', () => {
+      return function() { 
+        return {
+          getAll: () => {
+            return Promise.resolve([
+              {
+                id: '1',
+                name: 'testMap1',
+                width: 2,
+                height: 2,
+                tileMap: [ 0, 1, 2, 3 ],
+                tileSet: 'Harbour',
+                user:   {
+                  name: 'tester1',
+                  id: 'a',
+                  token: 'tokenstring',
+                  profile: 'profilestring'
+                }
+              },
+              {
+                id: '2',
+                name: 'testMap2',
+                width: 2,
+                height: 2,
+                tileMap: [ 0, 1, 2, 3 ],
+                tileSet: 'Cave',
+                user:   {
+                  name: 'tester2',
+                  id: 'b',
+                  token: 'tokenstring',
+                  profile: 'profilestring'
+                }
+              },
+            ]);
+          }
+        }
+      }
+    }); 
+  })
+
   test('setMaps, maps are set', () => {
     const store = mockStore({});
     
@@ -70,7 +110,6 @@ describe('on action', () => {
 
   test('initializeMaps, maps are fetched from the server', () => {
     const store = mockStore({});
-    mapsService.getAll.mockImplementation(() => Promise.resolve({ ...testMaps }));
     
     store.dispatch(initializeMaps());
 
