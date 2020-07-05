@@ -30,7 +30,7 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
       .then((user) => {
         req.user = user;
         next();
-      })
+      });
   } else {  
     const accessToken = getTokenFrom(req);
     const auth = google.oauth2({

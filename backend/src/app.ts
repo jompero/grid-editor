@@ -7,9 +7,11 @@ import config from './utils/config';
 
 import usersRouter from './controllers/users';
 import mapsRouter from './controllers/maps';
+import testingRouter from './controllers/testing';
 import logger from './utils/logger';
 
-
+const env = process.env.NODE_ENV;
+logger.info(`server running in ${env  || 'default'} environment`);
 logger.info('connecting to MongoDB:', config.MONGODB_URI);
 
 mongoose.connect(config.MONGODB_URI, {
@@ -37,5 +39,9 @@ app.use(express.static(publicFolder));
 
 app.use('/api/users/', usersRouter);
 app.use('/api/maps/', mapsRouter);
+
+if (env === 'test') {
+  app.use('/api/testing/', testingRouter);
+};
 
 export default app;
