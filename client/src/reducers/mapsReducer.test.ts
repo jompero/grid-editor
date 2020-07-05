@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
-import mapsReducer, { initializeMaps, setMaps, deleteMap, appendMap } from './mapsReducer';
+import mapsReducer, { setMaps, deleteMap, appendMap } from './mapsReducer';
 import { User } from './userReducer';
-import mapsService, { TileMap } from '../services/mapsService';
-import thunk from 'redux-thunk';
+import{ TileMap } from '../services/mapsService';
 
 // id?: string,
 // name: string,
@@ -50,49 +49,7 @@ const testMaps: TileMap[] = [
   },
 ]
 
-const mockStore = configureStore([ thunk ]);
-
-describe('on action', () => {
-  beforeAll(() => {
-    jest.mock('../services/mapsService', () => {
-      return function() { 
-        return {
-          getAll: () => {
-            return Promise.resolve([
-              {
-                id: '1',
-                name: 'testMap1',
-                width: 2,
-                height: 2,
-                tileMap: [ 0, 1, 2, 3 ],
-                tileSet: 'Harbour',
-                user:   {
-                  name: 'tester1',
-                  id: 'a',
-                  token: 'tokenstring',
-                  profile: 'profilestring'
-                }
-              },
-              {
-                id: '2',
-                name: 'testMap2',
-                width: 2,
-                height: 2,
-                tileMap: [ 0, 1, 2, 3 ],
-                tileSet: 'Cave',
-                user:   {
-                  name: 'tester2',
-                  id: 'b',
-                  token: 'tokenstring',
-                  profile: 'profilestring'
-                }
-              },
-            ]);
-          }
-        }
-      }
-    }); 
-  })
+const mockStore = configureStore();
 
   test('setMaps, maps are set', () => {
     const store = mockStore({});
@@ -105,18 +62,6 @@ describe('on action', () => {
       data: {
         maps: testMaps
       }
-    }]);
-  });
-
-  test('initializeMaps, maps are fetched from the server', () => {
-    const store = mockStore({});
-    
-    store.dispatch(initializeMaps());
-
-    const actions = store.getActions();
-    expect(actions).toEqual([{
-      type: 'SET_MAPS',
-      data: { ...testMaps }
     }]);
   });
 
