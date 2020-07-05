@@ -51,6 +51,7 @@ const testMaps: TileMap[] = [
 
 const mockStore = configureStore();
 
+describe('on action', () => {
   test('setMaps, maps are set', () => {
     const store = mockStore({});
     
