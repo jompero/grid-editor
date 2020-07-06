@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "name": "testMap1",
+    "width": 2,
+    "height": 2,
+    "tileMap": [ 0, 1, 2, 3 ],
+    "tileSet": "Harbour"
+  },
+  {
+    "id": "2",
+    "name": "testMap2",
+    "width": 2,
+    "height": 2,
+    "tileMap": [ 0, 1, 2, 3 ],
+    "tileSet": "Cave"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "tester1",
+    "id": "a",
+    "token": "tokenstring",
+    "profile": "profilestring"
+  },
+  {
+    "name": "tester2",
+    "id": "b",
+    "token": "tokenstring",
+    "profile": "profilestring"
+  }
+]

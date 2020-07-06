@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 import userReducer, { login, logout, User } from './userReducer';
+import users from '../../testProps/users.json';
 
 const mockStore = configureStore([]);
 
@@ -15,12 +16,12 @@ describe('on action', () => {
   
   test('login, user is logged in', () => {
     const store = mockStore({});
-    store.dispatch(login(user));
+    store.dispatch(login(users[0]));
 
     const actions = store.getActions();
     expect(actions).toEqual([{
       type: 'LOGIN',
-      data: user,
+      data: users[0],
     }]);
   });
 
@@ -50,9 +51,9 @@ describe('reducer', () => {
   });
 
   test('can log in', () => {
-    store.dispatch(login(user));
+    store.dispatch(login(users[0]));
     const state = store.getState();
-    expect(state).toBe(user);
+    expect(state).toBe(users[0]);
   });
 
   test('can log out', () => {

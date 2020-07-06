@@ -4,50 +4,8 @@ import { createStore } from 'redux';
 import mapsReducer, { setMaps, deleteMap, appendMap } from './mapsReducer';
 import { User } from './userReducer';
 import{ TileMap } from '../services/mapsService';
-
-// id?: string,
-// name: string,
-// width: number,
-// height: number,
-// tileMap: number[],
-// tileSet: string,
-// user?: User,
-
-const users: User[] = [
-  {
-    name: 'tester1',
-    id: 'a',
-    token: 'tokenstring',
-    profile: 'profilestring'
-  },
-  {
-    name: 'tester2',
-    id: 'b',
-    token: 'tokenstring',
-    profile: 'profilestring'
-  }
-]
-
-const testMaps: TileMap[] = [
-  {
-    id: '1',
-    name: 'testMap1',
-    width: 2,
-    height: 2,
-    tileMap: [ 0, 1, 2, 3 ],
-    tileSet: 'Harbour',
-    user: users[0]
-  },
-  {
-    id: '2',
-    name: 'testMap2',
-    width: 2,
-    height: 2,
-    tileMap: [ 0, 1, 2, 3 ],
-    tileSet: 'Cave',
-    user: users[1]
-  },
-]
+import testUsers from '../../testProps/users.json';
+import testMaps from '../../testProps/maps.json';
 
 const mockStore = configureStore();
 
