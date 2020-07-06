@@ -1,14 +1,16 @@
 [
   {
     "name": "tester1",
+    "email": "tester1@test.com",
     "id": "a",
     "token": "tokenstring",
-    "profile": "profilestring"
+    "profileId": "profilestring"
   },
   {
     "name": "tester2",
+    "email": "tester2@test.com",
     "id": "b",
     "token": "tokenstring",
-    "profile": "profilestring"
+    "profileId": "profilestring"
   }
 ]

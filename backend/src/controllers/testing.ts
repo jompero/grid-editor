@@ -13,9 +13,16 @@ router.post('/reset', (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-  console.log('test user', req.body);
+  console.log('creating test user', req.body);
   Users.create(req.body)
     .then(() => res.status(204).end());
-})
+});
+
+router.post('/maps', (req, res) => {
+  console.log('creating test user', req.body);
+  Users.findOne({})
+    .then((user) => Maps.create({ ...req.body, user })
+      .then(() => res.status(204).end()));
+});
 
 export default router;
