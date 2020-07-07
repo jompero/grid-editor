@@ -32,7 +32,7 @@ function Save() {
   }
 
   return (
-    <IconButton onClick={() => save()} disabled={!token}>
+    <IconButton id='save-button' onClick={() => save()} disabled={!token}>
       <SaveIcon />
     </IconButton>
   );

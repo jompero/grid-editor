@@ -21,5 +21,3 @@ describe('Maps ', function() {
     cy.contains(maps[1].name);
   });
 });
-
-export {};

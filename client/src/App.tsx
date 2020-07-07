@@ -30,21 +30,21 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Router>
-      <TopBar>
-        <Switch>
-          <Route exact path='/login'><Login /></Route>
-          <Route exact path='/'>
-            <ToolBar>
-              <Canvas />
-            </ToolBar>
-          </Route>
-          <Route path='/maps'><Maps /></Route>
-        </Switch>
-      </TopBar>
-      <Notification />
-    </Router>
+      <CssBaseline />
+      <Router>
+        <TopBar>
+          <Switch>
+            <Route exact path='/login'><Login /></Route>
+            <Route exact path='/'>
+              <ToolBar>
+                <Canvas />
+              </ToolBar>
+            </Route>
+            <Route path='/maps'><Maps /></Route>
+          </Switch>
+        </TopBar>
+        <Notification />
+      </Router>
     </ThemeProvider>
   );
 }
