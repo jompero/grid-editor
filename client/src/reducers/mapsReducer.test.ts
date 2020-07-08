@@ -2,9 +2,6 @@ import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 import mapsReducer, { setMaps, deleteMap, appendMap } from './mapsReducer';
-import { User } from './userReducer';
-import{ TileMap } from '../services/mapsService';
-import testUsers from '../../testProps/users.json';
 import testMaps from '../../testProps/maps.json';
 
 const mockStore = configureStore();
@@ -12,15 +9,15 @@ const mockStore = configureStore();
 describe('on action', () => {
   test('setMaps, maps are set', () => {
     const store = mockStore({});
-    
+
     store.dispatch(setMaps(testMaps));
 
     const actions = store.getActions();
     expect(actions).toEqual([{
       type: 'SET_MAPS',
       data: {
-        maps: testMaps
-      }
+        maps: testMaps,
+      },
     }]);
   });
 
@@ -32,9 +29,9 @@ describe('on action', () => {
 
     expect(actions).toEqual([{
       type: 'DELETE_MAP',
-      data: { map: testMaps[0] }
+      data: { map: testMaps[0] },
     }]);
-  })
+  });
 
   test('appendMap, map is added', () => {
     const store = mockStore({});
@@ -45,10 +42,10 @@ describe('on action', () => {
     expect(actions).toEqual([{
       type: 'SAVE_MAP',
       data: {
-        map: testMaps[0]
-      }
-    }])
-  })
+        map: testMaps[0],
+      },
+    }]);
+  });
 });
 
 describe('reducer', () => {
@@ -65,7 +62,7 @@ describe('reducer', () => {
     store.dispatch(setMaps(testMaps));
     const state = store.getState();
     expect(state).toStrictEqual(
-      testMaps
+      testMaps,
     );
   });
 
@@ -73,31 +70,31 @@ describe('reducer', () => {
     const store = createStore(mapsReducer);
     store.dispatch(setMaps(testMaps));
 
-    store.dispatch(appendMap(testMaps[0]))
+    store.dispatch(appendMap(testMaps[0]));
     const state = store.getState();
     expect(state).toStrictEqual(
-      [ ...testMaps ]
-    )
+      [...testMaps],
+    );
   });
 
   test('deletes a map', () => {
     const store = createStore(mapsReducer);
     store.dispatch(setMaps(testMaps));
 
-    store.dispatch(deleteMap(testMaps[0]))
+    store.dispatch(deleteMap(testMaps[0]));
     const state = store.getState();
     expect(state).toStrictEqual(
-      [ testMaps[1] ]
-    )
+      [testMaps[1]],
+    );
   });
 
   test('saves a new map', () => {
     const store = createStore(mapsReducer);
 
-    store.dispatch(appendMap(testMaps[0]))
+    store.dispatch(appendMap(testMaps[0]));
     const state = store.getState();
     expect(state).toStrictEqual(
-      [ testMaps[0] ]
-    )
+      [testMaps[0]],
+    );
   });
 });

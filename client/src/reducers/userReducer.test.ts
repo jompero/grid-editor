@@ -1,19 +1,12 @@
 import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
-import userReducer, { login, logout, User } from './userReducer';
+import userReducer, { login, logout } from './userReducer';
 import users from '../../testProps/users.json';
 
 const mockStore = configureStore([]);
 
-const user: User = {
-  name: 'Pekka Pouta',
-  profile: 'abcd1234',
-  token: '1234abcd'
-}
-
 describe('on action', () => {
-  
   test('login, user is logged in', () => {
     const store = mockStore({});
     store.dispatch(login(users[0]));
@@ -31,7 +24,7 @@ describe('on action', () => {
 
     const actions = store.getActions();
     expect(actions).toEqual([{
-      type: 'LOGOUT'
+      type: 'LOGOUT',
     }]);
   });
 });
@@ -42,8 +35,8 @@ describe('reducer', () => {
   const loggedOut = {
     name: '',
     profile: '',
-    token: ''
-  }
+    token: '',
+  };
 
   test('is initialized', () => {
     const state = store.getState();

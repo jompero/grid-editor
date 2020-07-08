@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { User } from '../reducers/userReducer';
 import Debug from '../utils/Debug';
 
 const url = process.env.NODE_ENV === 'development'

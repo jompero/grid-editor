@@ -15,7 +15,7 @@ test('style applied correctly', () => {
   );
 
   const tile = component.getByTestId('tile');
-  tile && Debug(prettyDOM(tile));
+  if (tile) Debug(prettyDOM(tile));
 
   expect(tile).toHaveStyle(
     'background-image: url(bw_tiles.png)',

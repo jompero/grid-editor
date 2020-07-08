@@ -6,7 +6,6 @@ import canvasReducer, { paintTile } from './canvasReducer';
 const mockStore = configureStore([]);
 
 describe('on action', () => {
-  
   test('tile is painted', () => {
     const store = mockStore({});
     store.dispatch(paintTile(0, 1));
@@ -28,7 +27,7 @@ describe('reducer', () => {
     expect(state.width).toBe(16);
     expect(state.name).toBe('New Map');
     expect(state.tileSet).toBe('Harbour');
-    expect(state.tileMap.length).toBe(16*16);
+    expect(state.tileMap.length).toBe(16 * 16);
   });
 
   test('can be painted on', () => {

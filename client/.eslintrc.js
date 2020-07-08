@@ -22,7 +22,7 @@ module.exports = {
   },
   plugins: [
     'react',
-    '@typescript-eslint',
+    '@typescript-eslint'
   ],
   rules: {
     'import/extensions': [
@@ -30,4 +30,14 @@ module.exports = {
       'never'
     ]
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+    'import/resolver': {
+      node: {
+        extensions: [ '.json' ]
+      }
+    },
+  }
 };

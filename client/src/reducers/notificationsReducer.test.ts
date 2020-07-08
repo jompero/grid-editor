@@ -8,7 +8,7 @@ const mockStore = configureStore([]);
 describe('on action', () => {
   test('notify, notification is set', () => {
     const store = mockStore({});
-    
+
     store.dispatch(notify('message', 'success'));
 
     const actions = store.getActions();
@@ -16,8 +16,8 @@ describe('on action', () => {
       type: 'NOTIFY',
       data: {
         message: 'message',
-        severity: 'success'
-      }
+        severity: 'success',
+      },
     }]);
   });
 
@@ -30,7 +30,7 @@ describe('on action', () => {
     expect(actions).toEqual([{
       type: 'RESET_NOTIFICATION',
     }]);
-  })
+  });
 });
 
 describe('reducer', () => {
@@ -45,8 +45,8 @@ describe('reducer', () => {
     store.dispatch(notify('message', 'success'));
     const state = store.getState();
     expect(state).toStrictEqual({
-      message:'message',
-      severity: 'success'
+      message: 'message',
+      severity: 'success',
     });
   });
 });

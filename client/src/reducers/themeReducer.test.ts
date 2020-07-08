@@ -6,7 +6,6 @@ import themeReducer, { toggleDarkMode } from './themeReducer';
 const mockStore = configureStore([]);
 
 describe('on action', () => {
-  
   test('toggleDarkMode, theme is toggled', () => {
     const store = mockStore({});
     store.dispatch(toggleDarkMode('dark'));

@@ -6,7 +6,6 @@ import tileSetReducer, { setTileSet } from './tileSetReducer';
 const mockStore = configureStore([]);
 
 describe('on action', () => {
-  
   test('set, tile set is changed', () => {
     const store = mockStore({});
     store.dispatch(setTileSet('Cave'));

@@ -13,8 +13,8 @@ interface UserAction {
 const loggedOut = {
   name: '',
   token: '',
-  profile: ''
-}
+  profile: '',
+};
 
 function userReducer(state: User = loggedOut, action: UserAction): User {
   switch (action.type) {
