@@ -1,5 +1,5 @@
-import users from '../../testProps/users.json';
-import maps from '../../testProps/maps.json';
+import users from '../../testProps/users.json'; // eslint-disable-line import/extensions
+import maps from '../../testProps/maps.json'; // eslint-disable-line import/extensions
 
 describe('Maps ', () => {
   beforeEach(() => {

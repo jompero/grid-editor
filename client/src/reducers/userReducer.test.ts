@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 import userReducer, { login, logout } from './userReducer';
-import users from '../../testProps/users.json';
+import users from '../../testProps/users.json'; // eslint-disable-line import/extensions
 
 const mockStore = configureStore([]);
 

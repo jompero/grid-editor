@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore } from 'redux';
 import mapsReducer, { setMaps, deleteMap, appendMap } from './mapsReducer';
-import testMaps from '../../testProps/maps.json';
+import testMaps from '../../testProps/maps.json'; // eslint-disable-line import/extensions
 
 const mockStore = configureStore();
 
