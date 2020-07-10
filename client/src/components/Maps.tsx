@@ -7,13 +7,20 @@ import { TileMap } from '../services/mapsService';
 import { RootState } from '../store';
 import { initializeMaps } from '../reducers/mapsReducer';
 import MapCard from './MapCard';
+import MapsFilter from './MapsFilter';
 
 const useStyles = makeStyles(() => createStyles({
+  container: {
+    display: 'grid',
+    gridTemplateColumns:'repeat(3, 50em [col-start])',
+    gridGap: '2em',
+    padding: '2em'
+  },
   map: {
     margin: '1em',
   },
   mapList: {
-    display: 'flex',
+    gridRow: 2
   },
 }));
 
@@ -35,8 +42,13 @@ function Maps() {
   }
 
   return (
-    <div className={classes.mapList}>
-      {parsedMaps()}
+    <div className={classes.container}>
+      <div>
+        <MapsFilter />
+      </div>
+      <div className={classes.mapList}>
+        {parsedMaps()}
+      </div>
     </div>
   );
 }
