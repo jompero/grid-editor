@@ -7,10 +7,11 @@ import brushReducer, { BrushState } from './reducers/brushReducer';
 import tileSetReducer from './reducers/tileSetReducer';
 import mapsReducer from './reducers/mapsReducer';
 import { TileMap } from './services/mapsService';
-import userReducer, { User } from './reducers/userReducer';
+import userReducer from './reducers/userReducer';
 import notificationsReducer, { NotificationsState } from './reducers/notificationsReducer';
 import themeReducer from './reducers/themeReducer';
 import Debug from './utils/Debug';
+import { User } from './services/usersService';
 
 export interface RootState {
   user: User,

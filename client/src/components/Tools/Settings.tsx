@@ -25,6 +25,7 @@ interface Props {
 function Settings({ handleSubmit }: Props) {
   const tileMap = useSelector((state: RootState) => state.canvas.present);
   const tileSetName = useSelector((state: RootState) => state.tileSet);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -58,6 +59,7 @@ function Settings({ handleSubmit }: Props) {
       width,
       height,
       tileMap: new Array(width * height).fill(-1),
+      user
     };
 
     Debug('creating new map', newMap);

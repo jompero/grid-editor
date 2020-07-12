@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { User } from '../reducers/userReducer';
 import Debug from '../utils/Debug';
+import { User } from './usersService';
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
@@ -13,7 +13,7 @@ export interface TileMap {
   height: number,
   tileMap: number[],
   tileSet: string,
-  user?: User,
+  user: User,
 }
 
 export function getAll(): Promise<any> {

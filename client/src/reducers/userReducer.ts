@@ -1,27 +1,16 @@
-export interface User {
-  name: string,
-  id?: string,
-  token: string,
-  profile: string
-}
+import { User, NoUser } from "../services/usersService";
 
 interface UserAction {
   type: string,
   data?: User
 }
 
-const loggedOut = {
-  name: '',
-  token: '',
-  profile: '',
-};
-
-function userReducer(state: User = loggedOut, action: UserAction): User {
+function userReducer(state: User = NoUser, action: UserAction): User {
   switch (action.type) {
     case ('LOGIN'):
       return action.data || state;
     case ('LOGOUT'):
-      return loggedOut;
+      return NoUser;
     default:
       return state;
   }

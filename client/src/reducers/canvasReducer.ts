@@ -1,4 +1,5 @@
 import { TileMap } from '../services/mapsService';
+import { NoUser } from '../services/usersService';
 
 interface CanvasAction {
   type: string,
@@ -17,6 +18,7 @@ const nullState: TileMap = {
   height: 16,
   tileSet: 'Harbour',
   tileMap: new Array(16 * 16).fill(-1),
+  user: NoUser
 };
 
 function paint(state: TileMap, position: number, newTile: number): TileMap {

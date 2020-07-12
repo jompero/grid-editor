@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { useState } from 'react';
 import { TextField, Theme, Select, MenuItem } from '@material-ui/core';
+import { User } from '../services/usersService';
+import { TileMap } from '../services/mapsService';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
@@ -22,7 +24,12 @@ function MapsFilter() {
   const [username, setUsername] = useState('');
   const [mapName, setMapName] = useState('');
 
-  const users = Array.from(new Set( maps.filter((map) => map.user)));
+  const users = maps.reduce((usersAcc: User[], map: TileMap) => {
+    if (usersAcc.some((foundUser) => foundUser.id === map.user.id)) {
+      return usersAcc;
+    }
+    return usersAcc.concat(map.user);
+  }, []);
 
   return (
     <div>
