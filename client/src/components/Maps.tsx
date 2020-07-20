@@ -11,16 +11,20 @@ import MapsFilter from './MapsFilter';
 
 const useStyles = makeStyles(() => createStyles({
   container: {
-    display: 'grid',
-    gridTemplateColumns:'repeat(3, 50em [col-start])',
-    gridGap: '2em',
+    display: 'flex',
+    flex: 'auto',
+    alignItems: 'stretch',
+    flexDirection: 'column',
     padding: '2em'
+  },
+  filter: {
+    flex: 'auto',
   },
   map: {
     margin: '1em',
   },
   mapList: {
-    gridRow: 2
+    display: 'flex'
   },
 }));
 
@@ -32,12 +36,23 @@ function Maps() {
   }, [dispatch]);
 
   const maps = useSelector((state: RootState) => state.maps);
+  const mapsFilter = useSelector((state: RootState) => state.mapsFilter);
   const classes = useStyles();
 
+  const filterMaps = () => {
+    return maps.filter((map) => {
+      return (
+        map.name.toLowerCase().includes(mapsFilter.text.toLowerCase()) 
+        && (mapsFilter.users.length === 0 
+          || (map.user.id && mapsFilter.users.includes(map.user.id))))
+    })
+  }
+
   function parsedMaps() {
-    if (maps.length === 0) return <Typography>No maps were found.</Typography>;
+    const filteredMaps = filterMaps();
+    if (filteredMaps.length === 0) return <Typography>No maps were found.</Typography>;
     return (
-      maps.map((map: TileMap) => <MapCard key={map.id} map={map} />)
+      filteredMaps.map((map: TileMap) => <MapCard key={map.id} map={map} />)
     );
   }
 

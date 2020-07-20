@@ -1,28 +1,39 @@
 import * as React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { useState } from 'react';
-import { TextField, Theme, Select, MenuItem } from '@material-ui/core';
+import { TextField, Theme, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import { User } from '../services/usersService';
 import { TileMap } from '../services/mapsService';
+import Debug from '../utils/Debug';
+import { setFilter } from '../reducers/mapsFilterReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   form: {
     background: theme.palette.background.default,
-    display: 'grid',
-    gridTemplateColumns:'repeat(3, 50em [col-start])',
-    gridGap: '2em',
+    display: 'flex',
     padding: '2em',
+    alignItems: 'stretch'
   },
+  searchField: {
+    flex: 'auto',
+    margin: '1em'
+  },
+  userFilter: {
+    flex: 'auto',
+    margin: '1em'
+  }
 }));
 
 function MapsFilter() {
+  const dispatch = useDispatch();
   const maps = useSelector((state: RootState) => state.maps);
+  const mapsFilter = useSelector((state: RootState) => state.mapsFilter);
   const classes = useStyles();
 
-  const [username, setUsername] = useState('');
-  const [mapName, setMapName] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
+  // const [userFilter, setUserFilter] = useState([] as string[]);
 
   const users = maps.reduce((usersAcc: User[], map: TileMap) => {
     if (usersAcc.some((foundUser) => foundUser.id === map.user.id)) {
@@ -31,21 +42,57 @@ function MapsFilter() {
     return usersAcc.concat(map.user);
   }, []);
 
+  function changeUserFilter(value: unknown) {
+    Debug('userfilter: ', value);
+    //setUserFilter(value as string[]);
+    dispatch(setFilter({
+      text: mapsFilter.text,
+      users: value as string[]
+    }))
+  }
+
+  function changeTextFilter(value: string) {
+    dispatch(setFilter({
+      text: value,
+      users: mapsFilter.users
+    }))
+  }
+
   return (
-    <div>
       <div className={classes.form} >
-        <TextField label='Search' type='text'  variant='outlined' defaultValue={username} onChange={(event) => setUsername(event.target.value)} />
-        <Select multiple value={users} >
-          {users.map((user) => {
-              return (
-                <MenuItem key={user.id} value={user.name}>
-                  {user.name}
-                </MenuItem>
-              )
-          })}
-        </Select>
+
+        <FormControl fullWidth className={classes.searchField} variant='outlined'>
+          <TextField 
+            label='Search' 
+            type='text'  
+            size='medium'
+            variant='outlined' 
+            defaultValue={mapsFilter.text}
+            value={mapsFilter.text}
+            onChange={(event) => changeTextFilter(event.target.value)} />
+        </FormControl>
+
+        <FormControl fullWidth className={classes.userFilter} variant='outlined'>
+          <InputLabel id='select-tileset-label'>Filter by user</InputLabel>
+          <Select 
+            labelId='select-tileset-label' 
+            label='Filter by user'
+            autoWidth
+            multiple value={mapsFilter.users} 
+            onChange={(event) => changeUserFilter(event.target.value)}>
+
+            {users.map((user) => {
+                return (
+                  <MenuItem key={user.id} value={user.id}>
+                    {user.name}
+                  </MenuItem>
+                )
+            })}
+
+          </Select>
+        </FormControl>
+
       </div>
-    </div>
   );
 }
 

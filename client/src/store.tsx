@@ -12,6 +12,7 @@ import notificationsReducer, { NotificationsState } from './reducers/notificatio
 import themeReducer from './reducers/themeReducer';
 import Debug from './utils/Debug';
 import { User } from './services/usersService';
+import mapsFilterReducer, { MapsFilterState } from './reducers/mapsFilterReducer';
 
 export interface RootState {
   user: User,
@@ -19,6 +20,7 @@ export interface RootState {
   canvas: StateWithHistory<TileMap>,
   tools: BrushState,
   maps: TileMap[],
+  mapsFilter: MapsFilterState,
   notification: NotificationsState,
   theme: 'dark' | 'light'
 }
@@ -29,6 +31,7 @@ const reducer = combineReducers({
   canvas: undoable(canvasReducer),
   tools: brushReducer,
   maps: mapsReducer,
+  mapsFilter: mapsFilterReducer,
   notification: notificationsReducer,
   theme: themeReducer,
 });
