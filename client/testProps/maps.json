@@ -5,7 +5,11 @@
     "width": 2,
     "height": 2,
     "tileMap": [ 0, 1, 2, 3 ],
-    "tileSet": "Harbour"
+    "tileSet": "Harbour",
+    "user": {
+      "name": "tester1",
+      "id": "a"
+    }
   },
   {
     "id": "2",
@@ -13,6 +17,10 @@
     "width": 2,
     "height": 2,
     "tileMap": [ 0, 1, 2, 3 ],
-    "tileSet": "Cave"
+    "tileSet": "Cave",
+    "user": {
+      "name": "tester2",
+      "id": "b"
+    }
   }
 ]

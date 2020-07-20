@@ -20,7 +20,7 @@ router.post('/user', (req, res) => {
 
 router.post('/maps', (req, res) => {
   console.log('creating test user', req.body);
-  Users.findOne({})
+  Users.findOne({ name: req.body.user.name })
     .then((user) => Maps.create({ ...req.body, user })
       .then(() => res.status(204).end()));
 });

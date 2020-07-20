@@ -2,7 +2,6 @@ import * as React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
-import { useState } from 'react';
 import { TextField, Theme, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import { User } from '../services/usersService';
 import { TileMap } from '../services/mapsService';
@@ -66,8 +65,7 @@ function MapsFilter() {
             label='Search' 
             type='text'  
             size='medium'
-            variant='outlined' 
-            defaultValue={mapsFilter.text}
+            variant='outlined'
             value={mapsFilter.text}
             onChange={(event) => changeTextFilter(event.target.value)} />
         </FormControl>
