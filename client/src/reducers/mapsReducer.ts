@@ -1,4 +1,4 @@
-import { getAll as getAllMaps, TileMap } from '../services/mapsService';
+import Maps, { TileMap } from '../services/mapsService';
 import GridEditorThunk from '../utils/GridEditorThunk';
 import { notify } from './notificationsReducer';
 import Debug from '../utils/Debug';
@@ -34,6 +34,12 @@ function mapsReducer(state: TileMap[] = [], action: MapAction) {
       }
       return state;
     }
+    case 'LIKE_MAP': {
+      const likedMap = action.data?.map;
+      if(!likedMap) return state;
+
+      return state.map((map) => map.id !== likedMap.id ? map : likedMap);
+    }
     default: {
       return state;
     }
@@ -42,7 +48,7 @@ function mapsReducer(state: TileMap[] = [], action: MapAction) {
 
 export function initializeMaps(): GridEditorThunk {
   return (dispatch) => {
-    getAllMaps()
+    Maps.getAll()
       .then((maps) => {
         dispatch({
           type: 'SET_MAPS',
@@ -82,6 +88,24 @@ export function appendMap(map: TileMap) {
     data: {
       map,
     },
+  };
+}
+
+export function likeMap(id: string, token: string): GridEditorThunk {
+  return (dispatch) => {
+    Maps.likeMap(id, token)
+      .then((map) => {
+        dispatch({
+          type: 'LIKE_MAP',
+          data: {
+            map,
+          },
+        });
+      })
+      .catch((error) => {
+        Debug(error);
+        dispatch(notify('Something went wrong while liking the map.', 'error'));
+      });
   };
 }
 

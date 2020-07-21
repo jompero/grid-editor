@@ -20,6 +20,7 @@ import tileSets from '../services/tileSets';
 import { notify } from '../reducers/notificationsReducer';
 import { RootState } from '../store';
 import Debug from '../utils/Debug';
+import MapLikeButton from './MapLikeButton';
 
 const useStyles = makeStyles(() => createStyles({
   map: {
@@ -99,6 +100,7 @@ function MapCard({ map }: Props) {
       </CardActionArea>
 
       <CardActions>
+        <MapLikeButton map={map} />
         <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
           Load
           </Button>

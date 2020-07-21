@@ -14,6 +14,7 @@ export interface TileMap {
   tileMap: number[],
   tileSet: string,
   user: User,
+  likes?: string[]
 }
 
 export function getAll(): Promise<any> {
@@ -59,4 +60,18 @@ export function deleteMap(id: string, token: string): Promise<any> {
     });
 }
 
-export default { getAll, saveMap, deleteMap };
+export function likeMap(id:string, token: string): Promise<any> {
+  const headers = {
+    Authorization: `bearer ${token}`,
+  }
+
+  Debug('liking map: ', id);
+
+  return axios.post(`${url}/api/maps/${id}/like`, null, { headers })
+  .then((response) => {
+    Debug('liked', response);
+    return response.data;
+  });
+}
+
+export default { getAll, saveMap, deleteMap, likeMap };
