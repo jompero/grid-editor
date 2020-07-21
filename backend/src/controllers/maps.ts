@@ -93,4 +93,23 @@ router.put('/:mapId/', getUser, (req, res, next) => {
     });
 });
 
+router.post('/:mapId/like/', getUser, (req, res, next) => {
+  Map.findByIdAndUpdate(
+    { _id: req.params.mapId },
+    {
+      $push: { likes: req.user }
+    },
+    { new: true },
+  )
+    .populate('user')
+    .then((result) => {
+      logger.info('liked map: ', result);
+      res.send(result);
+    })
+    .catch((err) => {
+      logger.error('error while liking map: ', err);
+      next(err);
+    });
+});
+
 export default router;

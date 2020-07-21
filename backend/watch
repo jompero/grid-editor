@@ -2,4 +2,6 @@
 > backend@0.0.0 start C:\Users\dani.jompero\Documents\GitHub\grid-editor\backend
 > cross-env NODE_ENV=production node ./dist/bin/www
 
-connecting to MongoDB: undefined
+connecting to MongoDB: mongodb+srv://herokuUser0:ca41NGoKv9HAmx0p@alpha-qkrqq.mongodb.net/dev?retryWrites=true&w=majority
+loading static content from C:\Users\dani.jompero\Documents\GitHub\grid-editor\backend\dist\public
+Terminate batch job (Y/N)? 

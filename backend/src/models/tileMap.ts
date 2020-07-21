@@ -8,6 +8,7 @@ export interface TileMap extends mongoose.Document {
   tileMap: number[];
   tileSet: string;
   user: mongoose.Types.ObjectId;
+  likes: mongoose.Types.ObjectId[];
 }
 
 const tileMapSchema = new mongoose.Schema({
@@ -34,6 +35,7 @@ const tileMapSchema = new mongoose.Schema({
     required: true,
   },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  likes: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
 });
 
 
