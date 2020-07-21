@@ -33,6 +33,11 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
       });
   } else {  
     const accessToken = getTokenFrom(req);
+    if (!accessToken) {
+      res.statusCode = 401;
+      next(new Error('Request missing access token'));
+    }
+
     const auth = google.oauth2({
       version: 'v2',
       headers: {
@@ -53,6 +58,10 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
             req.user = foundUser;
             next();
           });
+      })
+      .catch((err) => {
+        res.statusCode = 401;
+        next(new Error('Unauthorized request'));
       });
   }
 }
