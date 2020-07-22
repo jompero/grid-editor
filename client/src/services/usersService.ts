@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Debug from '../utils/Debug';
+import auth from '../utils/auth';
 
 export interface User {
   name: string,
@@ -26,4 +27,12 @@ export function getAll(): Promise<any> {
     });
 }
 
-export default getAll;
+export function login(token: string) {
+  return axios.post(`${url}/api/users/`, null, { headers: auth(token) })
+    .then((response) => {
+      Debug('logging in as: ', response.data);
+      return response.data;
+    });
+}
+
+export default { getAll, login };

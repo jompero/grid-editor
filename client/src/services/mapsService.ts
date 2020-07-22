@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Debug from '../utils/Debug';
 import { User } from './usersService';
+import auth from '../utils/auth';
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
@@ -26,20 +27,15 @@ export function getAll(): Promise<any> {
 }
 
 export function saveMap(map: TileMap, token: string): Promise<any> {
-  Debug(token);
-  const headers = {
-    Authorization: `bearer ${token}`,
-  };
-
   if (map.id) {
-    return axios.put(`${url}/api/maps/${map.id}`, map, { headers })
+    return axios.put(`${url}/api/maps/${map.id}`, map, { headers: auth(token) })
       .then((response) => {
         Debug('maps', response);
         return response.data;
       });
   }
 
-  return axios.post(`${url}/api/maps`, map, { headers })
+  return axios.post(`${url}/api/maps`, map, { headers: auth(token) })
     .then((response) => {
       Debug('maps', response);
       return response.data;
@@ -47,13 +43,9 @@ export function saveMap(map: TileMap, token: string): Promise<any> {
 }
 
 export function deleteMap(id: string, token: string): Promise<any> {
-  const headers = {
-    Authorization: `bearer ${token}`,
-  };
-
   Debug('deleting map');
 
-  return axios.delete(`${url}/api/maps/${id}`, { headers })
+  return axios.delete(`${url}/api/maps/${id}`, { headers: auth(token) })
     .then((response) => {
       Debug('deleted', response);
       return response.data;
@@ -61,13 +53,9 @@ export function deleteMap(id: string, token: string): Promise<any> {
 }
 
 export function likeMap(id:string, token: string): Promise<any> {
-  const headers = {
-    Authorization: `bearer ${token}`,
-  }
-
   Debug('liking map: ', id);
 
-  return axios.post(`${url}/api/maps/${id}/like`, null, { headers })
+  return axios.post(`${url}/api/maps/${id}/like`, null, { headers: auth(token) })
   .then((response) => {
     Debug('liked', response);
     return response.data;

@@ -1,4 +1,6 @@
-import { User, NoUser } from "../services/usersService";
+import Users, { User, NoUser } from "../services/usersService";
+import GridEditorThunk from '../utils/GridEditorThunk';
+import { notify } from "./notificationsReducer";
 
 interface UserAction {
   type: string,
@@ -16,11 +18,20 @@ function userReducer(state: User = NoUser, action: UserAction): User {
   }
 }
 
-export function login(user: User) {
-  return {
-    type: 'LOGIN',
-    data: user,
-  };
+export function login(user: User): GridEditorThunk {
+  return (dispatch) => {
+    Users.login(user.token)
+      .then((response) =>
+        dispatch({
+          type: 'LOGIN',
+          data: Object.assign(response, user),
+        })
+      )
+      .catch((err) => {
+        dispatch(notify('Error while logging in.', 'error'));
+      });
+  }
+
 }
 
 export function logout() {
