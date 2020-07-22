@@ -62,4 +62,14 @@ export function likeMap(id:string, token: string): Promise<any> {
   });
 }
 
-export default { getAll, saveMap, deleteMap, likeMap };
+export function unlikeMap(id:string, token: string): Promise<any> {
+  Debug('unliking map: ', id);
+
+  return axios.post(`${url}/api/maps/${id}/unlike`, null, { headers: auth(token) })
+  .then((response) => {
+    Debug('unliked', response);
+    return response.data;
+  });
+}
+
+export default { getAll, saveMap, deleteMap, likeMap, unlikeMap };

@@ -116,7 +116,7 @@ router.post('/:mapId/unlike/', getUser, (req, res, next) => {
   Map.findByIdAndUpdate(
     { _id: req.params.mapId },
     {
-      $pull: { likes: req.user }
+      $pull: { likes: req.user.id }
     },
     { new: true },
   )

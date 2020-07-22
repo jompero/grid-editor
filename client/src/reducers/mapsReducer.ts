@@ -109,4 +109,22 @@ export function likeMap(id: string, token: string): GridEditorThunk {
   };
 }
 
+export function unlikeMap(id: string, token: string): GridEditorThunk {
+  return (dispatch) => {
+    Maps.unlikeMap(id, token)
+      .then((map) => {
+        dispatch({
+          type: 'LIKE_MAP',
+          data: {
+            map,
+          },
+        });
+      })
+      .catch((error) => {
+        Debug(error);
+        dispatch(notify('Something went wrong while unliking the map.', 'error'));
+      });
+  };
+}
+
 export default mapsReducer;

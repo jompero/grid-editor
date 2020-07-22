@@ -5,7 +5,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { TileMap } from '../services/mapsService';
 import { RootState } from '../store';
-import { likeMap } from '../reducers/mapsReducer';
+import { likeMap, unlikeMap } from '../reducers/mapsReducer';
 import { NoUser } from '../services/usersService';
 
 interface Props {
@@ -17,13 +17,18 @@ function MapLikeButton({ map }: Props) {
   const user = useSelector((state: RootState) => state.user);
   if (user === NoUser) return null;
 
-  const icon = user.id && map.likes?.includes(user.id)
+  const liked = user.id && map.likes?.includes(user.id);
+
+  const icon = liked
     ? <FavoriteIcon />
     : <FavoriteBorderIcon />;
 
   function like() {
-    if (map.id) {
-      dispatch(likeMap(map.id, user.token))
+    if (!map.id) return;
+    if (!liked) {
+      dispatch(likeMap(map.id, user.token));
+    } else {
+      dispatch(unlikeMap(map.id, user.token));
     }
   }
 
