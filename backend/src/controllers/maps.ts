@@ -112,4 +112,23 @@ router.post('/:mapId/like/', getUser, (req, res, next) => {
     });
 });
 
+router.post('/:mapId/unlike/', getUser, (req, res, next) => {
+  Map.findByIdAndUpdate(
+    { _id: req.params.mapId },
+    {
+      $pull: { likes: req.user }
+    },
+    { new: true },
+  )
+    .populate('user')
+    .then((result) => {
+      logger.info('unliked map: ', result);
+      res.send(result);
+    })
+    .catch((err) => {
+      logger.error('error while unliking map: ', err);
+      next(err);
+    });
+});
+
 export default router;
