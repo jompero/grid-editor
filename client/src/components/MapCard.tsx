@@ -9,7 +9,7 @@ import {
   createStyles,
   makeStyles,
 } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from './Grid';
 import { TileMap, deleteMap } from '../services/mapsService';
@@ -101,9 +101,6 @@ function MapCard({ map }: Props) {
 
       <CardActions>
         <MapLikeButton map={map} />
-        <Button component={Link} to={'/'} onClick={() => dispatch(load(map))}>
-          Load
-          </Button>
         {
           user.profile === map.user?.profile
           && <Button onClick={() => removeMap(map)}>

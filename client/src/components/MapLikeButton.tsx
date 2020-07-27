@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Typography, makeStyles, createStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -12,7 +12,16 @@ interface Props {
   map: TileMap
 }
 
+const useStyles = makeStyles(() => createStyles({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
+}));
+
 function MapLikeButton({ map }: Props) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   if (user === NoUser) return null;
@@ -33,10 +42,13 @@ function MapLikeButton({ map }: Props) {
   }
 
   return (
-    <div onClick={() => like()}>
-        <IconButton data-testid='like-icon'>
+    <div className={classes.container}>
+        <IconButton data-testid='like-icon' onClick={() => like()}>
           {icon}
         </IconButton>
+        <Typography>
+          {map.likes?.length || 0}
+        </Typography>
     </div>
   );
 }
