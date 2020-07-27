@@ -97,7 +97,7 @@ router.post('/:mapId/like/', getUser, (req, res, next) => {
   Map.findByIdAndUpdate(
     { _id: req.params.mapId },
     {
-      $push: { likes: req.user }
+      $addToSet: { likes: req.user }
     },
     { new: true },
   )
