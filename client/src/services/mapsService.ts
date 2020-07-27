@@ -5,7 +5,7 @@ import auth from '../utils/auth';
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
-  : 'https://mysterious-meadow-32567.herokuapp.com';
+  :  process.env.BASE_URL;
 
 export interface TileMap {
   id?: string,
