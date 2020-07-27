@@ -19,7 +19,7 @@ function Login() {
 
   return (
       <GoogleLogin
-        clientId="566902547666-7bdampp3nip1c2pmp3bh7jp1bocpfg38.apps.googleusercontent.com"
+        clientId={process.env.REACT_APP_GOOGLE_LOGIN_URL || ''}
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}

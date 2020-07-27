@@ -17,7 +17,7 @@ export const NoUser = {
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
-  : process.env.BASE_URL;
+  : process.env.REACT_APP_BASE_URL;
 
 export function getAll(): Promise<any> {
   return axios.get(`${url}/api/users`)
@@ -28,7 +28,7 @@ export function getAll(): Promise<any> {
 }
 
 export function login(token: string) {
-  return axios.post(`${url}/api/users/`, null, { headers: auth(token) })
+  return axios.post(`${url}/api/users/login`, null, { headers: auth(token) })
     .then((response) => {
       Debug('logging in as: ', response.data);
       return response.data;

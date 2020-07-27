@@ -5,7 +5,7 @@ import auth from '../utils/auth';
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
-  :  process.env.BASE_URL;
+  :  process.env.REACT_APP_BASE_URL;
 
 export interface TileMap {
   id?: string,
