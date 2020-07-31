@@ -24,7 +24,7 @@ function getTokenFrom(request: Request) {
 }
 
 export function getUser(req: Request, res: Response, next: NextFunction) {
-  if (process.env.NODE_ENV === 'test' && !req.body) {
+  if (process.env.NODE_ENV === 'test' && req.body) {
     console.log('test user: ', req.body)
     Users.findById(req.body.user)
       .then((user) => {
