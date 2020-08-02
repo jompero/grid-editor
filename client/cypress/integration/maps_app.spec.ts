@@ -35,10 +35,6 @@ describe('when maps page is loaded', () => {
       
       cy.contains(maps[0].user.name);
       cy.contains(maps[1].user.name);
-    })
-
-    it('a map can be liked', () => {
-      
-    })
+    });
   })
 })
