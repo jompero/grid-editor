@@ -4,15 +4,13 @@
     "email": "tester1@test.com",
     "id": "a",
     "token": "tokenstring",
-    "profileId": "profilestring1",
-    "username": "notnull"
+    "profileId": "profilestring1"
   },
   {
     "name": "tester2",
     "email": "tester2@test.com",
     "id": "b",
     "token": "tokenstring",
-    "profileId": "profilestring2",
-    "username": "notnull2"
+    "profileId": "profilestring2"
   }
 ]
