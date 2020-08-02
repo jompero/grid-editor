@@ -20,11 +20,31 @@ Client built on create-react-app.
 Social options:
 
 - view other users' maps - MET!
-- like other users' maps - BACKLOG
+- like other users' maps - MET!
 
 ## Setup
 
 Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. If you need to publish to your server using git, initiatilizing backend folder as a git repository is recommended.
+
+### Environment variables
+
+#### Backend
+
+```bash
+MONGODB_URI | The address to the Mongo database  
+MONGODB_URI_TEST | The address to the Mongo database for test purposes  
+GOOGLE_CLIENT_ID | Google Client Id  
+GOOGLE_CONSUMER_SECRET | Google Consumer Secret
+```
+
+#### Client
+
+```bash
+REACT_APP_BASE_URL | the home address of the app  
+REACT_APP_GOOGLE_LOGIN_URL | the Google login Url
+```
+
+### Installing packages
 
 ```bash
 cd client
@@ -34,28 +54,32 @@ cd ../backend
 npm install
 ```
 
-Backend is required to run the static site. To run the static site in development:
+### Launching project in development mode
+
+In production, the backend serves the static site. However, to run the static site in development, start the projects in tandem. The development app is then found at <http://localhost:3000>.
 
 ```bash
 cd client
 npm start
-```
 
-And run the backend at the same time:
-
-```bash
-cd backend
+cd ../backend
 npm run start:watch
 ```
 
-Note that your IDE may flag tests for errors. I managed to fix this by installing mocha and eslint globally.
-
 ## Tests
 
-For now, only client has tests. Tests are written using jest.  
-Configuration has not been made to run tests once and only once.
+Some tests are present on both backend and client. End 2 end tests were written in Cypress before the React Warning that I have not been able to isolate hence no further Cypress teste have been written.  
+  
+To run the client tests:
 
 ```bash
 cd client
+npm test
+```
+
+To run the backend tests:
+
+```bash
+cd backend
 npm test
 ```
