@@ -31,6 +31,7 @@ router.post('/', getUser, (req, res, next) => {
   }
 
   map.user = mongoose.Types.ObjectId(req.user._id);
+  map.likes = [];
 
   Map.create(map)
     .then((response) => {
@@ -71,8 +72,8 @@ router.put('/:mapId/', getUser, (req, res, next) => {
   const newMap = { ...map };
   delete newMap.id;
 
-  Map.findByIdAndUpdate(
-    { _id: map.id },
+  Map.findOneAndUpdate(
+    { _id: map.id, user: req.user.id },
     {
       name: newMap.name,
       width: newMap.width,

@@ -12,27 +12,25 @@ import Debug from '../../utils/Debug';
 function Save() {
   const dispatch = useDispatch();
   const tileMap = useSelector((state: RootState) => state.canvas);
-  const token = useSelector((state: RootState) => state.user.token);
+  const user = useSelector((state: RootState) => state.user);
   const map: TileMap = { ...tileMap.present };
 
   function save(): void {
-    if (token) {
-      saveMap(map, token)
-        .then((savedMap) => {
-          Debug('map saved', savedMap);
-          dispatch(updateMap(savedMap));
-          dispatch(appendMap(savedMap));
-          dispatch(notify('Map saved succesfully', 'success'));
-        })
-        .catch((error) => {
-          Debug(error);
-          dispatch(notify('Error occured while saving map', 'error'));
-        });
-    }
+    saveMap(map, user)
+      .then((savedMap) => {
+        Debug('map saved', savedMap);
+        dispatch(updateMap(savedMap));
+        dispatch(appendMap(savedMap));
+        dispatch(notify('Map saved succesfully', 'success'));
+      })
+      .catch((error) => {
+        Debug(error);
+        dispatch(notify('Error occured while saving map', 'error'));
+      });
   }
 
   return (
-    <IconButton id='save-button' onClick={() => save()} disabled={!token}>
+    <IconButton id='save-button' onClick={() => save()} disabled={!user.token}>
       <SaveIcon />
     </IconButton>
   );

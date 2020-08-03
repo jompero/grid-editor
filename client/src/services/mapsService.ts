@@ -26,16 +26,16 @@ export function getAll(): Promise<any> {
     });
 }
 
-export function saveMap(map: TileMap, token: string): Promise<any> {
-  if (map.id) {
-    return axios.put(`${url}/api/maps/${map.id}`, map, { headers: auth(token) })
+export function saveMap(map: TileMap, user: User): Promise<any> {
+  if (map.id && map.user.id === user.id) {
+    return axios.put(`${url}/api/maps/${map.id}`, map, { headers: auth(user.token) })
       .then((response) => {
         Debug('maps', response);
         return response.data;
       });
   }
 
-  return axios.post(`${url}/api/maps`, map, { headers: auth(token) })
+  return axios.post(`${url}/api/maps`, map, { headers: auth(user.token) })
     .then((response) => {
       Debug('maps', response);
       return response.data;
