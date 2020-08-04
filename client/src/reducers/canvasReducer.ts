@@ -1,3 +1,4 @@
+import undoable from 'redux-undo';
 import { TileMap } from '../services/mapsService';
 import { NoUser } from '../services/usersService';
 
@@ -79,4 +80,6 @@ export function updateMap(map: TileMap) {
   };
 }
 
-export default canvasReducer;
+const undoableCanvas = undoable(canvasReducer);
+
+export default undoableCanvas;

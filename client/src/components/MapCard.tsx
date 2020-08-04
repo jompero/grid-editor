@@ -21,6 +21,7 @@ import { notify } from '../reducers/notificationsReducer';
 import { RootState } from '../store';
 import Debug from '../utils/Debug';
 import MapLikeButton from './MapLikeButton';
+import { ActionCreators } from 'redux-undo';
 
 const useStyles = makeStyles(() => createStyles({
   map: {
@@ -71,6 +72,7 @@ function MapCard({ map }: Props) {
 
   function clickHandler() {
     dispatch(load(map));
+    dispatch(ActionCreators.clearHistory());
     history.push('/');
   }
 
