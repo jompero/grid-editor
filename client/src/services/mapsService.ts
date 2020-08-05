@@ -5,7 +5,7 @@ import auth from '../utils/auth';
 
 const url = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3001'
-  :  process.env.REACT_APP_BASE_URL;
+  : process.env.REACT_APP_BASE_URL;
 
 export interface TileMap {
   id?: string,
@@ -56,20 +56,22 @@ export function likeMap(id:string, token: string): Promise<any> {
   Debug('liking map: ', id);
 
   return axios.post(`${url}/api/maps/${id}/like`, null, { headers: auth(token) })
-  .then((response) => {
-    Debug('liked', response);
-    return response.data;
-  });
+    .then((response) => {
+      Debug('liked', response);
+      return response.data;
+    });
 }
 
 export function unlikeMap(id:string, token: string): Promise<any> {
   Debug('unliking map: ', id);
 
   return axios.post(`${url}/api/maps/${id}/unlike`, null, { headers: auth(token) })
-  .then((response) => {
-    Debug('unliked', response);
-    return response.data;
-  });
+    .then((response) => {
+      Debug('unliked', response);
+      return response.data;
+    });
 }
 
-export default { getAll, saveMap, deleteMap, likeMap, unlikeMap };
+export default {
+  getAll, saveMap, deleteMap, likeMap, unlikeMap,
+};

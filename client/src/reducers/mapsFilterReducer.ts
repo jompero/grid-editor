@@ -13,10 +13,13 @@ interface MapsFilterAction {
 
 const initialState = {
   text: '',
-  users: []
-}
+  users: [],
+};
 
-function mapsFilterReducer(state: MapsFilterState = initialState, action: MapsFilterAction): MapsFilterState {
+function mapsFilterReducer(
+  state: MapsFilterState = initialState,
+  action: MapsFilterAction,
+): MapsFilterState {
   switch (action.type) {
     case 'SET_FILTER':
       return action.data;
@@ -28,8 +31,8 @@ function mapsFilterReducer(state: MapsFilterState = initialState, action: MapsFi
 export function setFilter(filter: MapsFilterState): MapsFilterAction {
   return {
     type: 'SET_FILTER',
-    data: filter
-  }
+    data: filter,
+  };
 }
 
 export function resetFilter(): MapsFilterAction {

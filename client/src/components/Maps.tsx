@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => createStyles({
     flex: 'auto',
     alignItems: 'stretch',
     flexDirection: 'column',
-    padding: '2em'
+    padding: '2em',
   },
   filter: {
     flex: 'auto',
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => createStyles({
     margin: '1em',
   },
   mapList: {
-    display: 'flex'
+    display: 'flex',
   },
 }));
 
@@ -39,14 +39,10 @@ function Maps() {
   const mapsFilter = useSelector((state: RootState) => state.mapsFilter);
   const classes = useStyles();
 
-  const filterMaps = () => {
-    return maps.filter((map) => {
-      return (
-        map.name.toLowerCase().includes(mapsFilter.text.toLowerCase()) 
-        && (mapsFilter.users.length === 0 
-          || (map.user.id && mapsFilter.users.includes(map.user.id))))
-    })
-  }
+  const filterMaps = () => maps.filter((map) => (
+    map.name.toLowerCase().includes(mapsFilter.text.toLowerCase())
+        && (mapsFilter.users.length === 0
+          || (map.user.id && mapsFilter.users.includes(map.user.id)))));
 
   function parsedMaps() {
     const filteredMaps = filterMaps();

@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { ActionCreators } from 'redux-undo';
 import Grid from './Grid';
 import { TileMap, deleteMap } from '../services/mapsService';
 import { deleteMap as cutMap } from '../reducers/mapsReducer';
@@ -21,7 +22,6 @@ import { notify } from '../reducers/notificationsReducer';
 import { RootState } from '../store';
 import Debug from '../utils/Debug';
 import MapLikeButton from './MapLikeButton';
-import { ActionCreators } from 'redux-undo';
 
 const useStyles = makeStyles(() => createStyles({
   map: {

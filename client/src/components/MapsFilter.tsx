@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
+import {
+  TextField, Theme, Select, MenuItem, InputLabel, FormControl,
+} from '@material-ui/core';
 import { RootState } from '../store';
-import { TextField, Theme, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import { User } from '../services/usersService';
 import { TileMap } from '../services/mapsService';
 import Debug from '../utils/Debug';
@@ -13,16 +15,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     background: theme.palette.background.default,
     display: 'flex',
     padding: '2em',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
   searchField: {
     flex: 'auto',
-    margin: '1em'
+    margin: '1em',
   },
   userFilter: {
     flex: 'auto',
-    margin: '1em'
-  }
+    margin: '1em',
+  },
 }));
 
 function MapsFilter() {
@@ -43,27 +45,27 @@ function MapsFilter() {
 
   function changeUserFilter(value: unknown) {
     Debug('userfilter: ', value);
-    //setUserFilter(value as string[]);
+    // setUserFilter(value as string[]);
     dispatch(setFilter({
       text: mapsFilter.text,
-      users: value as string[]
-    }))
+      users: value as string[],
+    }));
   }
 
   function changeTextFilter(value: string) {
     dispatch(setFilter({
       text: value,
-      users: mapsFilter.users
-    }))
+      users: mapsFilter.users,
+    }));
   }
 
   return (
       <div className={classes.form} >
 
         <FormControl fullWidth className={classes.searchField} variant='outlined'>
-          <TextField 
-            label='Search' 
-            type='text'  
+          <TextField
+            label='Search'
+            type='text'
             size='medium'
             variant='outlined'
             value={mapsFilter.text}
@@ -72,20 +74,18 @@ function MapsFilter() {
 
         <FormControl fullWidth className={classes.userFilter} variant='outlined'>
           <InputLabel id='select-tileset-label'>Filter by user</InputLabel>
-          <Select 
-            labelId='select-tileset-label' 
+          <Select
+            labelId='select-tileset-label'
             label='Filter by user'
             autoWidth
-            multiple value={mapsFilter.users} 
+            multiple value={mapsFilter.users}
             onChange={(event) => changeUserFilter(event.target.value)}>
 
-            {users.map((user) => {
-                return (
+            {users.map((user) => (
                   <MenuItem key={user.id} value={user.id}>
                     {user.name}
                   </MenuItem>
-                )
-            })}
+            ))}
 
           </Select>
         </FormControl>

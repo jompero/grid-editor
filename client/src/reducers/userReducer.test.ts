@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import axiosMock from 'jest-mock-axios';
 import userReducer, { login, logout } from './userReducer';
 import users from '../../testProps/users.json'; // eslint-disable-line import/extensions
-import thunk from 'redux-thunk';
 import GridEditorThunk from '../utils/GridEditorThunk';
-import axiosMock from 'jest-mock-axios';
 import { NoUser, User } from '../services/usersService';
 
-const middlewares = [ thunk ];
+const middlewares = [thunk];
 const mockStore = configureStore<User, GridEditorThunk>(middlewares);
 
 describe('on action', () => {
@@ -39,7 +39,7 @@ describe('reducer', () => {
   const store = createStore(
     userReducer,
     applyMiddleware(thunk),
-);
+  );
 
   test('is initialized', () => {
     const state = store.getState();
@@ -49,7 +49,7 @@ describe('reducer', () => {
   test('can log in', async () => {
     await store.dispatch(login(users[0]));
     axiosMock.mockResponse({ data: users[0] });
-    
+
     const state = store.getState();
     expect(state).toBe(users[0]);
   });

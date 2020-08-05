@@ -59,7 +59,7 @@ function Settings({ handleSubmit }: Props) {
       width,
       height,
       tileMap: new Array(width * height).fill(-1),
-      user
+      user,
     };
 
     Debug('creating new map', newMap);

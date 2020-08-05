@@ -1,5 +1,7 @@
 import React from 'react';
-import { IconButton, Typography, makeStyles, createStyles } from '@material-ui/core';
+import {
+  IconButton, Typography, makeStyles, createStyles,
+} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -16,8 +18,8 @@ const useStyles = makeStyles(() => createStyles({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }));
 
 function MapLikeButton({ map }: Props) {

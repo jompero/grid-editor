@@ -1,6 +1,7 @@
-import Users, { User, NoUser } from "../services/usersService";
+import { User, NoUser, login as userLogin } from '../services/usersService';
 import GridEditorThunk from '../utils/GridEditorThunk';
-import { notify } from "./notificationsReducer";
+import { notify } from './notificationsReducer';
+import Debug from '../utils/Debug';
 
 interface UserAction {
   type: string,
@@ -20,18 +21,16 @@ function userReducer(state: User = NoUser, action: UserAction): User {
 
 export function login(user: User): GridEditorThunk {
   return (dispatch) => {
-    Users.login(user.token)
-      .then((response) =>
-        dispatch({
-          type: 'LOGIN',
-          data: Object.assign(response, user),
-        })
-      )
+    userLogin(user.token)
+      .then((response) => dispatch({
+        type: 'LOGIN',
+        data: Object.assign(response, user),
+      }))
       .catch((err) => {
+        Debug(err);
         dispatch(notify('Error while logging in.', 'error'));
       });
-  }
-
+  };
 }
 
 export function logout() {
