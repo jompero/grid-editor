@@ -7,12 +7,16 @@ import { User } from '../models/user';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Map.find()
     .populate('user')
     .then((response) => {
       logger.info('all maps: ', response);
       res.send(response);
+    })
+    .catch((err) => {
+      logger.error(err);
+      next(err);
     });
 });
 
