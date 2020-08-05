@@ -18,7 +18,7 @@ router.post('/reset', (req, res, next) => {
 });
 
 router.post('/user', (req, res, next) => {
-  console.log('creating test user', req.body);
+  logger.info('creating test user', req.body);
   Users.create(req.body)
     .then(() => res.status(204).end())
     .catch((err) => {
@@ -28,14 +28,14 @@ router.post('/user', (req, res, next) => {
 });
 
 router.post('/maps', (req, res, next) => {
-  console.log('creating test user', req.body);
+  logger.info('creating test user', req.body);
   Users.findOne({ name: req.body.user.name })
     .then((user) => Maps.create({ ...req.body, user })
       .then(() => res.status(204).end()))
     .catch((err) => {
       logger.error(err);
       next(err);
-    })
+    });
 });
 
 export default router;

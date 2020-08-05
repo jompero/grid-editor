@@ -102,7 +102,7 @@ router.post('/:mapId/like/', getUser, (req, res, next) => {
   Map.findByIdAndUpdate(
     { _id: req.params.mapId },
     {
-      $addToSet: { likes: req.user }
+      $addToSet: { likes: req.user },
     },
     { new: true },
   )
@@ -121,7 +121,7 @@ router.post('/:mapId/unlike/', getUser, (req, res, next) => {
   Map.findByIdAndUpdate(
     { _id: req.params.mapId },
     {
-      $pull: { likes: req.user.id }
+      $pull: { likes: req.user.id },
     },
     { new: true },
   )

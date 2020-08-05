@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
     .catch((err) => {
       logger.error(err);
       next(err);
-    })
+    });
 });
 
 router.post('/login', getUser, (req, res) => {

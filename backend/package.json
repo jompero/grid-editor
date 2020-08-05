@@ -12,7 +12,8 @@
     "commit": "git add . && git commit -m \"deploy\"",
     "deploy:full": "npm run build:ui && npm run commit && npm run deploy",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "start:test": "cross-env NODE_ENV=test nodemon"
+    "start:test": "cross-env NODE_ENV=test nodemon",
+    "lint": "eslint src/**"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.10.1",

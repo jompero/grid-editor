@@ -25,13 +25,13 @@ function getTokenFrom(request: Request) {
 
 export function getUser(req: Request, res: Response, next: NextFunction) {
   if (process.env.NODE_ENV === 'test' && req.body) {
-    console.log('test user: ', req.body)
+    logger.info('test user: ', req.body);
     Users.findById(req.body.user)
       .then((user) => {
         req.user = user;
         next();
       });
-  } else {  
+  } else {
     const accessToken = getTokenFrom(req);
     if (!accessToken) {
       res.statusCode = 401;
@@ -60,6 +60,7 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
           });
       })
       .catch((err) => {
+        logger.error(err);
         res.statusCode = 401;
         next(new Error('Unauthorized request'));
       });
