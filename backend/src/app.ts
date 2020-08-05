@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-// import logger from 'morgan';
+import morgan from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import config from './utils/config';
@@ -26,8 +26,7 @@ mongoose.connect(config.MONGODB_URI, {
 
 const app = express();
 
-// TODO: Make sure to use the 'proper' logger and create a page to inspect it
-// app.use(logger('dev'));
+app.use(morgan('short'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
