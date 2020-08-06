@@ -5,7 +5,7 @@ jobs:
   backend:
       executor:
         name: node/default
-        tag: '10.4'
+        tag: '12.16'
       steps:
         - checkout
         - run: cd backend && npm test
