@@ -8,7 +8,7 @@ jobs:
         tag: '12.16'
       steps:
         - checkout
-        - run: cd backend && npm test
+        - run: cd backend && node/test
 workflows:
   version: 2.1
   backend_jobs:
