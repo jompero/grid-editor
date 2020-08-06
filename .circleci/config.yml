@@ -2,5 +2,14 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
-  steps:
-    - cd backend && node/test
+  backend:
+      executor:
+        name: node/default
+        tag: '10.4'
+      steps:
+        - cd backend && node/test
+workflows:
+  version: 2.1
+  backend_jobs:
+    jobs:
+      - backend
