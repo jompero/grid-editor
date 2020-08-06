@@ -4,5 +4,6 @@ orbs:
 workflows:
   node-tests:
     jobs:
-      steps:
-        - cd backend && node/test
+    test:
+        steps:
+          - cd backend && node/test
