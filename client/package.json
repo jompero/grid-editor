@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:once": "set CI=true && npm test",
     "eject": "react-scripts eject",
     "lint": "eslint src/** cypress/**",
     "cypress:open": "cypress open"
