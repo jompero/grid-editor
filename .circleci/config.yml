@@ -23,8 +23,8 @@ jobs:
       - run: cd client && npm test
   build:
     executor:
-      name: node/default
-      tag: '12.16'
+      name: win/default
+      shell: powershell.exe
     steps:
       - checkout
       - run: cd backend && npm run build:ui
