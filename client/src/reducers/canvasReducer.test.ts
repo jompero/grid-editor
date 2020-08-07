@@ -23,16 +23,16 @@ describe('reducer', () => {
 
   test('is initialized', () => {
     const state = store.getState();
-    expect(state.height).toBe(16);
-    expect(state.width).toBe(16);
-    expect(state.name).toBe('New Map');
-    expect(state.tileSet).toBe('Harbour');
-    expect(state.tileMap.length).toBe(16 * 16);
+    expect(state.present.height).toBe(16);
+    expect(state.present.width).toBe(16);
+    expect(state.present.name).toBe('New Map');
+    expect(state.present.tileSet).toBe('Harbour');
+    expect(state.present.tileMap.length).toBe(16 * 16);
   });
 
   test('can be painted on', () => {
     store.dispatch(paintTile(0, 1));
     const state = store.getState();
-    expect(state.tileMap[0]).toBe(1);
+    expect(state.present.tileMap[0]).toBe(1);
   });
 });
