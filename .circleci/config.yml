@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
   heroku: circleci/heroku@1.2.0
+  typescript: vidsy/typescript@1.0.0
 
 jobs:
   backend:
@@ -26,7 +27,7 @@ jobs:
       tag: '12.16'
     steps:
       - checkout
-      - run: cd backend && npm run build && npm run build:ui
+      - run: cd backend && npm build && npm run build:ui
 workflows:
   version: 2.1
   test_jobs:
