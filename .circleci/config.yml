@@ -31,9 +31,11 @@ jobs:
       - run: cd backend && npm run build:ui
 workflows:
   version: 2.1
-  jobs:
+  test_jobs:
+      jobs:
     - backend
     - frontend
+  deploy_jobs:
     - build
     - heroku/deploy-via-git:
         requires: 
