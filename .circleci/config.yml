@@ -27,16 +27,16 @@ jobs:
       shell: bash.exe
     steps:
       - checkout
+      - run: cd backend && npm install
       - run: cd backend && npm run build:ui
 workflows:
   version: 2.1
-  test_jobs:
-    jobs:
-      - backend
-      - frontend
-      - build
-      - heroku/deploy-via-git:
-          requires: 
-            - build
-          pre-steps:
-            - run: cd backend
+  jobs:
+    - backend
+    - frontend
+    - build
+    - heroku/deploy-via-git:
+        requires: 
+          - build
+        pre-steps:
+          - run: cd backend
