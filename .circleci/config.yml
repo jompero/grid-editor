@@ -34,9 +34,6 @@ workflows:
       - backend
       - frontend
       - build
-          requires: 
-            - backend
-            - frontend
       - heroku/deploy-via-git:
           requires: 
             - build
