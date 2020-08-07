@@ -27,7 +27,7 @@ jobs:
       tag: '12.16'
     steps:
       - checkout
-      - run: cd backend && npm build && npm run build:ui
+      - run: cd backend && npm run build && npm run build:ui
 workflows:
   version: 2.1
   test_jobs:
