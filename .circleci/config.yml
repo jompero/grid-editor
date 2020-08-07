@@ -34,11 +34,11 @@ workflows:
       - backend
       - frontend
       - build
-        requires: 
-          - backend
-          - frontend
+          requires: 
+            - backend
+            - frontend
       - heroku/deploy-via-git:
-        requires: 
-          - build
-        pre-steps:
-          - run: cd backend
+          requires: 
+            - build
+          pre-steps:
+            - run: cd backend
