@@ -32,7 +32,7 @@ jobs:
 workflows:
   version: 2.1
   test_jobs:
-      jobs:
+    jobs:
     - backend
     - frontend
   deploy_jobs:
