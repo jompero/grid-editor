@@ -1,17 +1,27 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+
 jobs:
   backend:
-      executor:
-        name: node/default
-        tag: '12.16'
-      steps:
-        - checkout
-        - run: cd backend && npm install
-        - run: cd backend && npm test
+    executor:
+      name: node/default
+      tag: '12.16'
+    steps:
+      - checkout
+      - run: cd backend && npm install
+      - run: cd backend && npm test
+  frontend:
+    executor:
+      name: node/default
+      tag: '12.16'
+    steps:
+      - checkout
+      - run: cd client && npm install
+      - run: cd client && npm test
 workflows:
   version: 2.1
-  backend_jobs:
+  test_jobs:
     jobs:
       - backend
+      - frontend
