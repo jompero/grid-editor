@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@3.0.0
   heroku: circleci/heroku@1.2.0
   win: circleci/windows@2.2.0
+  react: thefrontside/react@0.2.0
 
 jobs:
   backend:
@@ -22,16 +23,17 @@ jobs:
       - run: cd client && npm install
       - run: cd client && npm test
   build:
-    executor:
-      name: node/default
-      tag: '12.16'
+    executor: default
     steps:
+      - attach_workspace:
+        at: ~/
+
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
 
       - store_artifacts:
-        path: /tmp/artifact-frontend
+          path: ./artifacts
 workflows:
   version: 2.1
   test_and_deploy_jobs:
