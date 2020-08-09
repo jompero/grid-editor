@@ -27,15 +27,12 @@ jobs:
       name: node/default
       tag: '12.16'
     steps:
-      - attach_workspace:
-        at: ~/
-
+      - run:
+        command: mkdir -p artifacts
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-
-      - store_artifacts:
-          path: ./artifacts
+      - run: cd client && cp -r build artifacts
 workflows:
   version: 2.1
   test_and_deploy_jobs:
