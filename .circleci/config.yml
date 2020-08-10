@@ -38,7 +38,9 @@ workflows:
     jobs:
     - backend
     - frontend
-    - build
+    - react/build
+      pre-steps:
+        - run: cd backend
 #    - heroku/deploy-via-git:
 #        requires: 
 #          - build
