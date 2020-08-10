@@ -64,4 +64,4 @@ workflows:
         requires: 
           - build_client
         pre-steps:
-          - run: cd backend $CIRCLE_ARTIFACTS
+          - run: cd backend
