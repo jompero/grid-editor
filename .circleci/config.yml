@@ -30,10 +30,10 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      - run: cp -r client/build artifacts/build
+      - run: cp -r client/build ../backend/dist/public
 
-      - store_artifacts:
-          path: ./artifacts
+      # - store_artifacts:
+      #     path: ./artifacts
   build_backend:
     executor:
       name: node/default
@@ -43,9 +43,9 @@ jobs:
       - run: cd backend && npm install
       - run: cd backend && npm run build
       # - run: cp -r artifacts backend/dist/public
-      - run: cd backend && curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/github/@CIRCLE_PROJECT_USERNAME/@CIRCLE_PROJECT_REPONAME/latest/artifacts \
-        | grep -o 'https://[^"]*' \
-        | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
+      # - run: cd backend && curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/github/@CIRCLE_PROJECT_USERNAME/@CIRCLE_PROJECT_REPONAME/latest/artifacts \
+      #   | grep -o 'https://[^"]*' \
+      #   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 
 workflows:
   version: 2.1
@@ -56,12 +56,12 @@ workflows:
     - build_client:
         requires: 
           - frontend
+          - build_backend
     - build_backend:
-        requires: 
-          - build_client
+        requires:
           - backend
     - heroku/deploy-via-git:
         requires: 
-          - build_backend
+          - build_client
         pre-steps:
           - run: cd backend $CIRCLE_ARTIFACTS
