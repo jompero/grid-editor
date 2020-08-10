@@ -30,7 +30,7 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      - run: cp -r client/build artifacts
+      - run: cp -r client/build artifacts/build
 
       - store_artifacts:
           path: ./artifacts
@@ -50,7 +50,7 @@ workflows:
     jobs:
     - backend
     - frontend
-    - build_client
+    - build_client:
         requires: 
           - frontend
     - build_backend:
