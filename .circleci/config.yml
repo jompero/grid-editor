@@ -42,7 +42,7 @@ jobs:
       - checkout
       - run: cd backend && npm install
       - run: cd backend && npm run build
-      - run: cp -r $CIRCLE_ARTIFACTS backend/dist/public
+      - run: cp -r artifacts backend/dist/public
 
 workflows:
   version: 2.1
