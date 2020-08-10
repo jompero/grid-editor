@@ -51,9 +51,12 @@ workflows:
     - backend
     - frontend
     - build_client
+        requires: 
+          - frontend
     - build_backend:
         requires: 
           - build_client
+          - backend
     - heroku/deploy-via-git:
         requires: 
           - build_backend
