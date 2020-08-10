@@ -63,5 +63,3 @@ workflows:
     - heroku/deploy-via-git:
         requires: 
           - build_client
-        pre-steps:
-          - run: cd backend
