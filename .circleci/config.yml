@@ -41,6 +41,11 @@ jobs:
       - checkout
       - run: cd backend && npm install
       - run: cd backend && npm run build
+    
+  deploy:
+    steps:
+      - heroku/deploy-via-git:
+        force: true
       
 workflows:
   version: 2.1
@@ -55,7 +60,6 @@ workflows:
     - build_backend:
         requires:
           - backend
-    - heroku/deploy-via-git:
-      force: true
-      requires: 
-        - build_client
+    - deploy:
+        requires: 
+          - build_client
