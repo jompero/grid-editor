@@ -48,7 +48,7 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git:
-        force: true
+          force: true
       
 workflows:
   version: 2.1
