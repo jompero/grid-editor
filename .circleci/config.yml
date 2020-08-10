@@ -56,5 +56,6 @@ workflows:
         requires:
           - backend
     - heroku/deploy-via-git:
+        force: true
         requires: 
           - build_client
