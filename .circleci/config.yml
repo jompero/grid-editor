@@ -30,11 +30,11 @@ jobs:
       # - attach_workspace:
       #     at: ~/
 
-      # - run: mkdir -p artifacts
+      - run: mkdir -p artifacts
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      - run: cd client && cp -r build artifacts
+      - run: cp -r client/build artifacts
 
       - store_artifacts:
           path: ./artifacts
