@@ -44,6 +44,7 @@ jobs:
     
   deploy:
     executor: heroku/default
+    working_directory: backend
     steps:
       - checkout
       - heroku/install
