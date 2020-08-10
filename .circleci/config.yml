@@ -22,15 +22,11 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm test
-  build:
+  build_client:
     executor:
       name: node/default
       tag: '12.16'
     steps:
-      # - attach_workspace:
-      #     at: ~/
-
-      # - run: mkdir -p artifacts
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
@@ -38,15 +34,28 @@ jobs:
 
       - store_artifacts:
           path: ./artifacts
+  build_backend:
+    executor:
+      name: node/default
+      tag: '12.16'
+    steps:
+      - checkout
+      - run: cd backend && npm install
+      - run: cd backend && npm run build
+      - run: cp -r $CIRCLE_ARTIFACTS backend/dist/public
+
 workflows:
   version: 2.1
   test_and_deploy_jobs:
     jobs:
     - backend
     - frontend
-    - build
-#    - heroku/deploy-via-git:
-#        requires: 
-#          - build
-#        pre-steps:
-#          - run: cd backend
+    - build_client
+    - build_backend
+        requires: 
+          - build_client
+    - heroku/deploy-via-git:
+        requires: 
+          - build_backend
+        pre-steps:
+          - run: cd backend $CIRCLE_ARTIFACTS
