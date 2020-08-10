@@ -1,9 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-  heroku: circleci/heroku@1.2.0
+  heroku: circleci/heroku@1.1.1
   win: circleci/windows@2.2.0
-  react: thefrontside/react@0.2.0
 
 jobs:
   backend:
@@ -14,6 +13,7 @@ jobs:
       - checkout
       - run: cd backend && npm install
       - run: cd backend && npm test
+
   frontend:
     executor:
       name: node/default
@@ -22,6 +22,7 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm test
+
   build_client:
     executor:
       name: node/default
@@ -32,8 +33,6 @@ jobs:
       - run: cd client && npm run build
       - run: cp -r client/build backend/dist/public
 
-      # - store_artifacts:
-      #     path: ./artifacts
   build_backend:
     executor:
       name: node/default
@@ -42,11 +41,7 @@ jobs:
       - checkout
       - run: cd backend && npm install
       - run: cd backend && npm run build
-      # - run: cp -r artifacts backend/dist/public
-      # - run: cd backend && curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/github/@CIRCLE_PROJECT_USERNAME/@CIRCLE_PROJECT_REPONAME/latest/artifacts \
-      #   | grep -o 'https://[^"]*' \
-      #   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
-
+      
 workflows:
   version: 2.1
   test_and_deploy_jobs:
