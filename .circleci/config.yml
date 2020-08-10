@@ -30,7 +30,7 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      - run: cp -r client/build ../backend/dist/public
+      - run: cp -r client/build backend/dist/public
 
       # - store_artifacts:
       #     path: ./artifacts
