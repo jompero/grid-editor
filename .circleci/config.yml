@@ -57,7 +57,7 @@ jobs:
       tag:
         default: $CIRCLE_TAG
         type: string
-
+ 
     steps:
       - checkout
       - heroku/install
@@ -71,18 +71,18 @@ jobs:
       #         command: 'heroku maintenance:on --app << parameters.app-name >>'
       #         name: Turn ON maintenance mode.
       - run:
-        command: >
-          heroku_url = "https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
-          parameters.app-name >>.git"
+          command: >
+            heroku_url = "https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
+            parameters.app-name >>.git"
 
-          if [ -z "<< parameters.branch >>" ]; then
-            git subtree push --prefix backend $heroku_url << parameters.branch >>:master -f
-          elif [ -z "<< parameters.tag >>" ]; then
-            git subtree push $heroku_url << parameters.tag >>^{}:master -f
-          else
-            echo "No branch or tag found."
-            exit 1
-          fi
+            if [ -z "<< parameters.branch >>" ]; then
+              git subtree push --prefix backend $heroku_url << parameters.branch >>:master -f
+            elif [ -z "<< parameters.tag >>" ]; then
+              git subtree push $heroku_url << parameters.tag >>^{}:master -f
+            else
+              echo "No branch or tag found."
+              exit 1
+            fi
       
 workflows:
   version: 2.1
