@@ -3,54 +3,63 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getUser = void 0;
 const googleapis_1 = require("googleapis");
-const config_1 = __importDefault(require("./config"));
 const user_1 = __importDefault(require("../models/user"));
-const googleConfig = {
-    clientId: config_1.default.GOOGLE_CLIENT_ID,
-    clientSecret: config_1.default.GOOGLE_CONSUMER_SECRET,
-    redirect: 'https://your-website.com/google-auth'
-};
-const defaultScope = [
-    'https://www.googleapis.com/auth/userinfo.email',
-];
-function createConnection() {
-    return new googleapis_1.google.auth.OAuth2(googleConfig.clientId, googleConfig.clientSecret, googleConfig.redirect);
+const logger_1 = __importDefault(require("./logger"));
+function getTokenFrom(request) {
+    logger_1.default.info('auth request: ', request);
+    const authorization = request.get('Authorization');
+    logger_1.default.info('authorization header: ', authorization);
+    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+        const token = authorization.substring(7);
+        logger_1.default.info('Access token: ', token);
+        return token;
+    }
+    logger_1.default.error('No access token');
+    return null;
 }
 function getUser(req, res, next) {
-    const accessToken = getTokenFrom(req);
-    const auth = googleapis_1.google.oauth2({
-        version: 'v2',
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-    auth.userinfo.get({})
-        .then(response => {
-        const user = response.data;
-        console.log('user', user);
-        user_1.default.findOneAndUpdate({ profileId: user.id }, {
-            name: user.name,
-            email: user.email
-        }, { upsert: true, new: true })
+    if (process.env.NODE_ENV === 'test' && req.body) {
+        logger_1.default.info('test user: ', req.body);
+        user_1.default.findById(req.body.user)
             .then((user) => {
-            console.log('passing user to req', user);
             req.user = user;
             next();
         });
-    });
+    }
+    else {
+        const accessToken = getTokenFrom(req);
+        if (!accessToken) {
+            res.statusCode = 401;
+            next(new Error('Request missing access token'));
+        }
+        const auth = googleapis_1.google.oauth2({
+            version: 'v2',
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        auth.userinfo.get({})
+            .then((response) => {
+            const user = response.data;
+            logger_1.default.info('user', user);
+            user_1.default.findOneAndUpdate({ profileId: user.id }, {
+                name: user.name,
+                email: user.email,
+            }, { upsert: true, new: true })
+                .then((foundUser) => {
+                logger_1.default.info('passing user to req', foundUser);
+                req.user = foundUser;
+                next();
+            });
+        })
+            .catch((err) => {
+            logger_1.default.error(err);
+            res.statusCode = 401;
+            next(new Error('Unauthorized request'));
+        });
+    }
 }
 exports.getUser = getUser;
-function getTokenFrom(request) {
-    //console.log('request', request);
-    const authorization = request.get('Authorization');
-    //console.log('auth', authorization);
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-        const token = authorization.substring(7);
-        console.log('Access token', token);
-        return token;
-    }
-    console.log('No access token');
-    return null;
-}
 //# sourceMappingURL=google-auth.js.map

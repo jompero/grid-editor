@@ -10,25 +10,26 @@ const tileMapSchema = new mongoose_1.default.Schema({
         required: true,
         type: String,
         minLength: 3,
-        unique: true
+        unique: true,
     },
     width: {
         required: true,
-        type: Number
+        type: Number,
     },
     height: {
         required: true,
-        type: Number
+        type: Number,
     },
     tileMap: {
         required: true,
-        type: [Number]
+        type: [Number],
     },
     tileSet: {
         type: String,
-        required: true
+        required: true,
     },
-    user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User' }
+    user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User' },
+    likes: { type: [mongoose_1.default.Schema.Types.ObjectId], ref: 'User' },
 });
 tileMapSchema.set('toJSON', {
     transform: (document, returnedObject) => {
@@ -38,7 +39,7 @@ tileMapSchema.set('toJSON', {
         delete returnedObject.user._id;
         delete returnedObject.user._v;
         delete returnedObject.user.profileId;
-    }
+    },
 });
 mongoose_1.default.plugin(mongoose_unique_validator_1.default);
 exports.default = mongoose_1.default.model('TileMap', tileMapSchema);

@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const info = (...params) => {
-    console.log(...params);
+    if (process.env.NODE_ENV !== 'test')
+        console.log(...params); // eslint-disable-line no-console
 };
 const error = (...params) => {
-    console.error(...params);
+    if (process.env.NODE_ENV !== 'test')
+        console.error(...params); // eslint-disable-line no-console
 };
 exports.default = {
-    info, error
+    info, error,
 };
 //# sourceMappingURL=logger.js.map
