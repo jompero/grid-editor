@@ -76,7 +76,7 @@ jobs:
             parameters.app-name >>.git"
 
             if [ -z "<< parameters.branch >>" ]; then
-              git subtree push --prefix backend $heroku_url << parameters.branch >>:master -f
+              git subtree push --prefix backend $heroku_url << parameters.branch >>:master
             elif [ -z "<< parameters.tag >>" ]; then
               git subtree push $heroku_url << parameters.tag >>^{}:master
             else
