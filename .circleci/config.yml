@@ -61,12 +61,12 @@ jobs:
       # - git subtree push -f --prefix backend heroku master
       # - heroku/deploy-via-git:
       #     force: true
-      - when:
-        condition: << parameters.maintenance-mode >>
-        steps:
-          - run:
-              command: 'heroku maintenance:on --app << parameters.app-name >>'
-              name: Turn ON maintenance mode.
+      # - when:
+      #   condition: << parameters.maintenance-mode >>
+      #   steps:
+      #     - run:
+      #         command: 'heroku maintenance:on --app << parameters.app-name >>'
+      #         name: Turn ON maintenance mode.
       - run:
         command: >
           heroku_url = "https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
