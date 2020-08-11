@@ -14,9 +14,10 @@
                 "node_modules/*",
                 "src/types/*"
             ]
-        }
+        },                                                                                                                                                                                 
+        "types": ["node"] 
     },
     "include": [
-        "src/**/*", "babel.config.js", "tests"
+        "./src/*", "babel.config.js"
     ]
 }
