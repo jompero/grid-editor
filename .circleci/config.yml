@@ -89,10 +89,10 @@ workflows:
     - build_client:
         requires: 
           - frontend
-    #       - build_backend
-    # - build_backend:
-    #     requires:
-    #       - backend
+          - build_backend
+    - build_backend:
+        requires:
+          - backend
     - deploy:
         requires: 
           - build_client
