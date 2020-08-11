@@ -78,7 +78,7 @@ jobs:
             if [ -z "<< parameters.branch >>" ]; then
               git subtree push --prefix backend $heroku_url << parameters.branch >>:master -f
             elif [ -z "<< parameters.tag >>" ]; then
-              git subtree push $heroku_url << parameters.tag >>^{}:master -f
+              git subtree push -f $heroku_url << parameters.tag >>^{}:master
             else
               echo "No branch or tag found."
               exit 1
