@@ -54,9 +54,6 @@ jobs:
       branch:
         default: master #$CIRCLE_BRANCH
         type: string
-      tag:
-        default: $CIRCLE_TAG
-        type: string
  
     steps:
       - checkout
@@ -71,14 +68,13 @@ jobs:
       #         command: 'heroku maintenance:on --app << parameters.app-name >>'
       #         name: Turn ON maintenance mode.
       - run:
+        # git subtree push --prefix backend $heroku_url << parameters.branch >>:master
           command: >
             heroku_url="https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
             parameters.app-name >>.git"
 
             if [ -z "<< parameters.branch >>" ]; then
-              git subtree push --prefix backend $heroku_url << parameters.branch >>:master
-            elif [ -z "<< parameters.tag >>" ]; then
-              git subtree push $heroku_url << parameters.tag >>^{}:master
+              git push origin `git subtree split --prefix backend $heroku_url << parameters.branch >>`:master --force              
             else
               echo "No branch or tag found."
               exit 1
