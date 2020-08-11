@@ -46,7 +46,7 @@ jobs:
     executor: heroku/default
     steps:
       - checkout:
-          working_directory: ~/grid-editor/backend
+          path: backend
       - heroku/install
       - heroku/deploy-via-git:
           force: true
