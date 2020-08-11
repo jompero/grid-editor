@@ -72,7 +72,7 @@ jobs:
       #         name: Turn ON maintenance mode.
       - run:
           command: >
-            heroku_url = "https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
+            heroku_url="https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
             parameters.app-name >>.git"
 
             if [ -z "<< parameters.branch >>" ]; then
