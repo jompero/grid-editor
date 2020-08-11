@@ -54,7 +54,6 @@ jobs:
       branch:
         default: master #$CIRCLE_BRANCH
         type: string
-            app-name:
       default: $CIRCLE_TAG
         type: string
 
