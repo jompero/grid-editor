@@ -38,5 +38,6 @@ app.use('/api/maps/', maps_1.default);
 if (env === 'test') {
     app.use('/api/testing/', testing_1.default);
 }
-exports.default = app;
+//export default app;
+module.exports = app;
 //# sourceMappingURL=app.js.map
