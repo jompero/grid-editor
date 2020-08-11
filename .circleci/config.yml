@@ -54,7 +54,8 @@ jobs:
       branch:
         default: master #$CIRCLE_BRANCH
         type: string
-      default: $CIRCLE_TAG
+      tag:
+        default: $CIRCLE_TAG
         type: string
 
     steps:
