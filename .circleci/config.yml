@@ -46,7 +46,7 @@ jobs:
     executor: heroku/default
     steps:
       - checkout:
-          path: backend
+          working_directory: backend
       - heroku/install
       - heroku/deploy-via-git:
           force: true
