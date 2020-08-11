@@ -49,6 +49,7 @@ jobs:
           working_directory: backend
       - heroku/install
       - heroku/deploy-via-git:
+          working_directory: backend
           force: true
       
 workflows:
