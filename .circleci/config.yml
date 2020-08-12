@@ -66,7 +66,7 @@ jobs:
       - attach_workspace:
           at: /tmp/grid-editor
       - run: cd /tmp/grid-editor/client/build && ls -a
-      - run: cp -a /tmp/grid-editor/client/build backend/dist/public/
+      - run: cp -a /tmp/grid-editor/client/build/. backend/dist/public/
       - run: cd backend/dist/ && ls -a
       - run: cd backend/dist/public/ && ls -a
 
