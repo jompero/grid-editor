@@ -64,7 +64,7 @@ function MapsFilter() {
 
         <FormControl fullWidth className={classes.searchField} variant='outlined'>
           <TextField
-            label='Search'
+            label='Map search'
             type='text'
             size='medium'
             variant='outlined'
