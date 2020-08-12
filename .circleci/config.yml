@@ -70,6 +70,9 @@ jobs:
       - run:
         # git subtree push --prefix backend $heroku_url << parameters.branch >>:master
           command: >
+            cd backend && npm run build:ui
+            cd ..
+            
             heroku_url="https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
             parameters.app-name >>.git"
 
