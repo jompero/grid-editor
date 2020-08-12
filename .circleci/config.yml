@@ -66,6 +66,7 @@ jobs:
       - attach_workspace:
           at: /tmp/grid-editor
       - run: cp -r /tmp/grid-editor/client/build backend/dist/public
+      - run: cd backend/dist/public/ && ls -a
 
       - heroku/install
       # - heroku/deploy-via-git:
