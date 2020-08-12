@@ -67,6 +67,7 @@ jobs:
           at: /tmp/grid-editor
       - run: cd /tmp/grid-editor/client/build && ls -a
       - run: cp -r /tmp/grid-editor/client/build backend/dist/
+      - run: cd backend/dist/ && ls -a
       - run: cd backend/dist/public/ && ls -a
 
       - heroku/install
