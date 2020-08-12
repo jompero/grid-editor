@@ -31,7 +31,12 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      - run: cp -r client/build backend/dist/public
+      # - run: cp -r client/build backend/dist/public
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - client/build
 
   build_backend:
     executor:
@@ -57,8 +62,12 @@ jobs:
  
     steps:
       - checkout
+
+      - attach_workspace:
+          at: /tmp/grid-editor
+      - run: cp -r /tmp/grid-editor/client/build backend/dist/public
+
       - heroku/install
-      # - git subtree push -f --prefix backend heroku master
       # - heroku/deploy-via-git:
       #     force: true
       # - when:
@@ -67,7 +76,6 @@ jobs:
       #     - run:
       #         command: 'heroku maintenance:on --app << parameters.app-name >>'
       #         name: Turn ON maintenance mode.
-      - build_client
       - run:
         # git subtree push --prefix backend $heroku_url << parameters.branch >>:master
           command: >
@@ -87,14 +95,9 @@ workflows:
     jobs:
     - backend
     - frontend
-    # - build_client:
-    #     requires: 
-    #       - frontend
-    #      - build_backend
-    # - build_backend:
-    #     requires:
-    #      - backend
+    - build_client:
+        requires: 
+          - frontend
     - deploy:
         requires: 
-          - backend
-          - frontend
+          - build_client
