@@ -67,12 +67,10 @@ jobs:
       #     - run:
       #         command: 'heroku maintenance:on --app << parameters.app-name >>'
       #         name: Turn ON maintenance mode.
+      - build_client
       - run:
         # git subtree push --prefix backend $heroku_url << parameters.branch >>:master
           command: >
-            cd backend && npm run build:ui
-            cd ..
-            
             heroku_url="https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
             parameters.app-name >>.git"
 
@@ -89,13 +87,14 @@ workflows:
     jobs:
     - backend
     - frontend
-    - build_client:
-        requires: 
-          - frontend
+    # - build_client:
+    #     requires: 
+    #       - frontend
     #      - build_backend
     # - build_backend:
     #     requires:
     #      - backend
     - deploy:
         requires: 
-          - build_client
+          - backend
+          - frontend
