@@ -57,7 +57,7 @@ jobs:
         default: $HEROKU_APP_NAME
         type: string
       branch:
-        default: master #$CIRCLE_BRANCH
+        default: main #$CIRCLE_BRANCH
         type: string
  
     steps:
@@ -65,10 +65,8 @@ jobs:
 
       - attach_workspace:
           at: /tmp/grid-editor
-      - run: cd /tmp/grid-editor/client/build && ls -a
       - run: cp -a /tmp/grid-editor/client/build/. backend/dist/public/
-      - run: cd backend/dist/ && ls -a
-      - run: cd backend/dist/public/ && ls -a
+      - run: cd backend && npm run commit
 
       - heroku/install
       # - heroku/deploy-via-git:
