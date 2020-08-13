@@ -57,7 +57,7 @@ jobs:
         default: $HEROKU_APP_NAME
         type: string
       branch:
-        default: main #$CIRCLE_BRANCH
+        default: master #$CIRCLE_BRANCH
         type: string
  
     steps:
