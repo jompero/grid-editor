@@ -43,5 +43,4 @@ if (env === 'test') {
   app.use('/api/testing/', testingRouter);
 }
 
-//export default app;
 module.exports = app;
