@@ -13,7 +13,7 @@
     "deploy:full": "npm run build:ui && npm run commit && npm run deploy",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "start:test": "cross-env NODE_ENV=test nodemon",
-    "lint": "eslint src/**"
+    "lint": "eslint --no-error-on-unmatched-pattern src/**"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.10.1",
