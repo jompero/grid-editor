@@ -31,7 +31,6 @@ jobs:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
-      # - run: cp -r client/build backend/dist/public
 
       - persist_to_workspace:
           root: ./
@@ -57,7 +56,7 @@ jobs:
         default: $HEROKU_APP_NAME
         type: string
       branch:
-        default: master #$CIRCLE_BRANCH
+        default: master
         type: string
  
     steps:
@@ -71,16 +70,15 @@ jobs:
       - run: git add . && git commit -m \"deploy\"
 
       - heroku/install
-      # - heroku/deploy-via-git:
-      #     force: true
+
       # - when:
       #   condition: << parameters.maintenance-mode >>
       #   steps:
       #     - run:
       #         command: 'heroku maintenance:on --app << parameters.app-name >>'
       #         name: Turn ON maintenance mode.
+
       - run:
-        # git subtree push --prefix backend $heroku_url << parameters.branch >>:master
           command: >
             heroku_url="https://heroku:$<< parameters.api-key >>@git.heroku.com/<<
             parameters.app-name >>.git"
@@ -88,7 +86,7 @@ jobs:
             if [ -n "<< parameters.branch >>" ]; then
               git push $heroku_url `git subtree split --prefix backend << parameters.branch >>`:master --force              
             else
-              echo "No branch or tag found."
+              echo "No branch found."
               exit 1
             fi
       
