@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "test:once": "set CI=true && npm test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**",
+    "lint": "eslint --no-error-on-unmatched-pattern src/**",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {
