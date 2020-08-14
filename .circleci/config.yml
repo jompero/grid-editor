@@ -19,6 +19,7 @@ jobs:
       tag: '12.16'
     steps:
       - checkout
+      - run: cd client && npm install
       - run: cd backend && npm run lint
 
   frontend:
@@ -35,6 +36,7 @@ jobs:
       tag: '12.16'
     steps:
       - checkout
+      - run: cd client && npm install
       - run: cd client && npm run lint
 
   build_client:
