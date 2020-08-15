@@ -25,7 +25,7 @@ Social options:
 
 ## Setup
 
-Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. Circleci configuration is provided for CI/CD (deployment to Heroku).
+Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. Circleci configuration is provided for CI/CD (deployment to Heroku) as well as manual scripts (note that these shouldn't be used together).
 
 ### Environment variables
 
