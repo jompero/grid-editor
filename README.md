@@ -1,6 +1,6 @@
 # grid-editor
 
-Grid-editor is a a tool that allows editing a grid based layout with preset 'palettes'. Tilesets used in the example are [Adam Saltsman](https://adamatomic.itch.io/)'s _Kyst_ and _Monochrome Caves_.
+Grid-editor is a a tool that allows editing a grid based layout with preset 'palettes'. Tilesets used in the example are [Adam Saltsman](https://adamatomic.itch.io/)'s _Kyst_, _Amarelo_ and _Monochrome Caves_.
   
 The example itself is running on [Heroku](https://mysterious-meadow-32567.herokuapp.com/). CircleCi is used to test, build (client) and deploy (backend).
   
