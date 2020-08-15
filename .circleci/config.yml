@@ -100,7 +100,7 @@ jobs:
             parameters.app-name >>.git"
 
             if [ -n "<< parameters.branch >>" ]; then
-              git push $heroku_url `git subtree split --prefix backend << parameters.branch >>`:master --force              
+              git push $heroku_url `git subtree split --prefix backend << parameters.branch >>`:master              
             else
               echo "No branch found."
               exit 1
