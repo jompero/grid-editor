@@ -26,6 +26,7 @@ mongoose_1.default.connect(config_1.default.MONGODB_URI, {
     logger_1.default.error('error connection to MongoDB:', error.message);
 });
 const app = express_1.default();
+app.set('port', process.env.PORT || 3001);
 app.use(morgan_1.default('short'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
@@ -38,6 +39,6 @@ app.use('/api/maps/', maps_1.default);
 if (env === 'test') {
     app.use('/api/testing/', testing_1.default);
 }
-//export default app;
-module.exports = app;
+// module.exports = app;
+exports.default = app;
 //# sourceMappingURL=app.js.map
