@@ -26,6 +26,8 @@ mongoose.connect(config.MONGODB_URI, {
 
 const app = express();
 
+app.set('port', process.env.PORT || 3001);
+
 app.use(morgan('short'));
 
 app.use(express.json());
@@ -43,4 +45,5 @@ if (env === 'test') {
   app.use('/api/testing/', testingRouter);
 }
 
-module.exports = app;
+//module.exports = app;
+export default app;
