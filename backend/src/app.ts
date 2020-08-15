@@ -36,10 +36,10 @@ app.use(cors());
 
 const publicFolder = path.join(__dirname, 'public');
 logger.info('loading static content from', publicFolder);
-app.use(express.static(publicFolder));
 
 app.use('/api/users/', usersRouter);
 app.use('/api/maps/', mapsRouter);
+app.use('/*', express.static(publicFolder));
 
 if (env === 'test') {
   app.use('/api/testing/', testingRouter);
