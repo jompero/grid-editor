@@ -1,11 +1,11 @@
 # grid-editor
 
-Grid-editor is a working progress project. The goal is to create a tool that allows editing a grid based layout with preset 'palette'. An example will be created with a tileset from Zelda: Link's Awakening and the ability to create and edit a level layout.  
+Grid-editor is a a tool that allows editing a grid based layout with preset 'palettes'. Tilesets used in the example are [Adam Saltsman](https://adamatomic.itch.io/)'s _Kyst_ and _Monochrome Caves_.
   
-The example is available on [Heroku](https://mysterious-meadow-32567.herokuapp.com/).  
+The example itself is running on [Heroku](https://mysterious-meadow-32567.herokuapp.com/). CircleCi is used to test, build (client) and deploy (backend).
   
-Backend built on express-generator.  
-Client built on create-react-app.
+Backend built with express-generator.  
+Client built with create-react-app.
   
 ## Goals
 
@@ -15,7 +15,8 @@ Client built on create-react-app.
   
 ### Stretch Goals  
 
-- Create a custom tileset (from an image file) - MET!
+- Create a custom static tilesets (from an image file) - MET!
+- Upload a custom tilesets - BACKLOG
 
 Social options:
 
@@ -24,7 +25,7 @@ Social options:
 
 ## Setup
 
-Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. If you need to publish to your server using git, initiatilizing backend folder as a git repository is recommended.
+Fork or download .zip to a local folder. Note that there are two projects in the repository. Client is a react project and the backend is a node project. Circleci configuration is provided for CI/CD (deployment to Heroku).
 
 ### Environment variables
 
@@ -42,6 +43,14 @@ GOOGLE_CONSUMER_SECRET | Google Consumer Secret
 ```bash
 REACT_APP_BASE_URL | the home address of the app  
 REACT_APP_GOOGLE_LOGIN_URL | the Google login Url
+```
+
+#### CircleCI
+Configure these also on CircleCi for Heroku deployment, if CircleCi is used.
+
+```bash
+HEROKU_API_KEY
+HEROKU_APP_NAME
 ```
 
 ### Installing packages
@@ -68,7 +77,7 @@ npm run start:watch
 
 ## Tests
 
-Some tests are present on both backend and client. End 2 end tests were written in Cypress before the React Warning that I have not been able to isolate hence no further Cypress teste have been written.  
+Some tests are present on both backend and client. End 2 end tests were written in Cypress before the React Warning that I have not been able to isolate hence no further Cypress tests have been written. Cypress tests are also ignored on the CI/CD pipeline. 
   
 To run the client tests:
 
@@ -83,3 +92,8 @@ To run the backend tests:
 cd backend
 npm test
 ```
+
+## Lessons Learned
+1. Setup CI/CD as early as possible
+1. Setup testing practices as early as possible, and follow it
+1. If using template and TypeScript, check if there is a TypeScript template already
