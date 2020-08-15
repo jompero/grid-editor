@@ -33,9 +33,9 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use(cors_1.default());
 const publicFolder = path_1.default.join(__dirname, 'public');
 logger_1.default.info('loading static content from', publicFolder);
-app.use(express_1.default.static(publicFolder));
 app.use('/api/users/', users_1.default);
 app.use('/api/maps/', maps_1.default);
+app.use('/*', express_1.default.static(publicFolder));
 if (env === 'test') {
     app.use('/api/testing/', testing_1.default);
 }
