@@ -1,5 +1,6 @@
 import cityImage from '../tileSets/revolution_tiles.png';
 import caveImage from '../tileSets/bw_tiles.png';
+import amareloImage from '../tileSets/amarelo.png';
 import { Props as TileProps } from '../components/Tile';
 import getMapping, { computeTilesPerRow } from '../utils/tileMapping';
 
@@ -64,9 +65,34 @@ Cave.mapping = getMapping(
   Cave.tiles,
 );
 
+const Amarelo: TileSet = {
+  name: 'Amarelo',
+  image: amareloImage,
+  imageWidth: 64,
+  imageHeight: 88,
+  tileWidth: 8,
+  tileHeight: 8,
+  tiles: 81,
+  tilesPerRow: 0,
+  tilesPerColumn: 0,
+  mapping: [],
+};
+
+Amarelo.tilesPerRow = computeTilesPerRow(Amarelo.imageWidth, Amarelo.tileWidth);
+Amarelo.tilesPerColumn = computeTilesPerRow(Amarelo.imageHeight, Amarelo.tileHeight);
+Amarelo.mapping = getMapping(
+  Amarelo.image,
+  Amarelo.tilesPerRow,
+  Amarelo.imageHeight,
+  Amarelo.tileWidth,
+  Amarelo.tileHeight,
+  Amarelo.tiles,
+);
+
 const tileSets = {
   Harbour,
   Cave,
+  Amarelo
 } as {
   [key: string]: TileSet
 };
