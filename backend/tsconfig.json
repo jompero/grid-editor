@@ -18,6 +18,6 @@
         "types": ["node"] 
     },
     "include": [
-        "src/**/*", "babel.config.js"
+        "./src/*", "babel.config.js"
     ]
 }
