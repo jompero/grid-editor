@@ -68,7 +68,7 @@ router.delete('/:mapId/', google_auth_1.getUser, (req, res, next) => {
 });
 router.put('/:mapId/', google_auth_1.getUser, (req, res, next) => {
     const map = req.body;
-    const newMap = Object.assign({}, map);
+    const newMap = { ...map };
     delete newMap.id;
     tileMap_1.default.findOneAndUpdate({ _id: map.id, user: req.user.id }, {
         name: newMap.name,

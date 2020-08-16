@@ -31,7 +31,7 @@ router.post('/user', (req, res, next) => {
 router.post('/maps', (req, res, next) => {
     logger_1.default.info('creating test user', req.body);
     user_1.default.findOne({ name: req.body.user.name })
-        .then((user) => tileMap_1.default.create(Object.assign(Object.assign({}, req.body), { user }))
+        .then((user) => tileMap_1.default.create({ ...req.body, user })
         .then(() => res.status(204).end()))
         .catch((err) => {
         logger_1.default.error(err);

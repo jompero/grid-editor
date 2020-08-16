@@ -26,19 +26,18 @@ mongoose_1.default.connect(config_1.default.MONGODB_URI, {
     logger_1.default.error('error connection to MongoDB:', error.message);
 });
 const app = express_1.default();
-app.set('port', process.env.PORT || 3001);
 app.use(morgan_1.default('short'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(cors_1.default());
-const publicFolder = path_1.default.join(__dirname, 'public');
-logger_1.default.info('loading static content from', publicFolder);
-app.use(express_1.default.static(publicFolder));
 app.use('/api/users/', users_1.default);
 app.use('/api/maps/', maps_1.default);
 if (env === 'test') {
     app.use('/api/testing/', testing_1.default);
 }
-// module.exports = app;
+const publicFolder = path_1.default.join(__dirname, 'public');
+logger_1.default.info('loading static content from', publicFolder);
+app.use(express_1.default.static(publicFolder));
+app.use('/maps', (req, res, send) => send(path_1.default.join(publicFolder, 'index.html')));
 exports.default = app;
 //# sourceMappingURL=app.js.map
