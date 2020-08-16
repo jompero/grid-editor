@@ -6,6 +6,9 @@ The example itself is running on [Heroku](https://mysterious-meadow-32567.heroku
   
 Backend built with express-generator.  
 Client built with create-react-app.
+
+[App usage instructions](https://github.com/jompero/grid-editor/blob/master/hours.md)
+[Hours log](https://github.com/jompero/grid-editor/blob/master/instructions.md)
   
 ## Goals
 
