@@ -42,6 +42,8 @@ if (env === 'test') {
 const publicFolder = path.join(__dirname, 'public');
 logger.info('loading static content from', publicFolder);
 app.use(express.static(publicFolder));
-app.use('/maps', (req, res, send) => send(path.join(publicFolder, 'index.html')));
+app.get('*', (req, res) => {
+  res.sendFile(publicFolder + '/index.html');
+});
 
 export default app;
