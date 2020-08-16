@@ -1,5 +1,7 @@
 # grid-editor
 
+## Summary
+
 Grid-editor is a a tool that allows editing a grid based layout with preset 'palettes'. Tilesets used in the example are [Adam Saltsman](https://adamatomic.itch.io/)'s _Kyst_, _Amarelo_ and _Monochrome Caves_.
   
 The example itself is running on [Heroku](https://mysterious-meadow-32567.herokuapp.com/). CircleCi is used to test, build (client) and deploy (backend).
@@ -7,8 +9,9 @@ The example itself is running on [Heroku](https://mysterious-meadow-32567.heroku
 Backend built with express-generator.  
 Client built with create-react-app.
 
-[App usage instructions](https://github.com/jompero/grid-editor/blob/master/hours.md)
-[Hours log](https://github.com/jompero/grid-editor/blob/master/instructions.md)
+### Important links
+* [App usage instructions](https://github.com/jompero/grid-editor/blob/master/hours.md)  
+* [Hours log](https://github.com/jompero/grid-editor/blob/master/instructions.md)
   
 ## Goals
 
