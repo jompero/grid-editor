@@ -43,7 +43,7 @@ const publicFolder = path.join(__dirname, 'public');
 logger.info('loading static content from', publicFolder);
 app.use(express.static(publicFolder));
 app.get('*', (req, res) => {
-  res.sendFile(publicFolder + '/index.html');
+  res.sendFile(path.join(publicFolder, 'index.html'));
 });
 
 export default app;
