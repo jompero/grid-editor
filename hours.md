@@ -29,7 +29,7 @@
 | 15/4/2020  | 0.5   | Add eraser, start undo / redo                                                                                                                                             |
 | 18/4/2020  | 1     | Add undo / redo                                                                                                                                                           |
 | 19/4/2020  | 2.5   | Improve Canvas UX and fix inability to paint on empty tiles                                                                                                               |
-| Add Eslint |
+||| Add Eslint |
 | 20/4/2020  | 1.5   | Fixing Eslint rules and error                                                                                                                                             |
 | 21/4/2020  | 1     | Fixing Eslint errors                                                                                                                                                      |
 | 24/4/2020  | 1.5   | Reminding myself how to write tests and make first succesful test                                                                                                         |
