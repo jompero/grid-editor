@@ -32,10 +32,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const publicFolder = path.join(__dirname, 'public');
-logger.info('loading static content from', publicFolder);
-app.use(express.static(publicFolder));
-
 app.use('/api/users/', usersRouter);
 app.use('/api/maps/', mapsRouter);
 
@@ -43,4 +39,9 @@ if (env === 'test') {
   app.use('/api/testing/', testingRouter);
 }
 
-module.exports = app;
+const publicFolder = path.join(__dirname, 'public');
+logger.info('loading static content from', publicFolder);
+app.use(express.static(publicFolder));
+app.use('/maps', (req, res, send) => send(path.join(publicFolder, 'index.html')));
+
+export default app;
